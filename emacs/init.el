@@ -90,6 +90,13 @@
 (put 'narrow-to-region 'disabled nil)
 (set-variable 'initial-scratch-message "")
 
+                                        ; Sigh.
+(defun my-dummy-ring-bell-function ()
+  (interactive))
+
+(whenhost gnuemacs
+  (set-variable 'ring-bell-function 'my-dummy-ring-bell-function))
+
 ;;;; Operating system specific fixes
 
 (whenhost (xemacs windows)
