@@ -247,10 +247,19 @@
 
 (setq custom-file
       (concat my-emacs-conf-dir
+              "custom-"
               (ehostcase
-               (aquamacs "custom-aquamacs.el")
-               (gnuemacs "custom-gnuemacs.el")
-               (xemacs   "custom-xemacs.el"))))
+               (aquamacs "aquamacs")
+               (gnuemacs "gnuemacs")
+               (xemacs   "xemacs"))
+              "-"
+              (format "%d.%d" emacs-major-version emacs-minor-version)
+              "-"
+              (case system-type
+                (windows-nt "win")
+                (darwin     "mac")
+                (t          "unix"))
+              ".el"))
 
 ;;; If you try to load your customizations by simply feeding your
 ;;; newly-set `custom-file' to `load-file' in this initialization
