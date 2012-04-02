@@ -39,30 +39,34 @@
 
 ;;;; Load extensions that aren't bundled with Emacs
 
-(dolist (code-dir (list my-emacs-public-code-dir my-emacs-private-code-dir))
+(dolist (code-dir (list my-emacs-public-code-dir
+                        my-emacs-private-code-dir))
 
-  ;; Kill all byte-compiled .elc files; they are a nuisance. In
-  ;; addition to cluttering directory listings they may be out of date
-  ;; or made by an incompatible Emacs, and in such cases `load' won't
-  ;; do the right thing, which is to resort to loading the .el file
-  ;; instead.  Note that the `delete-file' call below deletes even
-  ;; such .elc files that have no corresponding .el file. This is not
-  ;; an issue for me since I always keep the .el files.
-  (mapc #'delete-file (directory-files code-dir t "\\.elc$"))
+  (when (file-accessible-directory-p code-dir)
 
-  ;; Before loading anything, add the extension directory to
-  ;; `load-path' to make sure the extensions can find each other in
-  ;; case one of them `require's another. This is necessary because we
-  ;; don't make an effort to load the extensions in dependency order;
-  ;; we delegate all dependency-chasing work to the Emacs Lisp
-  ;; `require'/`provide' mechanism which causes recursive `load'
-  ;; calls. Also, we use `pushnew' instead of plain `push' to prevent
-  ;; multiple `load-path' entries for the extension directory in case
-  ;; this init file is loaded multiple times in one Emacs session.
-  (pushnew code-dir load-path :test #'equal)
+    ;; Kill all byte-compiled .elc files; they are a nuisance. In
+    ;; addition to cluttering directory listings they may be out of
+    ;; date or made by an incompatible Emacs, and in such cases `load'
+    ;; won't do the right thing, which is to resort to loading the .el
+    ;; file instead.  Note that the `delete-file' call below deletes
+    ;; even such .elc files that have no corresponding .el file. This
+    ;; is not an issue for me since I always keep the .el files.
+    (mapc #'delete-file (directory-files code-dir t "\\.elc$"))
 
-  ;; At last, load the extensions.
-  (mapc #'load-file (directory-files code-dir t "\\.el$")))
+    ;; Before loading anything, add the extension directory to
+    ;; `load-path' to make sure the extensions can find each other in
+    ;; case one of them `require's another. This is necessary because
+    ;; we don't make an effort to load the extensions in dependency
+    ;; order; we delegate all dependency-chasing work to the Emacs
+    ;; Lisp `require'/`provide' mechanism which causes recursive
+    ;; `load' calls. Also, we use `pushnew' instead of plain `push' to
+    ;; prevent multiple `load-path' entries for the extension
+    ;; directory in case this init file is loaded multiple times in
+    ;; one Emacs session.
+    (pushnew code-dir load-path :test #'equal)
+
+    ;; At last, load the extensions.
+    (mapc #'load-file (directory-files code-dir t "\\.el$"))))
 
 ;;;; Internationalization and localization
 
