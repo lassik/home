@@ -95,11 +95,14 @@
 (put 'narrow-to-region 'disabled nil)
 (set-variable 'initial-scratch-message "")
 
-                                        ; Sigh.
-(defun my-dummy-ring-bell-function ()
-  (interactive))
-
+;; Make the startup screen a blank slate.
 (whenhost gnuemacs
+  (set-variable 'inhibit-splash-screen t)
+  (set-variable 'inhibit-startup-echo-area-message (user-login-name)))
+
+;; Prevent the computer from beeping and flashing at me.
+(whenhost gnuemacs
+  (defun my-dummy-ring-bell-function () (interactive))
   (set-variable 'ring-bell-function 'my-dummy-ring-bell-function))
 
 ;;;; Operating system specific fixes
