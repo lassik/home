@@ -109,6 +109,9 @@
   (defun my-dummy-ring-bell-function () (interactive))
   (set-variable 'ring-bell-function 'my-dummy-ring-bell-function))
 
+;; A frame title that I can use to distinguish one Emacs from another.
+(setq frame-title-format (concat "%b " (substring system-name 0 (position ?. system-name)) " " (downcase invocation-name)))
+
 ;;;; Operating system specific fixes
 
 (whenhost (xemacs windows)
