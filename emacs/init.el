@@ -112,8 +112,8 @@
 ;; A frame title that I can use to distinguish one Emacs from another.
 (setq frame-title-format
       (concat "%b"
-              " " (substring (system-name) 0 (position ?. (system-name)))
-              " " (downcase (replace-regexp-in-string "[^A-Za-z0-9_-]" "" invocation-name))))
+              " " (downcase (substring (system-name) 0 (position ?. (system-name))))
+              " " (downcase (replace-regexp-in-string "[^A-Za-z0-9_-].*$" "" invocation-name))))
 
 ;;;; Operating system specific fixes
 
