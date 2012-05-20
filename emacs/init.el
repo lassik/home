@@ -242,6 +242,7 @@
   (dolist (prop '(lisp-indent-function common-lisp-indent-function) value)
     (if (equal 0 value) (remprop symbol prop) (put symbol prop value))))
 
+(set-lisp-indent 'asm 1)
 (set-lisp-indent 'casequal 1)
 (set-lisp-indent 'dcase 1)
 (set-lisp-indent 'defconst 1) ; Emacs Lisp
@@ -259,9 +260,11 @@
 (set-lisp-indent 'loop 0)
 (set-lisp-indent 'prog1 0)
 (set-lisp-indent 'until 1)
+(set-lisp-indent 'when-output 1)
 (set-lisp-indent 'whenhost 1)
 (set-lisp-indent 'whilet 2)
 (set-lisp-indent 'with-output-to-string 0)
+(set-lisp-indent :section 1)
 
 ;;;; Pathnames
 
