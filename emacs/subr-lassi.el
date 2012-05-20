@@ -21,3 +21,17 @@
   (if (region-active-p)
       (downcase-region (region-beginning) (region-end))
       (downcase-word arg)))
+
+(defun scratch ()
+  (interactive)
+  (switch-to-buffer (get-buffer-create "*scratch*"))
+  (funcall (or initial-major-mode 'lisp-interaction-mode))
+  (font-lock-mode 1)) ;; xemacs fix
+
+(defun customize-face-at-point ()
+  (interactive)
+  (custom-buffer-create
+   (mapcar (lambda (symbol) `(,symbol custom-face))
+           ((lambda (x) (if (listp x) x (list x)))
+            (or (get-char-property (point) 'face) '(default))))
+   "*Customize Faces*"))
