@@ -60,3 +60,7 @@
 		    (insert (make-string (- start last) ? ))
 		    (insert (make-string (- end start) dash-char))
 		    (setq last end))))))))
+
+(defun insert-date-iso ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d ")))
