@@ -31,6 +31,7 @@
 
 (require 'cl) ; For great justice.
 
+(require 'cc-mode)
 (require 'css-mode)
 (require 'dired)
 (require 'picture)
@@ -210,6 +211,8 @@
 (define-key (current-global-map) [(meta c)] 'capitalize-region-or-word)
 (define-key (current-global-map) [(meta l)] 'downcase-region-or-word)
 (define-key (current-global-map) [(meta u)] 'upcase-region-or-word)
+(define-key c++-mode-map [(control c) (control c)] 'compile)
+(define-key c-mode-map [(control c) (control c)] 'compile)
 (define-key comint-mode-map [(meta n)] 'comint-next-matching-input-from-input)
 (define-key comint-mode-map [(meta p)] 'comint-previous-matching-input-from-input)
 (define-key dired-mode-map [(B)] 'my-dired-up)
@@ -220,14 +223,15 @@
 (define-key minibuffer-local-map [(control n)] 'next-history-element)
 (define-key minibuffer-local-map [(control p)] 'previous-history-element)
 (define-key minibuffer-local-map [(space)] 'self-insert-command)
-(whenhost aquamacs
-  (define-key osx-key-mode-map "\C-z" 'suspend-emacs))
 (define-key picture-mode-map [(control c) down]  'picture-movement-down)
 (define-key picture-mode-map [(control c) left]  'picture-movement-left)
 (define-key picture-mode-map [(control c) right] 'picture-movement-right)
 (define-key picture-mode-map [(control c) up]    'picture-movement-up)
 (define-key ruby-mode-map [(meta backspace)] 'backward-kill-word)
 (define-key tex-mode-map [?\"] 'self-insert-command)
+
+(whenhost aquamacs
+  (define-key osx-key-mode-map "\C-z" 'suspend-emacs))
 
 (whenhost xemacs
   (define-key cssm-mode-map [?{] 'self-insert-command))
