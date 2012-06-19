@@ -1,5 +1,10 @@
-;; The following three functions are copied straight from the XEmacs
-;; source file "simple.el".
+;;; Personal Emacs subroutines
+
+;; Lassi Kortela <lassi@lassikortela.net>
+
+;; The following three functions are copied from the XEmacs source
+;; file simple.el. They're included here because they're not in GNU
+;; Emacs. They seem trivial enough not to fall under copyright.
 
 (defun capitalize-region-or-word (arg)
   "Capitalize the selected region or the following word (or ARG words)."
@@ -22,11 +27,19 @@
       (downcase-region (region-beginning) (region-end))
       (downcase-word arg)))
 
+;;; Date and time
+
+(defun insert-date-iso ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d ")))
+
+;;; Miscellaneous commands
+
 (defun scratch ()
   (interactive)
   (switch-to-buffer (get-buffer-create "*scratch*"))
   (funcall (or initial-major-mode 'lisp-interaction-mode))
-  (font-lock-mode 1)) ;; xemacs fix
+  (font-lock-mode 1)) ; XEmacs fix
 
 (defun customize-face-at-point ()
   (interactive)
@@ -60,7 +73,3 @@
 		    (insert (make-string (- start last) ? ))
 		    (insert (make-string (- end start) dash-char))
 		    (setq last end))))))))
-
-(defun insert-date-iso ()
-  (interactive)
-  (insert (format-time-string "%Y-%m-%d ")))
