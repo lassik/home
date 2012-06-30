@@ -73,3 +73,22 @@
 		    (insert (make-string (- start last) ? ))
 		    (insert (make-string (- end start) dash-char))
 		    (setq last end))))))))
+
+;; Adapted from code in <http://emacswiki.org/emacs/DuplicateLines>
+(defun uniq (start end)
+  "Remove duplicate adjacent lines in region."
+  (interactive "*r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region start end)
+      (goto-char (point-min))
+      (let ((count 0))
+        (while (re-search-forward "^\\(.*\n\\)\\1+" nil t)
+          (incf count (1- (truncate (- (match-end 0) (match-beginning 0))
+                                    (- (match-end 1) (match-beginning 1)))))
+          (replace-match "\\1"))
+        (when (interactive-p)
+          (if (= count 0)
+              (message "No superfluous lines found")
+              (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
+        count))))
