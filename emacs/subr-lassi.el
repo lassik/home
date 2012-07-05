@@ -2,6 +2,13 @@
 
 ;; Lassi Kortela <lassi@lassikortela.net>
 
+;; Provide uniform versions of basic functions that are missing in
+;; some emacsen or have different semantics in different emacsen.
+
+;; XEmacs fix
+(unless (fboundp 'use-region-p)
+  (defalias 'use-region-p 'region-active-p))
+
 ;; The following three functions are copied from the XEmacs source
 ;; file simple.el. They're included here because they're not in GNU
 ;; Emacs. They seem trivial enough not to fall under copyright.
@@ -26,6 +33,22 @@
   (if (region-active-p)
       (downcase-region (region-beginning) (region-end))
       (downcase-word arg)))
+
+;;; Extend `delete-blank-lines' to likewise work on the region if it's
+;;; active.  That's what I want most of the time.
+
+(defalias 'delete-blank-lines-std (symbol-function 'delete-blank-lines))
+
+(defun delete-blank-lines ()
+  (interactive "*")
+  (if (not (use-region-p))
+      (delete-blank-lines-std)
+      (save-excursion
+        (save-restriction
+          (goto-char (region-beginning))
+          (narrow-to-region (region-beginning) (region-end))
+          (while (re-search-forward "\\(^[ \t]*\n\\)+" nil t)
+            (replace-match ""))))))
 
 ;;; Date and time
 
