@@ -62,7 +62,7 @@
   (interactive)
   (switch-to-buffer (get-buffer-create "*scratch*"))
   (funcall (or initial-major-mode 'lisp-interaction-mode))
-  (font-lock-mode 1)) ; XEmacs fix
+  (font-lock-mode 1))                   ; XEmacs fix
 
 (defun customize-face-at-point ()
   (interactive)
@@ -103,8 +103,8 @@
   (interactive "*r")
   (save-excursion
     (save-restriction
+      (goto-char start)
       (narrow-to-region start end)
-      (goto-char (point-min))
       (let ((count 0))
         (while (re-search-forward "^\\(.*\n\\)\\1+" nil t)
           (incf count (1- (truncate (- (match-end 0) (match-beginning 0))
@@ -115,3 +115,29 @@
               (message "No superfluous lines found")
               (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
         count))))
+
+(defun compact-blank-lines (start end)
+  (interactive "*r")
+  (save-excursion
+    (save-restriction
+      (goto-char start)
+      (narrow-to-region start end)
+      (while (re-search-forward "^\\([ \t]*\n\\)+" nil t)
+        (replace-match "\n")))))
+
+(when (fboundp 'w32-shell-execute)
+  (defun terminal-window-here ()
+    (interactive)
+    (w32-shell-execute nil "cmd.exe")))
+
+;; For Windows XEmacs. This is complicated but I finally got it to work.
+(when (fboundp 'mswindows-shell-execute)
+  (defun terminal-window-here ()
+    (interactive)
+    ;; NOTE: In the code below, default-directory doesn't need to be
+    ;; shell-quoted because the Windows shell's cd command parses it
+    ;; as a single argument.
+    (mswindows-shell-execute
+     nil
+     (concat (getenv "SystemRoot") "\\system32\\cmd.exe")
+     (concat "/k cd /d " default-directory))))
