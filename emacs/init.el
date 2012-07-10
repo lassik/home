@@ -240,6 +240,7 @@
 (define-key dired-mode-map [(B)] 'my-dired-up)
 (define-key dired-mode-map [(control return)] 'dired-find-alternate-file)
 (define-key dired-mode-map [return] 'my-dired-run)
+(define-key java-mode-map [(control c) (control c)] 'compile)
 (define-key minibuffer-local-completion-map [space] 'self-insert-command)
 (define-key minibuffer-local-map [(control backspace)] 'my-minibuffer-backspace)
 (define-key minibuffer-local-map [(control n)] 'next-history-element)
