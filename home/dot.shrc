@@ -3,6 +3,9 @@ export BASH_ENV=~/.shrc
 export ENV=~/.shrc
 
 _uname=$(uname | tr [A-Z] [a-z])
+if test "$_uname" = "darwin" ; then
+   _uname=osx
+fi
 
 # --- Set PATH
 PATH= # Empty

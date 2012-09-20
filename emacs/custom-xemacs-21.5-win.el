@@ -35,3 +35,5 @@
  '(minibuffer-prompt ((t (:inherit minibuffer :foreground "aquamarine"))))
  '(renamed-face ((((class color)) (:background "blue" :foreground "white"))))
  '(text-cursor ((t (:foreground "Black" :background "orange"))) t))
+
+(setq minibuffer-max-depth nil)
