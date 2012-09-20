@@ -1,0 +1,2 @@
+# lassi
+. ~/.shrc
