@@ -16,9 +16,7 @@ PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/games
 PATH=$PATH:. # Important for current directory to be last in PATH search order
 export PATH
 
-. shellprompt.sh \
-  blue text "<" cyan time blue text "> [" cyan dir blue text "]" newline \
-  green host blue sign space
+. shellprompt.sh green time space cyan dir newline host green sign space
 
 # pkgsrc needs to be told where to download packages on operating systems that use it.
 if test "$_uname" = "netbsd"; then
