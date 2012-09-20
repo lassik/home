@@ -1,17 +1,23 @@
 # lassi
 export BASH_ENV=~/.shrc
-export PATH=~/bin:~/persist/pending/android-sdk-macosx/platform-tools:~/persist/pending/android-sdk-macosx/tools:"$PATH"
-# -- Begin output: shellpromptgen cyan localtime dir shorthost shellsign
-if test "$TERM" = dumb; then
-    PS1="\A \w \h\\$ "
-elif test `id -u` = 0; then
-    PS1="\[\e[0;36m\]\A \w \h\\$\[\e[0m\] "
-else
-    PS1="\[\e[0;36m\]\A \w \h\\$\[\e[0m\] "
-fi
-# -- End output
+export ENV=~/.shrc
+
+_uname=$(uname | tr [A-Z] [a-z])
+
+# --- Set PATH
+PATH= # Empty
+PATH=$PATH:$HOME/bin:$HOME/persist/private/bin/$_uname
+PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
+PATH=$PATH:/usr/X11/bin
+PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/games
+PATH=$PATH:. # Important for current directory to be last in PATH search order
+export PATH
+
+. shellprompt.sh \
+  blue text "<" cyan time blue text "> [" cyan dir blue text "]" newline \
+  green host blue sign space
 
 # pkgsrc needs to be told where to download packages on operating systems that use it.
-if test "$(uname)" = "NetBSD"; then
+if test "$_uname" = "netbsd"; then
     export PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/$(uname)/$(uname -m)/$(uname -r)/All/"
 fi
