@@ -141,3 +141,15 @@
      nil
      (concat (getenv "SystemRoot") "\\system32\\cmd.exe")
      (concat "/k cd /d " default-directory))))
+
+(defun count-hours-region (start end)
+  (interactive "r")
+  (save-match-data
+    (save-excursion
+      (goto-char start)
+      (let ((hours 0))
+        (while (re-search-forward "^[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \\([0-9]+\\)h" end t)
+          (incf hours (car (read-from-string (match-string 1)))))
+        (when (interactive-p)
+          (message "%d hours in region" hours))
+        hours))))
