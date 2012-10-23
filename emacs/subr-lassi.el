@@ -64,6 +64,13 @@
   (funcall (or initial-major-mode 'lisp-interaction-mode))
   (font-lock-mode 1))                   ; XEmacs fix
 
+(defun foo ()
+  (interactive)
+  (let ((names '("foo" "bar" "baz" "qux" "quux" "quuux" "quuuux")))
+    (let ((name (dolist (name names (car (last names)))
+                  (unless (get-buffer name) (return name)))))
+      (switch-to-buffer (get-buffer-create name)))))
+
 (defun customize-face-at-point ()
   (interactive)
   (custom-buffer-create
