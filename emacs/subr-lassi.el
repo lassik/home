@@ -68,7 +68,9 @@
   (interactive)
   (let ((names '("foo" "bar" "baz" "qux" "quux" "quuux" "quuuux")))
     (let ((name (dolist (name names (car (last names)))
-                  (unless (get-buffer name) (return name)))))
+                  (let ((buf (get-buffer name)))
+                    (when (or (null buf) (= 0 (buffer-size buf)))
+                      (return name))))))
       (switch-to-buffer (get-buffer-create name)))))
 
 (defun customize-face-at-point ()
