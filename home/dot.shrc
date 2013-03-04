@@ -9,14 +9,23 @@ fi
 
 # --- Set PATH
 PATH= # Empty
+PATH=$PATH:/usr/local/bin # Homebrew first
 PATH=$PATH:$HOME/bin:$HOME/persist/private/bin/$_uname
 PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
 PATH=$PATH:/usr/X11/bin
-PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/games
+PATH=$PATH:/usr/local/sbin:/usr/games
+PATH=$PATH:/usr/local/heroku/bin
 PATH=$PATH:. # Important for current directory to be last in PATH search order
 export PATH
 
-. shellprompt.sh green time space cyan dir newline host green sign space
+case "$-" in
+    *i*)
+        # This is an interactive shell.
+        . shellprompt.sh green time space cyan dir newline host green sign space
+        ;;
+esac
+
+set +u # shellprompt.sh fix
 
 # pkgsrc needs to be told where to download packages on operating systems that use it.
 if test "$_uname" = "netbsd"; then
