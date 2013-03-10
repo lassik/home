@@ -239,6 +239,7 @@
 (define-key comint-mode-map [(meta p)] 'comint-previous-matching-input-from-input)
 (define-key dired-mode-map [(B)] 'my-dired-up)
 (define-key dired-mode-map [(control return)] 'dired-find-alternate-file)
+(define-key dired-mode-map [(shift return)] 'dired-find-alternate-file)
 (define-key dired-mode-map [return] 'my-dired-run)
 (define-key java-mode-map [(control c) (control c)] 'compile)
 (define-key minibuffer-local-completion-map [space] 'self-insert-command)
