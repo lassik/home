@@ -15,13 +15,14 @@
 
 ;; I use this on the following platforms.
 
-;; Emacs             Operating system    GUI
-;; ----------------  ----------------    ---
-;; Aquamacs 2.4      Mac OS X 10.6       Cocoa
-;; GNU Emacs 23.1.1  Ubuntu Linux 10.04  GTK
-;; GNU Emacs 22.3.1  Ubuntu Linux 11.10  GTK
-;; GNU Emacs 23.4.1  Windows XP          Windows
-;; XEmacs 21.5.31    Windows XP          Windows
+;; Emacs             Operating system     window-system
+;; ----------------  -------------------  -------------
+;; Aquamacs 2.4      OS X 10.6            ns
+;; GNU Emacs 22.1.1  OS X 10.6            nil
+;; GNU Emacs 23.3.1  Ubuntu Linux 12.04   nil
+;; GNU Emacs 23.3.1  Ubuntu Linux 12.04   x
+;; GNU Emacs 24.2.1  Windows 7            w32
+;; XEmacs 21.5.31    Windows 7            mswindows
 
 ;;; Find out where our stuff is
 
