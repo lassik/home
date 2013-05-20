@@ -2,6 +2,31 @@
 
 ;; Lassi Kortela <lassi@lassikortela.net>
 
+;; TODO: delete all blank lines (in region)
+;; TODO: compact all blank lines so there are never two or more consecutive blank lines (in region)
+
+;;;; Utility functions
+
+(defun region-bounds (&optional need-bol-p need-eol-p)
+  (unless (region-active-p)
+    (error "The region is not active now"))
+  (unless (eq (current-buffer) (marker-buffer (mark-marker)))
+    (error "The mark is not set now"))
+  (let ((start (region-beginning))
+        (end (region-end)))
+    (save-excursion
+      (goto-char start)
+      (when (and need-bol-p (not (bolp)))
+        (goto-char (min (point-max) (1+ (point-at-eol))))
+        (setq start (point)))
+      (goto-char end)
+      (when (and need-eol-p (not (eolp)))
+        (goto-char (point-at-bol))
+        (setq end (point))))
+    (if (< start end) (list start end) (list nil nil))))
+
+;;;; Commands
+
 ;; Provide uniform versions of basic functions that are missing in
 ;; some emacsen or have different semantics in different emacsen.
 
@@ -162,3 +187,60 @@
         (when (interactive-p)
           (message "%d hours in region" hours))
         hours))))
+
+;;;; Commands to manipulate region lines
+
+(defun prefix-region (prefix start end)
+  (interactive 
+   (destructuring-bind (start end) (region-bounds t nil)
+     (list (read-string "Prefix: ") start end)))
+  (when (and start end)
+    (save-restriction
+      (goto-char start)
+      (narrow-to-region start end)
+      (while (< (point) (point-max))
+        (insert prefix)
+        (goto-char (min (point-max) (1+ (point-at-eol))))))))
+
+(defun suffix-region (suffix start end)
+  (interactive 
+   (destructuring-bind (start end) (region-bounds nil t)
+     (list (read-string "Suffix: ") start end)))
+  (when (and start end)
+    (save-restriction
+      (goto-char start)
+      (narrow-to-region start end)
+      (let ((done nil))
+        (while (not done)
+          (goto-char (point-at-eol))
+          (insert suffix)
+          (goto-char (min (point-max) (1+ (point))))
+          (setq done (= (point) (point-max))))))))
+
+(defun unprefix-region (prefix start end)
+  (interactive 
+   (destructuring-bind (start end) (region-bounds t nil)
+     (list (read-string "Prefix: ") start end)))
+  (when (and start end (not (equal "" prefix)))
+    (save-restriction
+      (goto-char start)
+      (narrow-to-region start end)
+      (let ((done nil))
+        (while (and (not done) (re-search-forward (concat "^" (regexp-quote prefix)) nil t))
+          (replace-match "")
+          (goto-char (min (point-max) (1+ (point))))
+          (setq done (= (point) (point-max))))))))
+
+(defun unsuffix-region (suffix start end)
+  (interactive 
+   (destructuring-bind (start end) (region-bounds nil t)
+     (list (read-string "Suffix: ") start end)))
+  (when (and start end (not (equal "" suffix)))
+    (save-restriction
+      (goto-char start)
+      (narrow-to-region start end)
+      (let ((done nil))
+        (while (and (not done) (re-search-forward (concat (regexp-quote suffix) "$") nil t))
+          (replace-match "")
+          (goto-char (min (point-max) (1+ (point))))
+          (setq done (= (point) (point-max))))))))
