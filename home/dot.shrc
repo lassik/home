@@ -4,20 +4,27 @@
 export BASH_ENV=~/.shrc
 export ENV=~/.shrc
 
-_uname=$(uname | tr [A-Z] [a-z])
-if test "$_uname" = "darwin" ; then
-    _uname=osx
-fi
+_newpath=""
+_appendpath() {
+    test -d "$1" && _newpath="$_newpath:$1"
+}
 
-PATH= # Empty
-PATH=$PATH:/usr/local/bin # Homebrew first
-PATH=$PATH:$HOME/bin:$HOME/persist/private/bin/$_uname
-PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
-PATH=$PATH:/usr/X11/bin
-PATH=$PATH:/usr/local/sbin:/usr/games
-PATH=$PATH:/usr/local/heroku/bin
-PATH=$PATH:. # Important for current directory to be last in PATH search order
-export PATH
+_appendpath ~/bin
+_appendpath ~/persist/private/bin/"$(uname | tr '[A-Z]' '[a-z]' | tr -dC '[a-z]')"
+_appendpath ~/oracle/bin
+_appendpath /usr/local/bin  # Homebrew shall override OS X native utilities.
+_appendpath /usr/local/sbin
+_appendpath /bin
+_appendpath /sbin
+_appendpath /usr/bin
+_appendpath /usr/sbin
+_appendpath /usr/X11R6/bin
+_appendpath /usr/X11/bin
+_appendpath /usr/games
+
+export PATH="$(echo "$_newpath" | sed 's/^://')"
+unset _appendpath
+unset _newpath
 
 # Oracle Instant Client stuff... sigh
 if test -d ~/oracle ; then
@@ -26,18 +33,20 @@ if test -d ~/oracle ; then
     export DYLD_LIBRARY_PATH=~/oracle/lib
 fi
 
+# Virtualenvwrapper for managing multiple Python installations
+if which virtualenvwrapper.sh >/dev/null 2>&1 ; then
+    export WORKON_HOME=~/.virtualenvs
+    source virtualenvwrapper.sh
+fi
+
+# pkgsrc needs to be told where to download packages on operating systems that use it.
+if test "$(uname)" = "NetBSD"; then
+    export PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/$(uname)/$(uname -m)/$(uname -r)/All/"
+fi
+
 case "$-" in
     *i*)
         # This is an interactive shell.
-        if test "$_uname" = "osx" ; then
-            export WORKON_HOME="$HOME"/.virtualenvs
-            source virtualenvwrapper.sh
-        fi
         . ~/.shellprompt
         ;;
 esac
-
-# pkgsrc needs to be told where to download packages on operating systems that use it.
-if test "$_uname" = "netbsd"; then
-    export PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/$(uname)/$(uname -m)/$(uname -r)/All/"
-fi
