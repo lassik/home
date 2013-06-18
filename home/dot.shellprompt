@@ -1,0 +1,8 @@
+# checksum placeholder
+. shellprompt \
+  cyan time sp \
+  green text ve: yellow virtualenv sp \
+  green text git: yellow gitbranch sp \
+  green text hg: yellow hgbranch sp \
+  cyan dir nl \
+  host green sign sp

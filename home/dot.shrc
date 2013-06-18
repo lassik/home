@@ -21,7 +21,7 @@ export PATH
 case "$-" in
     *i*)
         # This is an interactive shell.
-        . shellprompt.sh green time space cyan dir newline host green sign space
+        . ~/.shellprompt
         ;;
 esac
 
