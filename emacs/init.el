@@ -298,6 +298,7 @@
 ;;; Pathnames
 
 (setq ecumenist-db (concat my-emacs-conf-dir "ecumenist"))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;;; Find the right `customize' data file and load it
 
