@@ -18,6 +18,13 @@ PATH=$PATH:/usr/local/heroku/bin
 PATH=$PATH:. # Important for current directory to be last in PATH search order
 export PATH
 
+# Oracle Instant Client stuff... sigh
+if test -d ~/oracle ; then
+    export ORACLE_HOME=~/oracle
+    export TNS_ADMIN=~/oracle
+    export DYLD_LIBRARY_PATH=~/oracle/lib
+fi
+
 case "$-" in
     *i*)
         # This is an interactive shell.
