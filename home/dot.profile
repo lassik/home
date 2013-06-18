@@ -1,2 +1,2 @@
-# lassi
+# checksum placeholder
 . ~/.shrc
