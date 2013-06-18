@@ -1,13 +1,14 @@
+# emacs: -*- sh -*-
 # checksum placeholder
+
 export BASH_ENV=~/.shrc
 export ENV=~/.shrc
 
 _uname=$(uname | tr [A-Z] [a-z])
 if test "$_uname" = "darwin" ; then
-   _uname=osx
+    _uname=osx
 fi
 
-# --- Set PATH
 PATH= # Empty
 PATH=$PATH:/usr/local/bin # Homebrew first
 PATH=$PATH:$HOME/bin:$HOME/persist/private/bin/$_uname
