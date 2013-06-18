@@ -1,13 +1,37 @@
 #! /bin/sh
-cp="cp" # Change this to "echo cp" for a dry run.
-cd "$(dirname "$0")" # Make sure the current dir is the script dir.
+set -e
+cd "$(dirname "$0")"
+
+calcsum() {
+    sed 's/checksum [a-z0-9]*/checksum placeholder/' < "$1" | sha1sum | sed 's/ .*//'
+}
+
+putsum () {
+    sed "s/checksum [a-z0-9]*/checksum $(calcsum "$1")/" < "$1"
+}
+
+getsum() {
+    grep 'checksum [a-z0-9]*' < "$1" | head -n 1 | sed 's/.*checksum \([a-z0-9]*\).*/\1/'
+}
+
 for src in dot.* ; do
     dst=~/"$(echo "$src" | sed "s/^dot//")"
-    if ! test -e "$dst".orig && test -s "$dst" && awk "/lassi/ {exit 1} // {exit}" < "$dst" ; then
-        # dst.orig doesn't exist; dst exists and isn't empty and
-        # doesn't contain my name on the first line
-        # so make a backup of dst into dst.orig
-        $cp -pf "$dst" "$dst".orig
+    update=0
+    if ! test -e "$dst" ; then
+        echo "creating $dst"
+        update=1
+    elif test "$(calcsum "$dst")" = "$(calcsum "$src")" ; then
+        #echo "unmodified $dst"
+        update=0
+    elif test "$(getsum "$dst")" = "$(calcsum "$dst")" ; then
+        echo "updating $dst"
+        update=1
+    else
+        echo "preserving $dst (appears to be modified outside repo)"
+        update=0
     fi
-    $cp -pf "$src" "$dst"
+    if test "$update" = 1 ; then
+        putsum "$src" > "$dst".new
+        mv -f "$dst".new "$dst"
+    fi
 done
