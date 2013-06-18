@@ -2,3 +2,6 @@
 
 [ui]
 username = Lassi Kortela <lassi@lassikortela.net>
+
+[extensions]
+record=
