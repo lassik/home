@@ -5,4 +5,4 @@
   green text git: yellow gitbranch sp \
   green text hg: yellow hgbranch sp \
   cyan dir nl \
-  host green sign sp
+  magenta host green sign sp
