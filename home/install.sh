@@ -37,6 +37,7 @@ for src in dot.* ; do
         update=1
     else
         echo "preserving $dst (appears to be modified outside repo)"
+        diff -u "$src" "$dst"
         update=0
     fi
     if test "$update" = 1 ; then
