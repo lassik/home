@@ -3,7 +3,7 @@ set -e
 cd "$(dirname "$0")"
 
 calcsum() {
-    sed 's/checksum [a-z0-9]*/checksum placeholder/' < "$1" | shasum | sed 's/ .*//'
+    sed 's/checksum [a-z0-9]*/checksum placeholder/' < "$1" | (shasum || sha1) 2>/dev/null | sed 's/.*\([0-9a-f]\{40\}\).*/\1/'
 }
 
 putsum () {
