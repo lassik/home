@@ -17,9 +17,18 @@ getsum() {
 for src in dot.* ; do
     dst=~/"$(echo "$src" | sed "s/^dot//")"
     update=0
-    if ! test -e "$dst" ; then
+    if test "$(getsum "$src")" != "placeholder" ; then
+        echo "skipping $dst (checksum placeholder not found in source file)"
+        update=0
+    elif ! test -e "$dst" ; then
         echo "creating $dst"
         update=1
+    elif test "$(getsum "$dst")" = "" ; then
+        echo "skipping $dst (no checksum in destination file)"
+        update=0
+    elif test "$(getsum "$dst")" = "placeholder" ; then
+        echo "skipping $dst (checksum placeholder instead of real checksum in $dst)"
+        update=0
     elif test "$(calcsum "$dst")" = "$(calcsum "$src")" ; then
         #echo "unmodified $dst"
         update=0
