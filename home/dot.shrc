@@ -44,6 +44,9 @@ if test "$(uname)" = "NetBSD"; then
     export PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/$(uname)/$(uname -m)/$(uname -r)/All/"
 fi
 
+# Options for the less(1) pager.
+export LESS="--ignore-case"
+
 # Don't preserve shell command history across sessions.
 unset HISTFILE
 rm -f ~/.bash_history ~/.sh_history
