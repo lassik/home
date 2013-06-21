@@ -44,6 +44,7 @@ if test "$(uname)" = "NetBSD"; then
 fi
 
 # Options for the less(1) pager.
+export PAGER="less"
 export LESS="--ignore-case"
 
 # Don't preserve shell command history across sessions.
