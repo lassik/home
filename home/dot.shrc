@@ -10,7 +10,6 @@ _appendpath() {
 }
 
 _appendpath ~/bin
-_appendpath ~/persist/private/bin/"$(uname | tr '[A-Z]' '[a-z]' | tr -dC '[a-z]')"
 _appendpath ~/oracle/bin
 _appendpath /usr/local/bin  # Homebrew shall override OS X native utilities.
 _appendpath /usr/local/sbin
