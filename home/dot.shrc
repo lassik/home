@@ -44,6 +44,10 @@ if test "$(uname)" = "NetBSD"; then
     export PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/$(uname)/$(uname -m)/$(uname -r)/All/"
 fi
 
+# Don't preserve shell command history across sessions.
+unset HISTFILE
+rm -f ~/.bash_history ~/.sh_history
+
 case "$-" in
     *i*)
         # This is an interactive shell.
