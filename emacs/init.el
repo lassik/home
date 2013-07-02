@@ -298,7 +298,14 @@
 ;;; Pathnames
 
 (setq ecumenist-db (concat my-emacs-conf-dir "ecumenist"))
+
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(dolist (alist '(auto-mode-alist magic-mode-alist))
+  (when (boundp alist)
+    (dolist (entry (symbol-value alist))
+      (when (equal (cdr entry) 'html-helper-mode)
+        (setf (cdr entry) 'html-mode)))))
 
 ;;; Find the right `customize' data file and load it
 
