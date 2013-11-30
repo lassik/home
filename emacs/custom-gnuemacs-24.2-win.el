@@ -7,6 +7,7 @@
  '(c-basic-offset 4)
  '(column-number-mode t)
  '(diff-switches "-u")
+ '(dired-dnd-protocol-alist nil)
  '(enable-recursive-minibuffers t)
  '(grep-command "grep -niR ")
  '(grep-use-null-device nil)

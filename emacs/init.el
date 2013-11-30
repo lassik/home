@@ -336,3 +336,5 @@
 ;; seems to work for me.
 (when (file-exists-p custom-file)
   (add-hook 'window-setup-hook (lambda () (load-file custom-file))))
+
+(setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))  ; FFFUUU

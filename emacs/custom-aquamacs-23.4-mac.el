@@ -19,6 +19,7 @@
  '(iswitchb-prompt-newbuffer nil)
  '(one-buffer-one-frame-mode nil nil (aquamacs-frame-setup))
  '(require-final-newline t)
+ '(sort-fold-case t)
  '(tool-bar-mode nil))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -39,5 +40,5 @@
  '(font-lock-variable-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "lightgreen"))))
  '(minibuffer-prompt ((t (:inherit minibuffer :foreground "aquamarine"))))
  '(renamed-face ((((class color)) (:background "blue" :foreground "white"))))
- '(rst-level-1-face ((t (:background "black" :foreground "cyan"))) t)
+ '(rst-level-1-face ((t (:foreground "cyan"))) t)
  '(rst-level-2-face ((t (:background "black" :foreground "cyan"))) t))
