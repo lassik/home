@@ -5,6 +5,12 @@
 ;; TODO: delete all blank lines (in region)
 ;; TODO: compact all blank lines so there are never two or more consecutive blank lines (in region)
 
+;;;; Portability fixes
+
+;; XEmacs fix
+(unless (fboundp 'use-region-p)
+  (defalias 'use-region-p 'region-active-p))
+
 ;;;; Utility functions
 
 (defun region-bounds (&optional need-bol-p need-eol-p)
@@ -25,14 +31,50 @@
         (setq end (point))))
     (if (< start end) (list start end) (list nil nil))))
 
-;;;; Commands
+;;; Buffer and window management commands
 
-;; Provide uniform versions of basic functions that are missing in
-;; some emacsen or have different semantics in different emacsen.
+(defun scratch ()
+  (interactive)
+  (switch-to-buffer (get-buffer-create "*scratch*"))
+  (funcall (or initial-major-mode 'lisp-interaction-mode))
+  (font-lock-mode 1))                   ; XEmacs fix
 
-;; XEmacs fix
-(unless (fboundp 'use-region-p)
-  (defalias 'use-region-p 'region-active-p))
+(defun foo ()
+  (interactive)
+  (let ((names '("foo" "bar" "baz" "qux" "quux" "quuux" "quuuux")))
+    (let ((name (dolist (name names (car (last names)))
+                  (let ((buf (get-buffer name)))
+                    (when (or (null buf) (= 0 (buffer-size buf)))
+                      (return name))))))
+      (switch-to-buffer (get-buffer-create name)))))
+
+(defun customize-face-at-point ()
+  (interactive)
+  (custom-buffer-create
+   (mapcar (lambda (symbol) `(,symbol custom-face))
+           ((lambda (x) (if (listp x) x (list x)))
+            (or (get-char-property (point) 'face) '(default))))
+   "*Customize Faces*"))
+
+;; For Windows GNU Emacs.
+(when (fboundp 'w32-shell-execute)
+  (defun terminal-window-here ()
+    (interactive)
+    (w32-shell-execute nil "cmd.exe")))
+
+;; For Windows XEmacs. This is complicated but I finally got it to work.
+(when (fboundp 'mswindows-shell-execute)
+  (defun terminal-window-here ()
+    (interactive)
+    ;; NOTE: In the code below, default-directory doesn't need to be
+    ;; shell-quoted because the Windows shell's cd command parses it
+    ;; as a single argument.
+    (mswindows-shell-execute
+     nil
+     (concat (getenv "SystemRoot") "\\system32\\cmd.exe")
+     (concat "/k cd /d " default-directory))))
+
+;;;; Word commands
 
 ;; The following three functions are copied from the XEmacs source
 ;; file simple.el. They're included here because they're not in GNU
@@ -58,135 +100,6 @@
   (if (region-active-p)
       (downcase-region (region-beginning) (region-end))
       (downcase-word arg)))
-
-;;; Extend `delete-blank-lines' to likewise work on the region if it's
-;;; active.  That's what I want most of the time.
-
-(defalias 'delete-blank-lines-std (symbol-function 'delete-blank-lines))
-
-(defun delete-blank-lines ()
-  (interactive "*")
-  (if (not (use-region-p))
-      (delete-blank-lines-std)
-      (save-excursion
-        (save-restriction
-          (goto-char (region-beginning))
-          (narrow-to-region (region-beginning) (region-end))
-          (while (re-search-forward "\\(^[ \t]*\n\\)+" nil t)
-            (replace-match ""))))))
-
-;;; Date and time
-
-(defun insert-date-iso ()
-  (interactive)
-  (insert (format-time-string "%Y-%m-%d ")))
-
-;;; Miscellaneous commands
-
-(defun scratch ()
-  (interactive)
-  (switch-to-buffer (get-buffer-create "*scratch*"))
-  (funcall (or initial-major-mode 'lisp-interaction-mode))
-  (font-lock-mode 1))                   ; XEmacs fix
-
-(defun foo ()
-  (interactive)
-  (let ((names '("foo" "bar" "baz" "qux" "quux" "quuux" "quuuux")))
-    (let ((name (dolist (name names (car (last names)))
-                  (let ((buf (get-buffer name)))
-                    (when (or (null buf) (= 0 (buffer-size buf)))
-                      (return name))))))
-      (switch-to-buffer (get-buffer-create name)))))
-
-(defun customize-face-at-point ()
-  (interactive)
-  (custom-buffer-create
-   (mapcar (lambda (symbol) `(,symbol custom-face))
-           ((lambda (x) (if (listp x) x (list x)))
-            (or (get-char-property (point) 'face) '(default))))
-   "*Customize Faces*"))
-
-(defun dashify (dash-char)
-  "Put a line of dashes under the titles on the current line, which should look like a heading or a table header."
-  (interactive (list (if current-prefix-arg ?= ?-)))
-  (goto-char (point-at-eol))
-  (delete-horizontal-space)
-  (goto-char (point-at-bol))
-  (let (titles)
-    (let ((start (point-at-bol)))
-      (while (re-search-forward "[ \t]+" (point-at-eol) t)
-	(unless (equal " " (match-string 0))
-	  (when (< (point-at-bol) (match-beginning 0))
-	    (setq titles (nconc titles (list (cons (- start (point-at-bol)) (- (match-beginning 0) (point-at-bol)))))))
-	  (setq start (match-end 0))))
-      (when (< start (point-at-eol))
-	(setq titles (nconc titles (list (cons (- start (point-at-bol)) (- (point-at-eol) (point-at-bol))))))))
-    (goto-char (point-at-eol))
-    (insert (with-temp-buffer
-	      (insert "\n")
-	      (let ((last 0))
-		(dolist (title titles (buffer-substring (point-min) (point-max)))
-		  (destructuring-bind (start . end) title
-		    (insert (make-string (- start last) ? ))
-		    (insert (make-string (- end start) dash-char))
-		    (setq last end))))))))
-
-;; Adapted from code in <http://emacswiki.org/emacs/DuplicateLines>
-(defun uniq (start end)
-  "Remove duplicate adjacent lines in region."
-  (interactive "*r")
-  (save-excursion
-    (save-restriction
-      (goto-char start)
-      (narrow-to-region start end)
-      (let ((count 0))
-        (while (re-search-forward "^\\(.*\n\\)\\1+" nil t)
-          (incf count (1- (truncate (- (match-end 0) (match-beginning 0))
-                                    (- (match-end 1) (match-beginning 1)))))
-          (replace-match "\\1"))
-        (when (interactive-p)
-          (if (= count 0)
-              (message "No superfluous lines found")
-              (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
-        count))))
-
-(defun compact-blank-lines (start end)
-  (interactive "*r")
-  (save-excursion
-    (save-restriction
-      (goto-char start)
-      (narrow-to-region start end)
-      (while (re-search-forward "^\\([ \t]*\n\\)+" nil t)
-        (replace-match "\n")))))
-
-(when (fboundp 'w32-shell-execute)
-  (defun terminal-window-here ()
-    (interactive)
-    (w32-shell-execute nil "cmd.exe")))
-
-;; For Windows XEmacs. This is complicated but I finally got it to work.
-(when (fboundp 'mswindows-shell-execute)
-  (defun terminal-window-here ()
-    (interactive)
-    ;; NOTE: In the code below, default-directory doesn't need to be
-    ;; shell-quoted because the Windows shell's cd command parses it
-    ;; as a single argument.
-    (mswindows-shell-execute
-     nil
-     (concat (getenv "SystemRoot") "\\system32\\cmd.exe")
-     (concat "/k cd /d " default-directory))))
-
-(defun count-hours-region (start end)
-  (interactive "r")
-  (save-match-data
-    (save-excursion
-      (goto-char start)
-      (let ((hours 0))
-        (while (re-search-forward "^[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \\([0-9]+\\)h" end t)
-          (incf hours (car (read-from-string (match-string 1)))))
-        (when (interactive-p)
-          (message "%d hours in region" hours))
-        hours))))
 
 ;;;; Commands to manipulate region lines
 
@@ -244,3 +157,108 @@
           (replace-match "")
           (goto-char (min (point-max) (1+ (point))))
           (setq done (= (point) (point-max))))))))
+
+(defun compact-blank-lines (start end)
+  (interactive "*r")
+  (save-excursion
+    (save-restriction
+      (goto-char start)
+      (narrow-to-region start end)
+      (while (re-search-forward "^\\([ \t]*\n\\)+" nil t)
+        (replace-match "\n")))))
+
+;; Adapted from code in <http://emacswiki.org/emacs/DuplicateLines>
+(defun uniq (start end)
+  "Remove duplicate adjacent lines in region."
+  (interactive "*r")
+  (save-excursion
+    (save-restriction
+      (goto-char start)
+      (narrow-to-region start end)
+      (let ((count 0))
+        (while (re-search-forward "^\\(.*\n\\)\\1+" nil t)
+          (incf count (1- (truncate (- (match-end 0) (match-beginning 0))
+                                    (- (match-end 1) (match-beginning 1)))))
+          (replace-match "\\1"))
+        (when (interactive-p)
+          (if (= count 0)
+              (message "No superfluous lines found")
+              (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
+        count))))
+
+;;;; Miscellaneous text editing commands
+
+(defun insert-date-iso ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d ")))
+
+(defun dashify (dash-char)
+  "Put a line of dashes under the titles on the current line, which should look like a heading or a table header."
+  (interactive (list (if current-prefix-arg ?= ?-)))
+  (goto-char (point-at-eol))
+  (delete-horizontal-space)
+  (goto-char (point-at-bol))
+  (let (titles)
+    (let ((start (point-at-bol)))
+      (while (re-search-forward "[ \t]+" (point-at-eol) t)
+	(unless (equal " " (match-string 0))
+	  (when (< (point-at-bol) (match-beginning 0))
+	    (setq titles (nconc titles (list (cons (- start (point-at-bol)) (- (match-beginning 0) (point-at-bol)))))))
+	  (setq start (match-end 0))))
+      (when (< start (point-at-eol))
+	(setq titles (nconc titles (list (cons (- start (point-at-bol)) (- (point-at-eol) (point-at-bol))))))))
+    (goto-char (point-at-eol))
+    (insert (with-temp-buffer
+	      (insert "\n")
+	      (let ((last 0))
+		(dolist (title titles (buffer-substring (point-min) (point-max)))
+		  (destructuring-bind (start . end) title
+		    (insert (make-string (- start last) ? ))
+		    (insert (make-string (- end start) dash-char))
+		    (setq last end))))))))
+
+(defun count-hours-region (start end)
+  (interactive "r")
+  (save-match-data
+    (save-excursion
+      (goto-char start)
+      (let ((hours 0))
+        (while (re-search-forward "^[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \\([0-9]+\\)h" end t)
+          (incf hours (car (read-from-string (match-string 1)))))
+        (when (interactive-p)
+          (message "%d hours in region" hours))
+        hours))))
+
+;;; Extend `delete-blank-lines' to likewise work on the region if it's
+;;; active.  That's what I want most of the time.
+
+(defalias 'delete-blank-lines-std (symbol-function 'delete-blank-lines))
+
+(defun delete-blank-lines ()
+  (interactive "*")
+  (if (not (use-region-p))
+      (delete-blank-lines-std)
+      (save-excursion
+        (save-restriction
+          (goto-char (region-beginning))
+          (narrow-to-region (region-beginning) (region-end))
+          (while (re-search-forward "\\(^[ \t]*\n\\)+" nil t)
+            (replace-match ""))))))
+
+(defun my-append-yanked-lines-to-those-starting-at-point ()
+  (interactive)
+  (let ((act-buf (current-buffer))
+        (tmp-buf nil))
+    (with-temp-buffer
+      (setq tmp-buf (current-buffer))
+      (yank)
+      (goto-char (point-min))
+      (while (and (not (with-current-buffer act-buf (eobp)))
+                  (not (with-current-buffer tmp-buf (eobp))))
+        (let ((line (buffer-substring (point-at-bol) (point-at-eol))))
+          (set-buffer act-buf)
+          (goto-char (point-at-eol))
+          (insert line)
+          (forward-line 1)
+          (set-buffer tmp-buf)
+          (forward-line 1))))))
