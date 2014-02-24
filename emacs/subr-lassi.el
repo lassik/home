@@ -262,3 +262,13 @@
           (forward-line 1)
           (set-buffer tmp-buf)
           (forward-line 1))))))
+
+(defun collect-matches-in-region (start end regexp)
+  (interactive "r\nsRegexp (obeys case-fold-search): ")
+  (let ((outbuf (get-buffer-create "*collect*")))
+    (goto-char start)
+    (while (re-search-forward regexp end t)
+      (let ((match (match-string 0)))
+        (with-current-buffer outbuf
+          (insert (format "%s\n" match)))))
+    (switch-to-buffer outbuf)))
