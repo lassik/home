@@ -318,7 +318,7 @@
                (gnuemacs "gnuemacs")
                (xemacs   "xemacs"))
               "-"
-              (format "%d.%d" emacs-major-version emacs-minor-version)
+              (format "%d" emacs-major-version)
               "-"
               (case system-type
                 (windows-nt "win")
