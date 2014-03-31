@@ -1,4 +1,4 @@
-;;; Personal Emacs subroutines
+;; Personal Emacs subroutines
 
 ;; Lassi Kortela <lassi@lassikortela.net>
 
@@ -245,7 +245,7 @@
           (while (re-search-forward "\\(^[ \t]*\n\\)+" nil t)
             (replace-match ""))))))
 
-(defun my-append-yanked-lines-to-those-starting-at-point ()
+(defun append-yanked-lines-to-those-starting-at-point ()
   (interactive)
   (let ((act-buf (current-buffer))
         (tmp-buf nil))
@@ -258,6 +258,24 @@
         (let ((line (buffer-substring (point-at-bol) (point-at-eol))))
           (set-buffer act-buf)
           (goto-char (point-at-eol))
+          (insert line)
+          (forward-line 1)
+          (set-buffer tmp-buf)
+          (forward-line 1))))))
+
+(defun prepend-yanked-lines-to-those-starting-at-point ()
+  (interactive)
+  (let ((act-buf (current-buffer))
+        (tmp-buf nil))
+    (with-temp-buffer
+      (setq tmp-buf (current-buffer))
+      (yank)
+      (goto-char (point-min))
+      (while (and (not (with-current-buffer act-buf (eobp)))
+                  (not (with-current-buffer tmp-buf (eobp))))
+        (let ((line (buffer-substring (point-at-bol) (point-at-eol))))
+          (set-buffer act-buf)
+          (goto-char (point-at-bol))
           (insert line)
           (forward-line 1)
           (set-buffer tmp-buf)
@@ -279,3 +297,50 @@
     (goto-char start)
     (delete-region start end)
     (insert decoded)))
+
+(defun whitespace-cleanup-buffer ()
+  (interactive)
+  "Improved version of the `whitespace-cleanup' function that
+comes with Emacs in the source file whitespace.el."
+  (let ((buffer-undo-list t))  ; Temporarily disable undo.
+    (save-match-data
+      (save-excursion
+        (save-restriction
+          (widen)
+          (goto-char (point-min))
+          (while (search-forward "\r\n" nil t) (replace-match "\n"))
+          (goto-char (point-min))
+          (while (search-forward "\r" nil t) (replace-match "\n"))
+          (unless indent-tabs-mode (untabify (point-min) (point-max)))
+          (goto-char (point-min))
+          (while (re-search-forward "[ \t]+$" nil t) (replace-match ""))
+          (goto-char (point-max))
+          (delete-region (if (re-search-backward "[^ \t\n]" nil t) (match-end 0) (point-min))
+                         (point-max))
+          (when (< (point-min) (point-max)) (goto-char (point-max)) (insert "\n")))))))
+
+(defun netify-region (beg end)
+  (interactive "r")
+  (let ((text (buffer-substring beg end)))
+    (switch-to-buffer (generate-new-buffer "*netify*"))
+    (insert text "\n")
+    (goto-char (point-min))
+    (while (re-search-forward "\t+" nil t) (replace-match " "))
+    (goto-char (point-min))
+    (while (not (= (point-at-eol) (point-max)))
+      (goto-char (point-at-eol))
+      (if (looking-at "\n\n+")
+          (goto-char (match-end 0))
+        (progn (delete-char 1)
+               (insert " ")
+               (goto-char (point-at-eol)))))
+    (goto-char (point-min))
+    (while (re-search-forward " +" nil t) (replace-match " "))
+    (goto-char (point-min))
+    (while (re-search-forward " +$" nil t) (replace-match ""))
+    (goto-char (point-min))
+    (when (looking-at " +") (replace-match ""))
+    (goto-char (point-max))
+    (re-search-backward "\n+")
+    (delete-region (1- (point)) (point-max))
+    (push-mark (point-min) t t)))
