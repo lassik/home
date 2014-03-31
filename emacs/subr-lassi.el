@@ -272,3 +272,10 @@
         (with-current-buffer outbuf
           (insert (format "%s\n" match)))))
     (switch-to-buffer outbuf)))
+
+(defun url-decode-region (start end)
+  (interactive "r")
+  (let ((decoded (url-unhex-string (buffer-substring start end))))
+    (goto-char start)
+    (delete-region start end)
+    (insert decoded)))
