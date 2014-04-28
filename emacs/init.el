@@ -265,7 +265,10 @@
 
 ;; I'm not sure this is the right way to do it, but it seems to work.
 
-(set-variable 'lisp-indent-function 'common-lisp-indent-function)
+(add-hook 'lisp-mode-hook
+          (lambda ()
+            (set (make-local-variable 'lisp-indent-function)
+                 'common-lisp-indent-function)))
 
 (defun set-lisp-indent (symbol value)
   (dolist (prop '(lisp-indent-function common-lisp-indent-function) value)
