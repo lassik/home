@@ -335,7 +335,11 @@
 ;; Emacs/Aquamacs startup process so I'm going with folk wisdom.  It
 ;; seems to work for me.
 (when (file-exists-p custom-file)
-  (add-hook 'window-setup-hook (lambda () (load-file custom-file))))
+  (add-hook 'window-setup-hook
+            (lambda () 
+              (load-file custom-file)
+              (set-variable 'dired-use-ls-dired nil)
+              nil)))
 
 (whenhost unix
   (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH"))))  ; FFFUUU

@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ack-and-a-half-executable "ack")
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style "bsd")
@@ -11,6 +12,7 @@
  '(cua-mode nil nil (cua-base))
  '(cursor-type (quote box) t)
  '(directory-free-space-args "-k")
+ '(dired-use-ls-dired (quote unspecified))
  '(enable-recursive-minibuffers t)
  '(grep-command "grep -niR ")
  '(indent-tabs-mode nil)
@@ -23,7 +25,7 @@
  '(ns-command-modifier (quote meta))
  '(package-archives (quote (("melpa" . "http://melpa.milkbox.net/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(require-final-newline t)
- '(sort-fold-case t)
+ '(sort-fold-case t t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -43,6 +45,9 @@
  '(font-lock-function-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "lightgreen"))))
  '(font-lock-type-face ((((class color) (min-colors 88) (background dark)) (:foreground "wheat"))))
  '(font-lock-variable-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "lightgreen"))))
+ '(lassi-todo-face-hash-tag ((t (:foreground "yellow"))))
+ '(lassi-todo-face-minus ((t (:foreground "red3"))))
+ '(lassi-todo-face-plus ((t (:foreground "chartreuse"))))
  '(minibuffer-prompt ((t (:inherit minibuffer :foreground "aquamarine"))))
  '(renamed-face ((((class color)) (:background "blue" :foreground "white"))))
  '(rst-level-1-face ((t (:foreground "cyan"))) t)
