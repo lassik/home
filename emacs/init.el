@@ -342,6 +342,8 @@
             (lambda () 
               (load-file custom-file)
               (set-variable 'dired-use-ls-dired nil)
+              (require 'ess)
+              (require 'ess-site)
               nil)))
 
 (whenhost unix
