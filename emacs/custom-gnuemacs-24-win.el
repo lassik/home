@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
+ '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "bsd"))))
  '(column-number-mode t)
  '(diff-switches "-u")
  '(dired-dnd-protocol-alist nil)
@@ -18,12 +19,13 @@
  '(initial-scratch-message nil)
  '(iswitchb-mode t)
  '(iswitchb-prompt-newbuffer nil)
+ '(lua-indent-level 2)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(minibuffer-prompt-properties (quote (read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)))
  '(require-final-newline t)
  '(safe-local-variable-values (quote ((Lowercase . Yes) (Base . 10) (Package . XLIB) (Syntax . Common-lisp))))
- '(scroll-bar-mode nil)
+ '(scroll-bar-mode (quote right))
  '(scroll-step 1)
  '(tool-bar-mode nil))
 
