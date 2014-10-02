@@ -1,8 +1,8 @@
 # checksum placeholder
-. shellprompt \
-  cyan time sp \
+export PS1="\$(shellprompt \
+ cyan time24 sp \
   green text ve: yellow virtualenv sp \
   green text git: yellow gitbranch sp \
   green text hg: yellow hgbranch sp \
   cyan dir nl \
-  magenta host green sign sp
+  magenta host green sign sp)"
