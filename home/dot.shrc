@@ -20,6 +20,7 @@ _appendpath /usr/sbin
 _appendpath /usr/X11R6/bin
 _appendpath /usr/X11/bin
 _appendpath /usr/games
+_appendpath /usr/local/texlive/2014basic/bin/x86_64-darwin  # mactex BasicTeX distribution on OSX
 
 export PATH="$(echo "$_newpath" | sed 's/^://')"
 unset _appendpath
