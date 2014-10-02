@@ -4,4 +4,6 @@
 username = Lassi Kortela <lassi@lassikortela.net>
 
 [extensions]
-record=
+hgext.bookmarks =
+hggit =
+record =
