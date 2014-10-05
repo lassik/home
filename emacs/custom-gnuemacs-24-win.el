@@ -23,6 +23,7 @@
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(minibuffer-prompt-properties (quote (read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)))
+ '(package-archives (quote (("melpa" . "http://melpa.milkbox.net/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(require-final-newline t)
  '(safe-local-variable-values (quote ((Lowercase . Yes) (Base . 10) (Package . XLIB) (Syntax . Common-lisp))))
  '(scroll-bar-mode (quote right))
