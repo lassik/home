@@ -1,4 +1,3 @@
-# checksum placeholder
 export PS1="\$(shellprompt \
  cyan time24 sp \
   green text ve: yellow virtualenv sp \
