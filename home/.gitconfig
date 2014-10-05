@@ -1,3 +1,5 @@
 [user]
 	name = Lassi Kortela
 	email = lassi@lassikortela.net
+[push]
+	default = simple
