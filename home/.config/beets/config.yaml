@@ -1,0 +1,47 @@
+directory: ~/persist/public/music/
+library: ~/persist/public/music/.beets-music-library.blb
+asciify_paths: yes
+per_disc_numbering: yes
+
+plugins:
+    duplicates
+    fetchart
+    fromfilename
+    inline
+    missing
+
+import:
+    move: yes
+    write: no
+    autotag: yes
+    log: ~/persist/public/music/.beets-import.log
+
+paths:
+    singleton:
+        $myquality-tracks/$mygenre/%left{$artist - $title,$mymaxlen}
+    genre:classical:
+        $myquality-albums/$mygenre/%left{%if{$composer,$composer - }$album%aunique{}%if{$comp,, ($albumartist%if{$year, $year})}/$mydisc$track - $title,$mymaxlen}
+    # TODO: we must specify "comp:" here or else filenames for
+    # compilations will come from the beets default
+    # configuration. comp: is now an exacte duplicate of default - how
+    # can I specify that without actually copy-pasting the text?
+
+    # TODO: Also, what about classical compilations? Ugh.
+    comp:
+        $myquality-albums/$mygenre/%left{%if{$comp,,$albumartist - }%if{$original_year,$original_year - ,%if{$year,$year - }}$album%aunique{}/$mydisc$track - $title,$mymaxlen}
+    default:
+        $myquality-albums/$mygenre/%left{%if{$comp,,$albumartist - }%if{$original_year,$original_year - ,%if{$year,$year - }}$album%aunique{}/$mydisc$track - $title,$mymaxlen}
+
+item_fields:
+    mydisc:      (disc if disctotal > 1 else "")
+    mygenre:     (unicode(genre).lower() if genre else "other")
+    myquality:   ("hq" if bitrate >= 256000 else "lowq")
+
+    # Strictly speaking, I'm not using %left{...,$mymaxlen}
+    # correctly. It should be per-component and not apply to the whole
+    # filename.  Because if I have e.g. "albumartist - album/track -
+    # title" and the "albumartist - album" part by itself is longer
+    # than mymaxlen, then all the album track numbers would get
+    # truncated and all the tracks on the album would have the same
+    # filename.  TODO: Think later about how to best fix this.
+    mymaxlen:    ("100")
