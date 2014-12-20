@@ -55,6 +55,6 @@ rm -f ~/.bash_history ~/.sh_history
 case "$-" in
     *i*)
         # This is an interactive shell.
-        . ~/.shellprompt
+        PROMPT_COMMAND='PS1="$(shellprompt encode bash || echo "$ ")"'
         ;;
 esac
