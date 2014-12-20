@@ -50,7 +50,9 @@ export LESS="--ignore-case"
 
 # Don't preserve shell command history across sessions.
 unset HISTFILE
-rm -f ~/.bash_history ~/.sh_history
+
+# Clear all readline command history files for shells, interpreters, etc.
+find ~ -type f -name '.*_history' -delete
 
 case "$-" in
     *i*)
