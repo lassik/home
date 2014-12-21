@@ -2,8 +2,7 @@
 
 # Some programs are confused if $HOME and ~ are different paths.
 # (This can happen when part of $HOME is a symbolic link.)
-cd
-export HOME="$(pwd -P)"
+export HOME="$(cd && pwd -P)"
 
 export BASH_ENV=~/.shrc
 export ENV=~/.shrc
