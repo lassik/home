@@ -1,1 +1,3 @@
-blue termcols line blue text git: cyan gitbranch sp green dir nl blue time24 sp cyan host green sign sp
+title user text @ host text " (" shell text ")" endtitle
+blue termcols line blue text git: cyan gitbranch sp green dir nl
+blue time24 sp weekday sp cyan host green sp shell sign sp
