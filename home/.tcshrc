@@ -1,0 +1,2 @@
+test -e ~/persist/private/code/shellprompt/shellprompt-activate.tcsh && \
+    source ~/persist/private/code/shellprompt/shellprompt-activate.tcsh
