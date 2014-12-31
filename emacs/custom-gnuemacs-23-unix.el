@@ -5,6 +5,7 @@
   ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
+ '(c-offsets-alist (quote ((arglist-cont . 4) (arglist-cont-nonempty . 4))))
  '(column-number-mode t)
  '(enable-recursive-minibuffers t)
  '(grep-command "grep -niR ")
@@ -23,6 +24,7 @@
  '(safe-local-variable-values (quote ((Lowercase . Yes) (Base . 10) (Package . XLIB) (Syntax . Common-lisp))))
  '(scroll-bar-mode nil)
  '(scroll-step 1)
+ '(sort-fold-case t)
  '(tool-bar-mode nil)
  '(x-select-enable-clipboard t))
 
@@ -33,5 +35,8 @@
   ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "unknown"))))
  '(cursor ((t (:background "aquamarine" :foreground "black"))))
+ '(diff-added ((t (:inherit diff-changed :foreground "green"))))
+ '(diff-indicator-added ((t (:inherit diff-added :foreground "green"))))
+ '(diff-removed ((t (:inherit diff-changed :foreground "red"))))
  '(font-lock-comment-face ((((class color) (min-colors 88) (background dark)) (:foreground "gray"))))
  '(renamed-face ((((class color)) (:foreground "orange")))))
