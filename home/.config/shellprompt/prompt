@@ -1,3 +1,8 @@
-title user text @ host text " (" shell text ")" endtitle
-blue termcols line blue text git: cyan gitbranch sp green dir nl
-blue time24 sp weekday sp cyan host green sp shell sign sp
+title user text @ host sp text "(" shell text ")" endtitle
+blue termcols line
+blue text bat: cyan battery sp
+blue text git: cyan gitbranch sp
+green dir nl
+blue time24 sp weekday sp
+cyan host sp
+green shell sign sp
