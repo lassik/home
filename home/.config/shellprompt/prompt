@@ -1,7 +1,7 @@
 title user text @ host sp text "(" shell text ")" endtitle
 blue termcols line
 blue text bat: cyan battery sp
-blue text git: cyan gitbranch sp
+blue text git: cyan gitbranch blue text "+" red gitstashcount sp
 green dir nl
 blue time24 sp weekday sp
 cyan host sp
