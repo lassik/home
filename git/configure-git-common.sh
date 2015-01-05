@@ -4,5 +4,8 @@
 # anywhere. Sigh.
 git config --global push.default current
 
+# Make less display ANSI colors from git output, not "ESC" junk.
+git config --global core.pager "less -R"
+
 git config --global user.name "Lassi Kortela"
 git config --global --unset user.email || :
