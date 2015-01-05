@@ -69,3 +69,14 @@ case "$-" in
         PROMPT_COMMAND='PS1="$(shellprompt encode bash || echo "$ ")"'
         ;;
 esac
+
+# Finally, I don't like having my own shell aliases and functions but
+# these are almost mandatory:
+
+l() {
+    ls -hAlF "$@"
+}
+
+c() {
+    cd "${1-..}"
+}
