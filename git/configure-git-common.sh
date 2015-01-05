@@ -1,6 +1,6 @@
 # This script is meant to be sourced from the other scripts.
 
-# change to push.defalut to 'simple' once I no longer use git <1.7.11
+# Change to push.default to 'simple' once I no longer use git <1.7.11
 # anywhere. Sigh.
 git config --global push.default current
 
