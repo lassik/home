@@ -4,7 +4,7 @@ title user text @ host sp text "(" shell text ")" endtitle
 ?battery 30 < dup if red else blue then text bat: if red else cyan then battery sp
 ?gitbranch if
   blue text git:
-  ?gitbranch ?text "master" <> if cyan gitbranch then
+  ?gitbranch ?text "master" <> if yellow gitbranch then
   ?gitstashcount if red text "+" gitstashcount then
   sp
 then
