@@ -1,7 +1,13 @@
+79 constant linelen 
 title user text @ host sp text "(" shell text ")" endtitle
-blue termcols line
-blue text bat: cyan battery sp
-blue text git: cyan gitbranch blue text "+" red gitstashcount sp
+?termcols linelen min cyan line ?termcols linelen - 0 max magenta line
+?battery 30 < dup if red else blue then text bat: if red else cyan then battery sp
+?gitbranch if
+  blue text git:
+  ?gitbranch ?text "master" <> if cyan gitbranch then
+  ?gitstashcount if red text "+" gitstashcount then
+  sp
+then
 green dir nl
 blue time24 sp weekday sp
 cyan host sp
