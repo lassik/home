@@ -3,10 +3,13 @@ title user text @ host sp text "(" shell text ")" endtitle
 ?termcols linelen min cyan line ?termcols linelen - 0 max magenta line
 ?battery 30 < dup if red else blue then text bat: if red else cyan then battery sp
 ?gitbranch if
-  blue text git:
-  ?gitbranch ?text "master" <> if yellow gitbranch then
-  ?gitstashcount if red text "+" gitstashcount then
-  sp
+  blue text git
+  ?gitstashcount if text "[" red text + gitstashcount blue text "]" then
+  text ":"
+  ?gitbranch ?text "master" <> if
+    blue text "<" red gitbranch blue text ">"
+  then
+ sp
 then
 green dir nl
 blue time24 sp weekday sp
