@@ -1,83 +1,90 @@
 # emacs: -*- sh -*-
 
-# Some programs are confused if $HOME and ~ are different paths.
-# (This can happen when part of $HOME is a symbolic link.)
-export HOME="$(cd && pwd -P)"
-cd "$(pwd -P)"
+if test "$MY_CUSTOMIZATION_DONE" != "yes" ; then
 
-export BASH_ENV=~/.shrc
-export ENV=~/.shrc
+    # Some programs are confused if $HOME and ~ are different paths.
+    # (This can happen when part of $HOME is a symbolic link.)
+    export HOME="$(cd && pwd -P)"
+    cd "$(pwd -P)"
 
-_newpath=""
-_appendpath() {
-    test -d "$1" && _newpath="$_newpath:$1"
-}
+    export BASH_ENV=~/.shrc
+    export ENV=~/.shrc
 
-_appendpath ~/bin
-_appendpath ~/oracle/bin
-_appendpath /usr/local/bin  # Homebrew shall override OS X native utilities.
-_appendpath /usr/local/sbin
-_appendpath /bin
-_appendpath /sbin
-_appendpath /usr/bin
-_appendpath /usr/sbin
-_appendpath /usr/X11R6/bin
-_appendpath /usr/X11/bin
-_appendpath /usr/games
-_appendpath /usr/local/texlive/2014basic/bin/x86_64-darwin  # mactex BasicTeX distribution on OSX
+    _newpath=""
+    _appendpath() {
+        test -d "$1" && _newpath="$_newpath:$1"
+    }
 
-export PATH="$(echo "$_newpath" | sed 's/^://')"
-unset _appendpath
-unset _newpath
+    _appendpath ~/bin
+    _appendpath ~/oracle/bin
+    _appendpath /usr/local/bin  # Homebrew shall override OS X native utilities.
+    _appendpath /usr/local/sbin
+    _appendpath /bin
+    _appendpath /sbin
+    _appendpath /usr/bin
+    _appendpath /usr/sbin
+    _appendpath /usr/X11R6/bin
+    _appendpath /usr/X11/bin
+    _appendpath /usr/games
+    _appendpath /usr/local/texlive/2014basic/bin/x86_64-darwin  # mactex BasicTeX distribution on OSX
 
-# Oracle Instant Client stuff... sigh
-if test -d ~/oracle ; then
-    export ORACLE_HOME=~/oracle
-    export TNS_ADMIN=~/oracle
-    export DYLD_LIBRARY_PATH=~/oracle/lib
+    export PATH="$(echo "$_newpath" | sed 's/^://')"
+    unset _appendpath
+    unset _newpath
+
+    # Oracle Instant Client stuff... sigh
+    if test -d ~/oracle ; then
+        export ORACLE_HOME=~/oracle
+        export TNS_ADMIN=~/oracle
+        export DYLD_LIBRARY_PATH=~/oracle/lib
+    fi
+
+    # Python stuff
+    export PYTHONIOENCODING=UTF-8
+    if which virtualenvwrapper.sh >/dev/null 2>&1 ; then
+        export WORKON_HOME=~/.virtualenvs
+        source virtualenvwrapper.sh
+    fi
+
+    # pkgsrc needs to be told where to download packages on operating systems that use it.
+    if test "$(uname)" = "NetBSD"; then
+        export PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/$(uname)/$(uname -m)/$(uname -r)/All/"
+    fi
+
+    # Options for the less(1) pager.
+    export PAGER="less"
+    export LESS="--ignore-case"
+
+    # Don't preserve shell command history across sessions.
+    unset HISTFILE
+
+    # Clear all readline command history files for shells, interpreters, etc.
+    find ~ -maxdepth 1 -type f -name '.*_history' -delete
+    find ~ -maxdepth 1 -type f -name 'nohup.out' -delete
+
+    if test "$(hostname)" = "lego"; then
+        export SHELLPROMPT_XTERM_TITLE=no
+    fi
+
 fi
 
-# Python stuff
-export PYTHONIOENCODING=UTF-8
-if which virtualenvwrapper.sh >/dev/null 2>&1 ; then
-    export WORKON_HOME=~/.virtualenvs
-    source virtualenvwrapper.sh
-fi
-
-# pkgsrc needs to be told where to download packages on operating systems that use it.
-if test "$(uname)" = "NetBSD"; then
-    export PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/$(uname)/$(uname -m)/$(uname -r)/All/"
-fi
-
-# Options for the less(1) pager.
-export PAGER="less"
-export LESS="--ignore-case"
-
-# Don't preserve shell command history across sessions.
-unset HISTFILE
-
-# Clear all readline command history files for shells, interpreters, etc.
-find ~ -maxdepth 1 -type f -name '.*_history' -delete
-find ~ -maxdepth 1 -type f -name 'nohup.out' -delete
-
-if test "$(hostname)" = "lego"; then
-    export SHELLPROMPT_XTERM_TITLE=no
-fi
+export MY_CUSTOMIZATION_DONE="yes"
 
 case "$-" in
     *i*)
         # This is an interactive shell.
         PROMPT_COMMAND='PS1="$(shellprompt encode bash || echo "$ ")"'
+
+        # Finally, I don't like having my own shell aliases and functions but
+        # these are almost mandatory:
+
+        l() {
+            ls -hAlF "$@"
+        }
+
+        c() {
+            cd "${1-..}"
+        }
+
         ;;
 esac
-
-# Finally, I don't like having my own shell aliases and functions but
-# these are almost mandatory:
-
-l() {
-    ls -hAlF "$@"
-}
-
-c() {
-    cd "${1-..}"
-}
