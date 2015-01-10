@@ -1,7 +1,11 @@
 79 constant linelen 
 title user text @ host sp text "(" shell text ")" endtitle
 ?termcols linelen min blue line ?termcols linelen - 0 max blue line
-?battery 30 < dup if red else blue then text bat: if red else cyan then battery sp
+?battery 100 < if
+  ?battery 30 < dup
+  if red else blue then text bat:
+  invert if cyan then battery text % sp
+then
 ?gitbranch if
   blue text git
   ?gitstashcount if text "[" magenta text + gitstashcount blue text "]" then
