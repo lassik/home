@@ -69,7 +69,12 @@ export MY_CUSTOMIZATION_DONE="yes"
 case "$-" in
     *i*)
         # This is an interactive shell.
-        PROMPT_COMMAND='PS1="$(shellprompt encode bash || echo "$ ")"'
+
+        if test -n "$ZSH_VERSION" ; then
+            eval $(shellprompt activate zsh)
+        elif test -n "$BASH_VERSION" ; then
+            eval $(shellprompt activate bash)
+        fi
 
         # Finally, I don't like having my own shell aliases and functions but
         # these are almost mandatory:
