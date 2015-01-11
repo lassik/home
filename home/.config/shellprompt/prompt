@@ -15,7 +15,7 @@ then
   then
  space
 then
-green dir nl
+green dir cr
 blue time24 space weekday space
 cyan host space
 green shell sign space
