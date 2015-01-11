@@ -1,10 +1,10 @@
-79 constant linelen 
-title user text @ host sp text "(" shell text ")" endtitle
+79 constant linelen
+title user text @ host space text "(" shell text ")" endtitle
 ?termcols linelen min blue line ?termcols linelen - 0 max blue line
 ?battery 100 < if
   ?battery 30 < dup
   if red else blue then text bat:
-  invert if cyan then battery text % sp
+  invert if cyan then battery text % space
 then
 ?gitbranch if
   blue text git
@@ -13,9 +13,9 @@ then
   ?gitbranch ?text "master" <> if
     blue text "<" magenta gitbranch blue text ">"
   then
- sp
+ space
 then
 green dir nl
-blue time24 sp weekday sp
-cyan host sp
-green shell sign sp
+blue time24 space weekday space
+cyan host space
+green shell sign space
