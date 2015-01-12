@@ -76,6 +76,12 @@ case "$-" in
             eval $(shellprompt activate bash)
         fi
 
+        for x in git-completion.bash ; do
+            if test -e /etc/bash_completion.d/"$x" ; then
+                source /etc/bash_completion.d/"$x"
+            fi
+        done
+
         # Finally, I don't like having my own shell aliases and functions but
         # these are almost mandatory:
 
