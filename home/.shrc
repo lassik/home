@@ -10,61 +10,16 @@ if test "$MY_CUSTOMIZATION_DONE" != "yes" ; then
     export BASH_ENV=~/.shrc
     export ENV=~/.shrc
 
-    _newpath=""
-    _appendpath() {
-        test -d "$1" && _newpath="$_newpath:$1"
-    }
-
-    _appendpath ~/bin
-    _appendpath ~/oracle/bin
-    _appendpath /usr/local/bin  # Homebrew shall override OS X native utilities.
-    _appendpath /usr/local/sbin
-    _appendpath /bin
-    _appendpath /sbin
-    _appendpath /usr/bin
-    _appendpath /usr/sbin
-    _appendpath /usr/X11R6/bin
-    _appendpath /usr/X11/bin
-    _appendpath /usr/games
-    _appendpath /usr/local/texlive/2014basic/bin/x86_64-darwin  # mactex BasicTeX distribution on OSX
-
-    export PATH="$(echo "$_newpath" | sed 's/^://')"
-    unset _appendpath
-    unset _newpath
-
-    # Oracle Instant Client stuff... sigh
-    if test -d ~/oracle ; then
-        export ORACLE_HOME=~/oracle
-        export TNS_ADMIN=~/oracle
-        export DYLD_LIBRARY_PATH=~/oracle/lib
-    fi
-
-    # Python stuff
-    export PYTHONIOENCODING=UTF-8
-    if which virtualenvwrapper.sh >/dev/null 2>&1 ; then
-        export WORKON_HOME=~/.virtualenvs
-        source virtualenvwrapper.sh
-    fi
-
-    # pkgsrc needs to be told where to download packages on operating systems that use it.
-    if test "$(uname)" = "NetBSD"; then
-        export PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/$(uname)/$(uname -m)/$(uname -r)/All/"
-    fi
-
-    # Options for the less(1) pager.
-    export PAGER="less"
-    export LESS="--ignore-case"
-
-    # Don't preserve shell command history across sessions.
-    unset HISTFILE
-
-    # Clear all readline command history files for shells, interpreters, etc.
-    find ~ -maxdepth 1 -type f -name '.*_history' -delete
-    find ~ -maxdepth 1 -type f -name 'nohup.out' -delete
-
 fi
 
 export MY_CUSTOMIZATION_DONE="yes"
+
+for myrc in ~/.myrc/*.sh ; do
+    source "$myrc"
+done
+
+# Remove blank and duplicate entries in PATH.
+export PATH="$(echo -n "$PATH" | awk -v RS=: '$0 && !arr[$0]++' | paste -sd :)"
 
 case "$-" in
     *i*)
@@ -75,23 +30,6 @@ case "$-" in
         elif test -n "$BASH_VERSION" ; then
             eval $(shellprompt activate bash)
         fi
-
-        for x in git-completion.bash ; do
-            if test -e /etc/bash_completion.d/"$x" ; then
-                source /etc/bash_completion.d/"$x"
-            fi
-        done
-
-        # Finally, I don't like having my own shell aliases and functions but
-        # these are almost mandatory:
-
-        l() {
-            ls -hAlF "$@"
-        }
-
-        c() {
-            cd "${1-..}"
-        }
 
         ;;
 esac
