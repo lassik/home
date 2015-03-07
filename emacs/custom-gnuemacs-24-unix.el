@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(ack-and-a-half-executable "ack")
  '(blink-cursor-mode nil)
+ '(browse-url-browser-function (quote browse-url-chromium))
  '(c-basic-offset 4)
  '(c-default-style "bsd")
  '(clojure-defun-style-default-indent t)
@@ -29,7 +30,7 @@
  '(ns-command-modifier (quote meta))
  '(package-archives (quote (("melpa" . "http://melpa.milkbox.net/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(require-final-newline t)
- '(sort-fold-case t t)
+ '(sort-fold-case t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
