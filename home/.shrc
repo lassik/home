@@ -19,7 +19,7 @@ for myrc in ~/.myrc/*.sh ; do
 done
 
 # Remove blank and duplicate entries in PATH.
-export PATH="$(echo -n "$PATH" | awk -v RS=: '$0 && !arr[$0]++' | paste -sd :)"
+export PATH="$(echo -n "$PATH" | awk -v RS=: '$0 && !arr[$0]++' | paste -sd : -)"
 
 case "$-" in
     *i*)
