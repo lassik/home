@@ -349,6 +349,16 @@
 (whenhost unix
   (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH"))))  ; FFFUUU
 
+;; Make C-x k run `server-edit' instead of the usual `kill-buffer' for
+;; emacsclient buffers. From EmacsWiki EmacsClient page.
+(whenhost gnuemacs
+  (add-hook 'server-switch-hook
+            (lambda ()
+              (when (current-local-map)
+                (use-local-map (copy-keymap (current-local-map))))
+              (when server-buffer-clients
+                (local-set-key (kbd "C-x k") 'server-edit)))))
+
 (defun maximize-emacs ()
   (interactive)
   (case window-system
@@ -359,3 +369,4 @@
                             '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))))
 
 (maximize-emacs)
+
