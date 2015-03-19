@@ -1,5 +1,4 @@
 79 constant linelen
-title user text @ host space text "(" shell text ")" endtitle
 ?termcols linelen min blue line ?termcols linelen - 0 max blue line
 ?battery 100 < if
   ?battery 30 < dup
