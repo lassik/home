@@ -330,6 +330,15 @@
                 (t          "unix"))
               ".el"))
 
+(defun maximize-emacs ()
+  (interactive)
+  (case window-system
+    (x
+     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+                            '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+                            '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))))
+
 ;; If you try to load your customizations by simply feeding your
 ;; newly-set `custom-file' to `load-file' in this initialization file,
 ;; some of the customizations won't have any effect because
@@ -338,9 +347,11 @@
 ;; load them.  I don't understand the bizarre complications of the
 ;; Emacs/Aquamacs startup process so I'm going with folk wisdom.  It
 ;; seems to work for me.
-(when (file-exists-p custom-file)
-  (add-hook 'window-setup-hook
-            (lambda () 
+(add-hook 'window-setup-hook
+          (lambda ()
+            (when (fboundp 'maximize-emacs)
+              (maximize-emacs))
+            (when (file-exists-p custom-file)
               (load-file custom-file)
               (set-variable 'dired-use-ls-dired nil)
               (require 'ess)
@@ -359,15 +370,3 @@
                 (use-local-map (copy-keymap (current-local-map))))
               (when server-buffer-clients
                 (local-set-key (kbd "C-x k") 'server-edit)))))
-
-(defun maximize-emacs ()
-  (interactive)
-  (case window-system
-    (x
-     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                            '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                            '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))))
-
-(maximize-emacs)
-
