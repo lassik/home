@@ -57,7 +57,8 @@
 ;;; Load extensions not bundled with Emacs
 
 (dolist (code-dir (list my-emacs-public-code-dir
-                        my-emacs-private-code-dir))
+                        my-emacs-private-code-dir
+                        (expand-file-name "~/.myrc")))
 
   (when (file-accessible-directory-p code-dir)
 
