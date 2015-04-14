@@ -9,6 +9,10 @@ alias gcm='git checkout master'
 alias gco='git checkout'
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gl='git pull'
+alias glg='git log --stat --max-count=10'
+alias glgg='git log --graph --max-count=10'
+alias gp='git push'
 alias gr='git remote'
 alias grv='git remote -v'
 alias gst='git status'
@@ -16,6 +20,7 @@ alias gsta='git stash'
 alias gstd='git stash drop'
 alias gstp='git stash pop'
 alias gsts='git stash show --text'
+alias gup='git pull --rebase'
 
 if test -r /etc/bash_completion.d/git-completion.bash ; then
     source /etc/bash_completion.d/git-completion.bash
@@ -29,8 +34,13 @@ if test -r /etc/bash_completion.d/git-completion.bash ; then
     __git_complete gco   _git_checkout
     __git_complete gd    _git_diff
     __git_complete gdc   _git_diff
+    __git_complete gl    _git_pull
+    __git_complete glg   _git_log
+    __git_complete glgg  _git_log
+    __git_complete gp    _git_push
     __git_complete gr    _git_remote
     __git_complete grv   _git_remote
+    __git_complete gup   _git_fetch
     # no gst
     __git_complete gsta  _git_stash
     __git_complete gstd  _git_stash
