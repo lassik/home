@@ -24,6 +24,7 @@
  '(safe-local-variable-values (quote ((Lowercase . Yes) (Base . 10) (Package . XLIB) (Syntax . Common-lisp))))
  '(scroll-bar-mode nil)
  '(scroll-step 1)
+ '(sentence-end-double-space nil)
  '(sort-fold-case t)
  '(tool-bar-mode nil)
  '(x-select-enable-clipboard t))
