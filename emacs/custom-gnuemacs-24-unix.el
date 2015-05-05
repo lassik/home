@@ -29,6 +29,8 @@
  '(ns-alternate-modifier (quote none))
  '(ns-command-modifier (quote meta))
  '(package-archives (quote (("melpa" . "http://melpa.milkbox.net/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(pcomplete-ignore-case t)
+ '(read-file-name-completion-ignore-case t)
  '(require-final-newline t)
  '(sort-fold-case t)
  '(tool-bar-mode nil))
