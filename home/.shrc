@@ -7,7 +7,6 @@ if test "$MY_CUSTOMIZATION_DONE" != "yes" ; then
     export HOME="$(cd && pwd -P)"
     cd "$(pwd -P)"
 
-    export BASH_ENV=~/.shrc
     export ENV=~/.shrc
 
 fi
