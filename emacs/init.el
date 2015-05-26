@@ -112,6 +112,8 @@
 ;;; Unfasten some seatbelts
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'qr 'query-replace)
+(defalias 'qrr 'query-replace-regexp)
 
 (put 'dired-find-alternate-file 'disabled nil)
 (put 'downcase-region 'disabled nil)
