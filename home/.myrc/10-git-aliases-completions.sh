@@ -40,10 +40,10 @@ if test -r /etc/bash_completion.d/git-completion.bash ; then
     __git_complete gp    _git_push
     __git_complete gr    _git_remote
     __git_complete grv   _git_remote
-    __git_complete gup   _git_fetch
     # no gst
     __git_complete gsta  _git_stash
     __git_complete gstd  _git_stash
     __git_complete gstp  _git_stash
     __git_complete gsts  _git_stash
+    __git_complete gup   _git_fetch
 fi
