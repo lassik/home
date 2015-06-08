@@ -12,7 +12,7 @@ alias gdc='git diff --cached'
 alias gl='git pull'
 alias glg='git log --stat --max-count=10'
 alias glgg='git log --graph --max-count=10'
-alias gp='git push'
+alias gp='git push --recurse-submodules=check' # The options are my own addition
 alias gr='git remote'
 alias grv='git remote -v'
 alias gst='git status'
