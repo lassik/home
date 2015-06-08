@@ -1,3 +1,5 @@
+export HISTCONTROL=ignoredups
+
 # Don't preserve shell command history across sessions.
 unset HISTFILE
 
