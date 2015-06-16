@@ -13,7 +13,7 @@ fi
 
 export MY_CUSTOMIZATION_DONE="yes"
 
-for _myrc in ~/.myrc/*.sh ; do
+for _myrc in ~/.config/myrc/*.sh; do
     source "$_myrc"
 done
 unset _myrc
