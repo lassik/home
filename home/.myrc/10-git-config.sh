@@ -13,6 +13,12 @@ if which git >/dev/null 2>&1 && ! test -e ~/.gitconfig.lock; then
         git config --global --unset diff.external
     fi
 
+    if which emacs >/dev/null 2>&1; then
+        git config --global merge.tool emerge
+    else
+        git config --global --unset merge.tool
+    fi
+
     git config --global user.name "Lassi Kortela"
     git config --global user.email "lassi@lassikortela.net"
 
