@@ -1,6 +1,6 @@
 # These aliases are from the oh-my-zsh git plugin
 alias ga='git add'
-alias gap='git add --patch'
+alias gapa='git add --patch'
 alias gb='git branch'
 alias gba='git branch -a'
 alias gc!='git commit -v --amend'
@@ -9,7 +9,7 @@ alias gcm='git checkout master'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
 alias gd='git diff'
-alias gdc='git diff --cached'
+alias gdca='git diff --cached'
 alias gl='git pull'
 alias glg='git log --stat --max-count=10'
 alias glgg='git log --graph --max-count=10'
@@ -45,7 +45,7 @@ if test -r /etc/bash_completion.d/git-completion.bash ; then
     # no gunwip
     # no gwip
     __git_complete ga    _git_add
-    __git_complete gap   _git_add
+    __git_complete gapa  _git_add
     __git_complete gb    _git_branch
     __git_complete gba   _git_branch
     __git_complete gc    _git_commit
@@ -54,7 +54,7 @@ if test -r /etc/bash_completion.d/git-completion.bash ; then
     __git_complete gco   _git_checkout
     __git_complete gcp   _git_cherry_pick
     __git_complete gd    _git_diff
-    __git_complete gdc   _git_diff
+    __git_complete gdca  _git_diff
     __git_complete gl    _git_pull
     __git_complete glg   _git_log
     __git_complete glgg  _git_log
