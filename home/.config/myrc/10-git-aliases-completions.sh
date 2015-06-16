@@ -12,6 +12,7 @@ alias gco='git checkout'
 alias gcp='git cherry-pick'
 alias gd='git diff'
 alias gdca='git diff --cached'
+alias gdt='git diff-tree --no-commit-id --name-only -r'
 alias gl='git pull'
 alias glg='git log --stat --max-count=10'
 alias glgg='git log --graph --max-count=10'
@@ -58,6 +59,7 @@ if test -r /etc/bash_completion.d/git-completion.bash ; then
     __git_complete gcp   _git_cherry_pick
     __git_complete gd    _git_diff
     __git_complete gdca  _git_diff
+    __git_complete gdt   _git_diff  # OK?
     __git_complete gl    _git_pull
     __git_complete glg   _git_log
     __git_complete glgg  _git_log
