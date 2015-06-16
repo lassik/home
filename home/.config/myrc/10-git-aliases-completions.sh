@@ -1,4 +1,6 @@
 # These aliases are from the oh-my-zsh git plugin
+# https://github.com/robbyrussell/oh-my-zsh/commits/master/plugins/git/git.plugin.zsh
+
 alias ga='git add'
 alias gapa='git add --patch'
 alias gb='git branch'
@@ -38,6 +40,7 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 
 if test -r /etc/bash_completion.d/git-completion.bash ; then
     source /etc/bash_completion.d/git-completion.bash
+
     # no grt
     # no gsb
     # no gss
@@ -74,4 +77,5 @@ if test -r /etc/bash_completion.d/git-completion.bash ; then
     __git_complete gsts  _git_stash
     __git_complete gsu   _git_submodule
     __git_complete gup   _git_fetch
+
 fi
