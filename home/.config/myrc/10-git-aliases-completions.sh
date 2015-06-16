@@ -34,7 +34,7 @@ alias gsts='git stash show --text'
 alias gsu='git submodule update'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gup='git pull --rebase'
-alias gwip='git add -A; git rm $(git ls-files --deleted); git commit -m "--wip--"'
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 if test -r /etc/bash_completion.d/git-completion.bash ; then
     source /etc/bash_completion.d/git-completion.bash
