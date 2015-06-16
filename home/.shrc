@@ -13,9 +13,10 @@ fi
 
 export MY_CUSTOMIZATION_DONE="yes"
 
-for myrc in ~/.myrc/*.sh ; do
-    source "$myrc"
+for _myrc in ~/.myrc/*.sh ; do
+    source "$_myrc"
 done
+unset _myrc
 
 # Remove blank and duplicate entries in PATH.
 export PATH="$(echo -n "$PATH" | awk -v RS=: '$0 && !arr[$0]++' | paste -sd : -)"
