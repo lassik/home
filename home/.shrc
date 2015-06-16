@@ -20,18 +20,3 @@ unset _myrc
 
 # Remove blank and duplicate entries in PATH.
 export PATH="$(echo -n "$PATH" | awk -v RS=: '$0 && !arr[$0]++' | paste -sd : -)"
-
-case "$-" in
-    *i*)
-        # This is an interactive shell.
-
-        if which shellprompt >/dev/null 2>&1 ; then
-            if test -n "$ZSH_VERSION" ; then
-                eval $(shellprompt activate zsh)
-            elif test -n "$BASH_VERSION" ; then
-                eval $(shellprompt activate bash)
-            fi
-        fi
-
-        ;;
-esac
