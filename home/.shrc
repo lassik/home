@@ -1,17 +1,11 @@
 # emacs: -*- sh -*-
 
-if test "$MY_CUSTOMIZATION_DONE" != "yes" ; then
+# Some programs are confused if $HOME and ~ are different paths.
+# (This can happen when part of $HOME is a symbolic link.)
+export HOME="$(cd && pwd -P)"
+cd "$(pwd -P)"
 
-    # Some programs are confused if $HOME and ~ are different paths.
-    # (This can happen when part of $HOME is a symbolic link.)
-    export HOME="$(cd && pwd -P)"
-    cd "$(pwd -P)"
-
-    export ENV=~/.shrc
-
-fi
-
-export MY_CUSTOMIZATION_DONE="yes"
+export ENV=~/.shrc
 
 for _myrc in ~/.config/myrc/*.sh; do
     source "$_myrc"
