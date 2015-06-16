@@ -7,6 +7,7 @@ alias gc!='git commit -v --amend'
 alias gc='git commit -v'
 alias gcm='git checkout master'
 alias gco='git checkout'
+alias gcp='git cherry-pick'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gl='git pull'
@@ -19,6 +20,7 @@ alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grbi='git rebase -i'
 alias grbm='git rebase master'
+alias grbs='git rebase --skip'
 alias grh='git reset HEAD'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
 alias grv='git remote -v'
@@ -50,6 +52,7 @@ if test -r /etc/bash_completion.d/git-completion.bash ; then
     __git_complete gc!   _git_commit
     __git_complete gcm   _git_checkout
     __git_complete gco   _git_checkout
+    __git_complete gcp   _git_cherry_pick
     __git_complete gd    _git_diff
     __git_complete gdc   _git_diff
     __git_complete gl    _git_pull
@@ -62,6 +65,7 @@ if test -r /etc/bash_completion.d/git-completion.bash ; then
     __git_complete grbc  _git_rebase
     __git_complete grbi  _git_rebase
     __git_complete grbm  _git_rebase
+    __git_complete grbs  _git_rebase
     __git_complete grh   _git_reset
     __git_complete grv   _git_remote
     __git_complete gsta  _git_stash
