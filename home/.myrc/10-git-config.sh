@@ -7,6 +7,12 @@ if which git >/dev/null 2>&1 && ! test -e ~/.gitconfig.lock; then
     # Make less display ANSI colors from git output, not "ESC" junk.
     git config --global core.pager "less -R"
 
+    if which git-wdiff >/dev/null 2>&1; then
+        git config --global diff.external git-wdiff
+    else
+        git config --global --unset diff.external
+    fi
+
     git config --global user.name "Lassi Kortela"
     git config --global user.email "lassi@lassikortela.net"
 
