@@ -58,7 +58,7 @@
 
 (dolist (code-dir (list my-emacs-public-code-dir
                         my-emacs-private-code-dir
-                        (expand-file-name "~/.myrc")))
+                        (expand-file-name "~/.config/myrc")))
 
   (when (file-accessible-directory-p code-dir)
 
