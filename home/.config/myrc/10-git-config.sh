@@ -4,6 +4,8 @@ if which git >/dev/null 2>&1 && ! test -e ~/.gitconfig.lock; then
     # anywhere. Sigh.
     git config --global push.default current
 
+    git config --global color.ui true
+
     # Make less display ANSI colors from git output, not "ESC" junk.
     git config --global core.pager "less -R"
 
