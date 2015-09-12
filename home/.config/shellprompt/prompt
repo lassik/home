@@ -2,15 +2,15 @@
 ?termcols linelen min blue line ?termcols linelen - 0 max blue line
 ?battery 100 < if
   ?battery 30 < dup
-  if red else blue then text bat:
-  invert if cyan then battery text % space
+  if red else blue then "bat:" type
+  invert if cyan then battery "%" type space
 then
 ?gitbranch if
-  blue text git
-  ?gitstashcount if text "[" magenta text + gitstashcount blue text "]" then
-  text ":<"
-  ?gitbranch ?text master = invert if green then gitbranch
-  blue text ">" space
+  blue "git" type
+  ?gitstashcount if "[" type magenta "+" type gitstashcount blue "]" type then
+  ":<" type
+  ?gitbranch "master" = invert if green then gitbranch
+  blue ">" type space
 then
 green dir cr
 blue time24 space weekday space
