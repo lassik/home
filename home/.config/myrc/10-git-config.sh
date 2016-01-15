@@ -22,6 +22,6 @@ if which git >/dev/null 2>&1 && ! test -e ~/.gitconfig.lock; then
     fi
 
     git config --global user.name "Lassi Kortela"
-    git config --global user.email "lassi@lassikortela.net"
+    git config --global user.email "lassi@lassi.io"
 
 fi
