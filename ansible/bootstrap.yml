@@ -1,0 +1,29 @@
+- name: Ensure we have a wheel group with passwordless sudo rights
+  hosts: all
+  remote_user: root
+  become: no
+  tasks:
+    - group: name=wheel
+    - user: name=root groups=wheel append=yes
+    - lineinfile: "dest=/etc/sudoers regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL'"
+
+- name: Ensure I have a user account with ssh keys in the wheel group
+  hosts: all
+  remote_user: root
+  become: no
+  tasks:
+    - user: name=lassi groups=wheel append=yes
+    - authorized_key: user=lassi exclusive=yes key='{{ lookup("file", "secrets/authorized_keys") }}'
+
+- name: Ensure we can login and sudo then lock down ssh access
+  hosts: all
+  remote_user: lassi
+  become: yes
+  tasks:
+    - lineinfile: "dest=/etc/ssh/sshd_config regexp='^#?PermitRootLogin' line='PermitRootLogin no'"
+    - lineinfile: "dest=/etc/ssh/sshd_config regexp='^#?PasswordAuthentication' line='PasswordAuthentication no'"
+    - when: ansible_os_family == "Debian"
+      service: name=ssh state=restarted
+    - when: ansible_os_family == "RedHat"
+      service: name=sshd state=restarted
+    - file: path=/root/.ssh/authorized_keys state=absent
