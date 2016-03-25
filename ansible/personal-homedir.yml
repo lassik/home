@@ -1,0 +1,58 @@
+- name: Set up my SSH keys
+  hosts: personal
+  tasks:
+    - known_hosts: name='{{ item | basename }}' key='{{ lookup("file", item) }}'
+      with_fileglob:
+        - known_hosts/*
+        - secrets/known_hosts/*
+
+- name: Set up my home directory
+  hosts: personal
+  tasks:
+    - file: path={{item}} state=directory mode=0700
+      with_items:
+        - ~/persist/private
+        - ~/persist/private/code
+        - ~/persist/public
+        - ~/.local/{{ ansible_system | lower }}-{{ ansible_machine }}/bin
+
+- name: Get my personal repos
+  hosts: personal
+  tasks:
+    - git: update=yes repo='git@github.com:lassik/conf.git'  dest=~/persist/private/conf
+    - git: update=yes repo='git@github.com:lassik/emacs.git' dest=~/persist/private/code/emacs
+
+- name: Get the latest shellprompt, compile and install it
+  hosts: personal
+  tasks:
+    - git: update=yes repo='git@github.com:lassik/shellprompt.git' dest=~/persist/private/code/shellprompt
+    - when: ansible_os_family == "Debian"
+      shell: ./build-linux.sh && cp build-linux/shellprompt ~/.local/linux-{{ansible_machine}}/bin/
+      args:
+        chdir: ~/persist/private/code/shellprompt
+
+- name: Get the latest pathy and compile it
+  hosts: personal
+  tasks:
+    - git: update=yes repo='git@github.com:lassik/pathy.git' dest=~/persist/private/code/pathy
+    - when: ansible_os_family == "Debian"
+      shell: ./build-linux-debian.sh
+      args:
+        chdir: ~/persist/private/code/pathy
+
+- name: Stow my configs
+  hosts: personal
+  tasks:
+    - shell: '[ -L {{item}} ] || mv {{item}} {{item}}.orig'
+      args:
+        chdir: ~
+        removes: '{{item}}'
+        creates: '{{item}}.orig'
+      with_items:
+        - .bashrc
+        - .profile
+        - .shrc
+        - .tcshrc
+    - shell: stow --no-folding -t ~ home
+      args:
+        chdir: ~/persist/private/conf
