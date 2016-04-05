@@ -3,11 +3,11 @@
 
 if which dircolors >/dev/null 2>&1 ; then
     l() {
-        ls --color -hAlF "$@"
+        ls --color -halF "$@"
     }
 else
     l() {
-        ls -hAlF "$@"
+        ls -halF "$@"
     }
 fi
 
