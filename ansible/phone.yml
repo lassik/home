@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    compphonemusic: ~/persist/public/music/phone
+    phonemusic: "{{ phoneroot }}/Music"
+  tasks:
+    - name: Check whether or not phone is mounted
+      stat: path={{ phoneroot }}
+      register: p
+    - name: Assert that phone is mounted
+      assert:
+        that:
+          - p.stat.exists and p.stat.isdir
+    - name: Ensure phone has a music directory
+      file: path={{ phonemusic }} state=directory mode=0777
+    - name: Ensure we have a phone music dir on the computer
+      file: path={{ compphonemusic }} state=directory
+    - name: Ensure music dir on phone is identical to music dir on compter
+      synchronize:
+        src: "{{ compphonemusic }}/"
+        dest: "{{ phonemusic }}/"
+        recursive: yes
+        copy_links: yes
+        times: yes
+        delete: yes
+        archive: no
+        partial: no
+        rsync_opts:
+          - "--exclude=.*"
+          - "--exclude=.*/"
