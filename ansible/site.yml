@@ -1,0 +1,14 @@
+---
+- name: mac
+  hosts: mac
+  become: no
+  roles:
+    - essentials
+
+- name: cloud
+  hosts: cloud
+  become: yes
+  roles:
+    - Luzifer.ubuntu-unattended-upgrades
+    - essentials
+    - machine-learning
