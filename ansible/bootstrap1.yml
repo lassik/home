@@ -1,0 +1,11 @@
+---
+- name: Ensure we have a wheel group with passwordless sudo rights
+  hosts: all
+  remote_user: root
+  become: no
+  tasks:
+    - group: name=wheel
+    - user: name=root groups=wheel append=yes
+    - lineinfile: "dest=/etc/sudoers regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL'"
+    - user: name=lassi groups=wheel append=yes shell=/bin/bash
+    - authorized_key: user=lassi exclusive=yes key='{{ lookup("file", "secrets/authorized_keys") }}'
