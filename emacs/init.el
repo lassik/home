@@ -361,7 +361,8 @@
               nil)))
 
 (whenhost unix
-  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH"))))  ; FFFUUU
+  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))  ; FFFUUU
+  (setq exec-path (split-string (getenv "PATH") ":" t)))
 
 ;; Make C-x k run `server-edit' instead of the usual `kill-buffer' for
 ;; emacsclient buffers. From EmacsWiki EmacsClient page.
