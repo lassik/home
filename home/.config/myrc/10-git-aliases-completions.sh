@@ -40,7 +40,7 @@ alias gup='git pull --rebase'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 if test -n "$BASH_VERSION" && test -r /etc/bash_completion.d/git-completion.bash ; then
-    source /etc/bash_completion.d/git-completion.bash
+    . /etc/bash_completion.d/git-completion.bash
 
     # no grt
     # no gsb

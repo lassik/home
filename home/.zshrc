@@ -1,4 +1,4 @@
-source ~/.shrc
+. ~/.shrc
 
 # Leave background jobs running unless I explicitly kill them.
 setopt NO_HUP
