@@ -305,6 +305,11 @@
 (set-lisp-indent 'with-output-to-string 0)
 (set-lisp-indent :section 1)
 
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (define-clojure-indent
+              (match 1))))
+
 ;;; Pathnames
 
 (setq ecumenist-db (concat my-emacs-conf-dir "ecumenist"))
