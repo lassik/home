@@ -50,6 +50,7 @@
 (require 'cc-mode)
 (require 'css-mode)
 (require 'dired)
+(require 'magit nil t)
 (require 'picture)
 (require 'ruby-mode)
 (require 'tex-mode)
@@ -257,6 +258,9 @@
 (define-key picture-mode-map [(control c) up]    'picture-movement-up)
 (define-key ruby-mode-map [(meta backspace)] 'backward-kill-word)
 (define-key tex-mode-map [?\"] 'self-insert-command)
+
+(when (featurep 'magit)
+  (global-set-key (kbd "C-x g") 'magit-status))
 
 (whenhost aquamacs
   (define-key osx-key-mode-map "\C-z" 'suspend-emacs))
