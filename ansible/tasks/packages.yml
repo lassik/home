@@ -2,7 +2,9 @@
 - name: Install Homebrew packages
   homebrew: name={{ item }}
   with_dict: "{{ brew_packages | default({}) }}"
-  when: ansible_os_family == "Darwin" and "brew" in item.value
+  when:
+    - ansible_os_family == "Darwin"
+    - "'brew' in item.value"
   become: no
   tags:
     - pkg
@@ -11,7 +13,9 @@
 - name: Install APT packages
   apt: name={{ item.key }}
   with_dict: "{{ packages | default({}) }}"
-  when: ansible_os_family == "Debian" and "apt" in item.value
+  when:
+    - ansible_os_family == "Debian"
+    - "'apt' in item.value"
   become: yes
   tags:
     - pkg
@@ -20,7 +24,9 @@
 - name: Install FreeBSD packages
   pkgng: name={{ item.key }}
   with_dict: "{{ packages | default({}) }}"
-  when: ansible_os_family == "FreeBSD" and "freebsd" in item.value
+  when:
+    - ansible_os_family == "FreeBSD"
+    - "'freebsd' in item.value"
   become: yes
   tags:
     - pkg
@@ -29,7 +35,7 @@
 - name: Install NPM packages (for all users)
   npm: name={{ item }} global=yes
   with_dict: "{{ packages | default([]) }}"
-  when: '"npm" in item.value'
+  when: "'npm' in item.value"
   become: "{{ ansible_os_family != 'Darwin' }}"
   tags:
     - pkg
