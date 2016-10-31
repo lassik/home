@@ -5,6 +5,8 @@ apt_packages:
   - bash-completion
   - build-essential
   - cowsay
+  - fortune-mod
+  - gdb
   - git
   - htop
   - httpie
@@ -13,11 +15,11 @@ apt_packages:
   - links
   - lynx
   - markdown
+  - mercurial
   - mg
   - npm
   - p7zip
   - p7zip-full
-  - pngcrush
   - psmisc
   - python
   - python3
@@ -38,6 +40,7 @@ brew_packages:
   - atool
   - bash-completion
   - cowsay
+  - fortune
   - git
   - htop-osx
   - httpie
@@ -46,10 +49,10 @@ brew_packages:
   - links
   - lynx
   - markdown
+  - mercurial
   - mg3a
   - node
   - p7zip
-  - pngcrush
   - pstree
   - python
   - python3
