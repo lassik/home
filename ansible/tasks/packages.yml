@@ -17,6 +17,15 @@
     - pkg
     - apt
 
+- name: Install FreeBSD packages
+  when: ansible_os_family == "FreeBSD"
+  pkgng: name={{ item }}
+  with_items: "{{ freebsd_packages | default([]) }}"
+  become: yes
+  tags:
+    - pkg
+    - freebsd
+
 - name: Install NPM packages (for all users)
   npm: name={{ item }} global=yes
   with_items: "{{ npm_packages | default([]) }}"
