@@ -1,6 +1,6 @@
 ---
-apt_packages:
-  - liboctave-dev
-  - octave
-  - r-base
-  - r-base-dev
+packages:
+  liboctave-dev: [apt]
+  octave: [apt]
+  r-base: [apt]
+  r-base-dev: [apt]
