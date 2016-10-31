@@ -1,0 +1,9 @@
+---
+packages:
+
+  ccl: [freebsd]
+  clozure-cl: [brew]
+
+  clisp: [brew]
+
+  sbcl: [brew, freebsd]
