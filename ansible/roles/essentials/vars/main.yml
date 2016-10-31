@@ -66,3 +66,8 @@ brew_packages:
   - w3m
   - wget
   - xz
+freebsd_packages:
+  - ansible
+  - curl
+  - tree
+  - wget
