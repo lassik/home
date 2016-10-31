@@ -1,0 +1,13 @@
+---
+packages:
+
+  liblua5.2-dev: [apt]
+
+  lua: [brew]
+  lua52: [freebsd]
+  lua5.2: [apt]
+
+  luarocks: [brew]
+  lua52-luarocks: [freebsd]
+
+  luajit: [brew, freebsd]
