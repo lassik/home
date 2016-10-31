@@ -1,7 +1,7 @@
 ---
 - name: Install Homebrew packages
-  homebrew: name={{ item }}
-  with_dict: "{{ brew_packages | default({}) }}"
+  homebrew: name={{ item.key }}
+  with_dict: "{{ packages | default({}) }}"
   when:
     - ansible_os_family == "Darwin"
     - "'brew' in item.value"
@@ -33,7 +33,7 @@
     - freebsd
 
 - name: Install NPM packages (for all users)
-  npm: name={{ item }} global=yes
+  npm: name={{ item.key }} global=yes
   with_dict: "{{ packages | default([]) }}"
   when: "'npm' in item.value"
   become: "{{ ansible_os_family != 'Darwin' }}"
