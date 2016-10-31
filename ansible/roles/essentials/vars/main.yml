@@ -1,73 +1,45 @@
 ---
-apt_packages:
-  - ansible
-  - atool
-  - bash-completion
-  - build-essential
-  - cowsay
-  - fortune-mod
-  - gdb
-  - git
-  - htop
-  - httpie
-  - imagemagick
-  - ispell
-  - links
-  - lynx
-  - markdown
-  - mercurial
-  - mg
-  - npm
-  - p7zip
-  - p7zip-full
-  - psmisc
-  - python
-  - python3
-  - rlwrap
-  - ruby
-  - silversearcher-ag
-  - stow
-  - tmux
-  - tree
-  - unrar
-  - unzip
-  - w3m
-  - wget
-  - whois
-  - zip
-brew_packages:
-  - ansible
-  - atool
-  - bash-completion
-  - cowsay
-  - fortune
-  - git
-  - htop-osx
-  - httpie
-  - imagemagick
-  - ispell
-  - links
-  - lynx
-  - markdown
-  - mercurial
-  - mg3a
-  - node
-  - p7zip
-  - pstree
-  - python
-  - python3
-  - rlwrap
-  - ruby
-  - stow
-  - the_silver_searcher
-  - tmux
-  - tree
-  - unrar
-  - w3m
-  - wget
-  - xz
-freebsd_packages:
-  - ansible
-  - curl
-  - tree
-  - wget
+packages:
+  ansible: [apt, brew, freebsd]
+  atool: [apt, brew]
+  bash-completion: [apt, brew]
+  build-essential: [apt]
+  cowsay: [apt, brew]
+  curl: [freebsd]
+  fortune-mod: [apt]
+  fortune: [brew]
+  gdb: [apt, brew]
+  git: [apt]
+  htop-osx: [brew]
+  htop: [apt]
+  httpie: [apt, brew]
+  imagemagick: [apt, brew]
+  ispell: [apt, brew]
+  links: [apt, brew]
+  lynx: [apt, brew]
+  markdown: [apt, brew]
+  mercurial: [apt, brew]
+  mg3a: [brew]
+  mg: [apt]
+  node: [brew]
+  npm: [apt]
+  p7zip-full: [apt]
+  p7zip: [apt, brew]
+  psmisc: [apt]
+  pstree: [brew]
+  python3: [apt, brew]
+  python: [apt, brew]
+  rlwrap: [apt, brew]
+  ruby: [apt, brew]
+  silversearcher-ag: [apt]
+  stow: [apt, brew]
+  the_silver_searcher: [brew]
+  tmux: [apt, brew]
+  tree: [apt, brew, freebsd]
+  unrar: [apt, brew]
+  unzip: [apt]
+  w3m: [apt, brew]
+  wget: [apt, brew, freebsd]
+  whois: [apt]
+  xz: [brew]
+  zip: [apt]
