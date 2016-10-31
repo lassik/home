@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ack-and-a-half-executable "ack")
+ '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style "bsd")
  '(clojure-defun-style-default-indent t)
@@ -27,7 +28,7 @@
    (quote
     (("gnu" . "http://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/"))))
- '(sort-fold-case t)
+ '(sort-fold-case t t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
