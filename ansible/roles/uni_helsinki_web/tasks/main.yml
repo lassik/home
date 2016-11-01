@@ -1,0 +1,11 @@
+---
+- name: Ensure home directory has the right permissions
+  file: path=/fs/home/{{ansible_user}} state=directory mode=0711
+
+- name: Ensure public_html directory exists with the right permissions
+  file: path=/fs/home/{{ansible_user}}/public_html state=directory mode=0711
+
+- name: Ensure htaccess file is up to date
+  copy: dest=/fs/home/{{ansible_user}}/public_html/.htaccess src=files/htaccess mode=0444
+
+# https://www.cs.helsinki.fi/en/compfac/homepage-departments-server
