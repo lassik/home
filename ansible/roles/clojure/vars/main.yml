@@ -1,0 +1,3 @@
+---
+packages:
+  leiningen: [apt, brew, freebsd]
