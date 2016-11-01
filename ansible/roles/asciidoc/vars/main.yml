@@ -1,0 +1,6 @@
+---
+packages:
+  asciidoc: [apt, brew, freebsd]
+  docbook: [freebsd]
+  docbook-xsl: [brew]
+  docbook2x: [brew]

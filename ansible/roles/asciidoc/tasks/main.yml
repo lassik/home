@@ -1,0 +1,4 @@
+---
+- include: ../../../tasks/packages.yml
+  tags:
+    - asciidoc
