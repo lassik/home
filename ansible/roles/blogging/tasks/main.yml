@@ -1,0 +1,3 @@
+---
+- include: ../../../tasks/packages.yml
+  tags: blogging
