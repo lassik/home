@@ -1,6 +1,7 @@
 ---
 packages:
   build-essential: [apt]
+  cmake: [brew, freebsd]
   gcc: [freebsd]
   gdb: [apt]
   go: [brew, freebsd]
