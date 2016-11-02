@@ -1,4 +1,4 @@
 ---
 - include: ../../../tasks/packages.yml
   tags:
-    - c_programming
+    - system_programming
