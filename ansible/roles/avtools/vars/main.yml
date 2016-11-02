@@ -1,0 +1,10 @@
+---
+packages:
+  ffmpeg: [brew]
+  flac: [brew]
+  lame: [brew]
+  taglib: [brew]
+  whatmp3: [brew]
+  x264: [brew]
+  xvid: [brew]
+  youtube-dl: [brew]
