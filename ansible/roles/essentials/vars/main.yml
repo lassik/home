@@ -19,6 +19,8 @@ packages:
   the_silver_searcher: [brew, freebsd]
   tmux: [apt, brew, freebsd]
   tree: [apt, brew, freebsd]
+  wine: [brew]
+  winetricks: [brew]
 
   ansible: [apt, brew, freebsd]
   git: [apt, freebsd]
