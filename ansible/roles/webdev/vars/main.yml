@@ -4,3 +4,4 @@ packages:
   coffee-script: [npm]
   node: [brew, freebsd]
   npm: [brew, freebsd]
+  opera: [brew_cask]

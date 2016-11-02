@@ -10,6 +10,18 @@
     - pkg
     - brew
 
+- name: Install Homebrew Cask packages
+  homebrew_cask: name={{ item.key }}
+  with_dict: "{{ packages | default({}) }}"
+  when:
+    - ansible_os_family == "Darwin"
+    - "'brew_cask' in item.value"
+  become: no
+  tags:
+    - pkg
+    - brew
+    - brew_cask
+
 - name: Install APT packages
   apt: name={{ item.key }}
   with_dict: "{{ packages | default({}) }}"

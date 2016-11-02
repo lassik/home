@@ -3,6 +3,7 @@ packages:
   ffmpeg: [brew]
   flac: [brew]
   lame: [brew]
+  supercollider: [brew_cask]
   taglib: [brew]
   whatmp3: [brew]
   x264: [brew]
