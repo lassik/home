@@ -1,0 +1,6 @@
+---
+packages:
+  bower: [npm]
+  coffee-script: [npm]
+  node: [brew, freebsd]
+  npm: [brew, freebsd]
