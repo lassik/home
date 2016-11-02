@@ -1,9 +1,11 @@
 ---
 packages:
 
+  aspell: [freebsd]
   bash-completion: [apt, brew, freebsd]
   ccleaner: [brew_cask]
   cowsay: [apt, brew, freebsd]
+  emacs-devel: [freebsd]
   emacs: [brew_cask]
   flux: [brew_cask]
   fortune-mod: [apt]
@@ -15,6 +17,7 @@ packages:
   iterm2: [brew_cask]
   mg3a: [brew]
   mg: [apt]
+  nano: [freebsd]
   psmisc: [apt]
   pstree: [brew, freebsd]
   rlwrap: [apt, brew, freebsd]
