@@ -3,3 +3,4 @@ packages:
   build-essential: [apt]
   gcc: [freebsd]
   gdb: [apt]
+  go: [brew, freebsd]
