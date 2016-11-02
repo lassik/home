@@ -1,6 +1,7 @@
 ---
 packages:
   liboctave-dev: [apt]
-  octave: [apt]
-  r-base: [apt]
+  octave: [apt, freebsd]
   r-base-dev: [apt]
+  r-base: [apt]
+  R: [freebsd]
