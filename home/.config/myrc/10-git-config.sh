@@ -10,7 +10,7 @@ if which git >/dev/null 2>&1; then
     # Make less display ANSI colors from git output, not "ESC" junk.
     git config --global core.pager "less -R"
 
-    if which git-wdiff >/dev/null 2>&1; then
+    if which wdiff >/dev/null 2>&1 && which git-wdiff >/dev/null 2>&1; then
         git config --global diff.external git-wdiff
     else
         git config --global --unset diff.external
