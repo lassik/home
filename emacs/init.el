@@ -50,7 +50,6 @@
 (require 'cc-mode)
 (require 'css-mode)
 (require 'dired)
-(require 'magit nil t)
 (require 'picture)
 (require 'ruby-mode)
 (require 'tex-mode)
@@ -87,6 +86,15 @@
 
     ;; At last, load the extensions.
     (mapc #'load-file (directory-files code-dir t "\\.el$"))))
+
+;;; Ensuer /usr/local is in PATH
+
+(whenhost unix
+  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))  ; FFFUUU
+  (setq exec-path (split-string (getenv "PATH") ":" t)))
+
+;; Magit needs git fron PATH, so postpone it until here.
+(require 'magit nil t)
 
 ;;; Internationalization and localization
 
@@ -368,10 +376,6 @@
               (require 'ess)
               (require 'ess-site)
               nil)))
-
-(whenhost unix
-  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))  ; FFFUUU
-  (setq exec-path (split-string (getenv "PATH") ":" t)))
 
 ;; Make C-x k run `server-edit' instead of the usual `kill-buffer' for
 ;; emacsclient buffers. From EmacsWiki EmacsClient page.
