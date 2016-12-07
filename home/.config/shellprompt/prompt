@@ -14,5 +14,5 @@ then
 then
 green dir cr
 blue time24 space weekday space
-cyan host space
+cyan user green "@" type cyan host space
 green shell sign space
