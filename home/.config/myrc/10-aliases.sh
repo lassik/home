@@ -6,6 +6,7 @@ if which dircolors >/dev/null 2>&1 ; then
         ls --color -halF "$@"
     }
 else
+    export CLICOLOR=y
     l() {
         ls -halF "$@"
     }
