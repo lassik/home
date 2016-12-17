@@ -11,7 +11,7 @@
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (ag editorconfig editorconfig-custom-majormode editorconfig-domain-specific ess cider))))
+    (yaml-mode ag editorconfig editorconfig-custom-majormode editorconfig-domain-specific ess cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
