@@ -7,6 +7,8 @@ case "$-" in
             elif test -n "$BASH_VERSION"; then
                 eval $(shellprompt activate bash)
             fi
+        else
+            export PS1='\n\w\n\u@\h\$ '
         fi
         ;;
 esac
