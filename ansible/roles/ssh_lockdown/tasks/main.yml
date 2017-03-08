@@ -1,0 +1,10 @@
+---
+- name: Deny root logins
+  lineinfile: "dest=/etc/ssh/sshd_config regexp='^#?PermitRootLogin' line='PermitRootLogin no'"
+
+- name: Deny logins with password
+  lineinfile: "dest=/etc/ssh/sshd_config regexp='^#?PasswordAuthentication' line='PasswordAuthentication no'"
+  notify: Restart ssh
+
+- name: Remove root authorized keys
+  file: path=/root/.ssh/authorized_keys state=absent

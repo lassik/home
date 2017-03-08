@@ -1,0 +1,4 @@
+---
+# On RedHat it's called sshd
+- name: Restart ssh (Debian)
+  service: name=ssh state=restarted
