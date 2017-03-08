@@ -3,7 +3,8 @@
 
 - name: Install Python for Ansible
   hosts: all
-  remote_user: root
+  vars:
+  - ansible_ssh_user: root
   become: no
   gather_facts: no
   tasks:
@@ -11,7 +12,8 @@
 
 - name: Ensure we have a wheel group with passwordless sudo rights
   hosts: all
-  remote_user: root
+  vars:
+  - ansible_ssh_user: root
   become: no
   tasks:
     - group: name=wheel
@@ -20,7 +22,8 @@
 
 - name: Make user lassi and put ssh key in there
   hosts: all
-  remote_user: root
+  vars:
+  - ansible_ssh_user: root
   become: no
   tasks:
     - user: name=lassi groups=wheel append=yes shell=/bin/bash
