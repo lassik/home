@@ -1,4 +1,14 @@
 ---
+# ansible-playbook boot.yml -i myhost,
+
+- name: Install Python for Ansible
+  hosts: all
+  remote_user: root
+  become: no
+  gather_facts: no
+  tasks:
+  - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
 - name: Ensure we have a wheel group with passwordless sudo rights
   hosts: all
   remote_user: root
@@ -7,5 +17,11 @@
     - group: name=wheel
     - user: name=root groups=wheel append=yes
     - lineinfile: "dest=/etc/sudoers regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL'"
+
+- name: Make user lassi and put ssh key in there
+  hosts: all
+  remote_user: root
+  become: no
+  tasks:
     - user: name=lassi groups=wheel append=yes shell=/bin/bash
     - authorized_key: user=lassi exclusive=yes key='{{ lookup("file", "secrets/authorized_keys") }}'
