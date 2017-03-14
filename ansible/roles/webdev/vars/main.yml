@@ -5,3 +5,4 @@ packages:
   node: [brew, freebsd]
   npm: [brew, freebsd]
   opera: [brew_cask]
+  libsqlite3-dev: [apt]

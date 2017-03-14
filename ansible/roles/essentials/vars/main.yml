@@ -33,7 +33,6 @@ packages:
 
   ansible: [apt, brew, freebsd]
   git: [apt, freebsd]
-  libsqlite3-dev: [apt]
   markdown: [apt, brew, freebsd]
   mercurial: [apt, brew, freebsd]
   node: [brew]
