@@ -7,7 +7,6 @@ packages:
   lua52: [freebsd]
   lua5.2: [apt]
 
-  luarocks: [brew]
   lua52-luarocks: [freebsd]
 
   luajit: [brew, freebsd]
