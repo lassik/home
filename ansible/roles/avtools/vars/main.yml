@@ -5,6 +5,7 @@ packages:
   lame: [brew]
   supercollider: [brew_cask]
   taglib: [brew]
+  vlc: [brew_cask]
   whatmp3: [brew]
   x264: [brew]
   xvid: [brew]
