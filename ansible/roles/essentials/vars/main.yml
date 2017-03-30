@@ -4,7 +4,6 @@ packages:
   aspell: [freebsd]
   bash-completion: [apt, brew, freebsd]
   ccleaner: [brew_cask]
-  cowsay: [apt, brew, freebsd]
   emacs-devel: [freebsd]
   emacs: [apt, brew_cask]
   flux: [brew_cask]
