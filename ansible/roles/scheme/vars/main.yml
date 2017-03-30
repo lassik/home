@@ -5,7 +5,6 @@ packages:
 
   chicken: [brew, freebsd]
 
-  gambit-scheme: [brew]
   gambit-c: [freebsd]
 
   guile: [brew, freebsd]
