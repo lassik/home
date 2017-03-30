@@ -27,8 +27,6 @@ packages:
   the_silver_searcher: [brew, freebsd]
   tmux: [apt, brew, freebsd]
   tree: [apt, brew, freebsd]
-  wine: [brew]
-  winetricks: [brew]
   paintbrush: [brew_cask]
 
   ansible: [apt, brew, freebsd]
