@@ -1,2 +1,4 @@
 *.retry
+/hosts.yml
+/site.yml
 secrets
