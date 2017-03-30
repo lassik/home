@@ -33,6 +33,7 @@ packages:
 
   ansible: [apt, brew, freebsd]
   git: [apt, freebsd]
+  java: [brew_cask]
   markdown: [apt, brew, freebsd]
   mercurial: [apt, brew, freebsd]
   node: [brew]
