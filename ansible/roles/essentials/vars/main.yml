@@ -21,7 +21,6 @@ packages:
   psmisc: [apt]
   pstree: [brew, freebsd]
   rlwrap: [apt, brew, freebsd]
-  seashore: [brew_cask]
   silversearcher-ag: [apt]
   skim: [brew_cask]
   stow: [apt, brew, freebsd]
@@ -30,6 +29,7 @@ packages:
   tree: [apt, brew, freebsd]
   wine: [brew]
   winetricks: [brew]
+  paintbrush: [brew_cask]
 
   ansible: [apt, brew, freebsd]
   git: [apt, freebsd]
