@@ -2,7 +2,9 @@
 packages:
   bower: [npm]
   coffee-script: [npm]
+  libmysqlclient-dev: [apt]
+  libpq-dev: [apt]
+  libsqlite3-dev: [apt]
   node: [brew, freebsd]
   npm: [brew, freebsd]
   opera: [brew_cask]
-  libsqlite3-dev: [apt]
