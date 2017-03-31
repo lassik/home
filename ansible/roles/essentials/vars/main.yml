@@ -13,6 +13,7 @@ packages:
   nano: [freebsd]
   paintbrush: [brew_cask]
   skim: [brew_cask]
+  thunderbird: [brew_cask]
 
   bash-completion: [apt, brew, freebsd]
   ccleaner: [brew_cask]
