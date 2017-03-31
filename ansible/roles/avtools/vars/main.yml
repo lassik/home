@@ -3,6 +3,7 @@ packages:
   ffmpeg: [brew]
   flac: [brew]
   lame: [brew]
+  rekordbox: [brew_cask]
   supercollider: [brew_cask]
   taglib: [brew]
   vlc: [brew_cask]
