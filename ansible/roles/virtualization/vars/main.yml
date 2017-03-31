@@ -1,0 +1,8 @@
+---
+packages:
+  boot2docker: [brew]
+  docker-compose: [brew]
+  docker-swarm: [brew]
+  docker: [brew]
+  vagrant: [brew_cask]
+  virtualbox: [brew_cask]

@@ -46,7 +46,6 @@ packages:
   python: [apt, brew, freebsd]
   ruby: [apt, brew, freebsd]
   sqlite: [brew, freebsd]
-  vagrant: [brew_cask]
 
   curl: [freebsd]
   firefox: [brew_cask]
