@@ -9,8 +9,8 @@
 
 ;; The following directory layout is expected:
 
-;; public/code/emacs/  -- non-standard elisp files downloaded from the internet
-;; private/code/emacs/ -- non-standard elisp files I'm editing
+;; public/src/emacs/   -- non-standard elisp files downloaded from the internet
+;; private/src/emacs/  -- non-standard elisp files I'm editing
 ;; private/conf/emacs/ -- personal configuration files for emacs including this file
 
 ;; I use this on the following platforms.
@@ -30,10 +30,10 @@
   (expand-file-name (file-name-directory load-file-name)))
 
 (defconst my-emacs-public-code-dir
-  (expand-file-name (concat my-emacs-conf-dir "../../../public/code/emacs/")))
+  (expand-file-name (concat my-emacs-conf-dir "../../../public/src/emacs/")))
 
 (defconst my-emacs-private-code-dir
-  (expand-file-name (concat my-emacs-conf-dir "../../../private/code/emacs/")))
+  (expand-file-name (concat my-emacs-conf-dir "../../../private/src/emacs/")))
 
 ;;; Load extensions bundled with Emacs
 
