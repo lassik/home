@@ -12,7 +12,7 @@
     - file: path={{item}} state=directory mode=0700
       with_items:
         - ~/persist/private
-        - ~/persist/private/code
+        - ~/persist/private/src
         - ~/persist/public
         - ~/.local/{{ ansible_system | lower }}-{{ ansible_machine }}/bin
 
@@ -20,25 +20,25 @@
   hosts: personal
   tasks:
     - git: update=yes repo='git@github.com:lassik/conf.git'  dest=~/persist/private/conf
-    - git: update=yes repo='git@github.com:lassik/emacs.git' dest=~/persist/private/code/emacs
+    - git: update=yes repo='git@github.com:lassik/emacs.git' dest=~/persist/private/src/emacs
 
 - name: Get the latest shellprompt, compile and install it
   hosts: personal
   tasks:
-    - git: update=yes repo='git@github.com:lassik/shellprompt.git' dest=~/persist/private/code/shellprompt
+    - git: update=yes repo='git@github.com:lassik/shellprompt.git' dest=~/persist/private/src/shellprompt
     - when: ansible_os_family == "Debian"
       shell: ./build-linux.sh && cp build-linux/shellprompt ~/.local/linux-{{ansible_machine}}/bin/
       args:
-        chdir: ~/persist/private/code/shellprompt
+        chdir: ~/persist/private/src/shellprompt
 
 - name: Get the latest pathy and compile it
   hosts: personal
   tasks:
-    - git: update=yes repo='git@github.com:lassik/pathy.git' dest=~/persist/private/code/pathy
+    - git: update=yes repo='git@github.com:lassik/pathy.git' dest=~/persist/private/src/pathy
     - when: ansible_os_family == "Debian"
       shell: ./build-linux-debian.sh
       args:
-        chdir: ~/persist/private/code/pathy
+        chdir: ~/persist/private/src/pathy
 
 - name: Stow my configs
   hosts: personal
