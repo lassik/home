@@ -1,7 +1,12 @@
 ---
+
+# R installation: https://rud.is/b/2015/10/22/installing-r-on-os-x-100-homebrew-edition/
+
 packages:
   liboctave-dev: [apt]
+  mactex: [brew_cask]
   octave: [apt, freebsd]
   r-base-dev: [apt]
   r-base: [apt]
-  R: [freebsd]
+  R: [brew, freebsd]
+  rstudio: [brew_cask]

@@ -1,3 +1,7 @@
 ---
+- homebrew_tap: name=homebrew/science
+  tags: machine_learning
+  when: ansible_os_family == "Darwin"
+
 - include: ../../../tasks/packages.yml
   tags: machine_learning
