@@ -1,3 +1,4 @@
 ---
 packages:
+  boot-clj: [brew]
   leiningen: [brew, freebsd]
