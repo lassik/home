@@ -2,3 +2,5 @@
 packages:
   boot-clj: [brew]
   leiningen: [brew, freebsd]
+  lumo: [brew]
+  planck: [brew]
