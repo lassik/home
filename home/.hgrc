@@ -1,5 +1,5 @@
 [ui]
-username = Lassi Kortela <lassi@lassikortela.net>
+username = Lassi Kortela <lassi@lassi.io>
 
 [extensions]
 hgext.bookmarks =
