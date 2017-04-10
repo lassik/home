@@ -1,7 +1,5 @@
 ;;; Personal Emacs initialization file
 
-;; Lassi Kortela <lassi@lassikortela.net>
-
 ;; To use, append the following line of code to the file that the
 ;; variable `user-init-file' on a vanilla emacs points to:
 
@@ -12,17 +10,6 @@
 ;; public/src/emacs/   -- non-standard elisp files downloaded from the internet
 ;; private/src/emacs/  -- non-standard elisp files I'm editing
 ;; private/conf/emacs/ -- personal configuration files for emacs including this file
-
-;; I use this on the following platforms.
-
-;; Emacs             Operating system     window-system
-;; ----------------  -------------------  -------------
-;; Aquamacs 2.4      OS X 10.6            ns
-;; GNU Emacs 22.1.1  OS X 10.6            nil
-;; GNU Emacs 23.3.1  Ubuntu Linux 12.04   nil
-;; GNU Emacs 23.3.1  Ubuntu Linux 12.04   x
-;; GNU Emacs 24.2.1  Windows 7            w32
-;; XEmacs 21.5.31    Windows 7            mswindows
 
 ;;; Find out where our stuff is
 
