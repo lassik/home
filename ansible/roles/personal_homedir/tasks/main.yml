@@ -3,7 +3,6 @@
   tasks:
     - known_hosts: name='{{ item | basename }}' key='{{ lookup("file", item) }}'
       with_fileglob:
-        - known_hosts/*
         - secrets/known_hosts/*
 
 - name: Set up my home directory
