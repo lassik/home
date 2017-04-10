@@ -63,6 +63,7 @@ packages:
   atool: [apt, brew, freebsd]
   p7zip-full: [apt]
   p7zip: [apt, brew, freebsd]
+  the-unarchiver: [brew_cask]
   unrar: [apt, brew, freebsd]
   unzip: [apt, freebsd]
   xz: [brew]
