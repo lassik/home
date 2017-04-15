@@ -12,6 +12,7 @@ packages:
   mg: [apt]
   nano: [freebsd]
   paintbrush: [brew_cask]
+  poppler: [brew]
   skim: [brew_cask]
   thunderbird: [brew_cask]
 
