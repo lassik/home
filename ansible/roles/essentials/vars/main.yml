@@ -38,6 +38,7 @@ packages:
   xquartz: [brew_cask]
 
   ansible: [apt, brew, freebsd]
+  cloc: [brew]
   git: [apt, freebsd]
   java: [brew_cask]
   markdown: [apt, brew, freebsd]
