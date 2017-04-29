@@ -5,3 +5,4 @@ packages:
   gcc: [freebsd]
   gdb: [apt]
   go: [brew, freebsd]
+  golang-go: [apt]
