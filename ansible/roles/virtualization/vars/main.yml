@@ -1,5 +1,7 @@
 ---
 packages:
   docker: [brew_cask]
+  docker-completion: [brew]
+  docker-compose-completion: [brew]
   vagrant: [brew_cask]
   virtualbox: [brew_cask]
