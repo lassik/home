@@ -20,6 +20,7 @@
  '(dired-listing-switches "-alh")
  '(editorconfig-custom-hooks (quote (editorconfig-domain-specific)))
  '(editorconfig-mode t)
+ '(ido-mode (quote both) nil (ido))
  '(iswitchb-mode t)
  '(make-backup-files nil)
  '(ns-alternate-modifier (quote none))
@@ -31,7 +32,7 @@
  '(package-selected-packages
    (quote
     (haskell-mode markdown-mode editorconfig cider magit ess-R-data-view ess-R-object-popup yaml-mode vkill shm rainbow-delimiters purescript-mode nrepl-sync nrepl-eval-sexp-fu moonscript matlab-mode markdown-toc markdown-mode+ magit-rockstar magit-push-remote magit-gitflow magit-gh-pulls magit-find-file lice htmlize hindent haml-mode go-mode flycheck-package flycheck-hdevtools flycheck-haskell flycheck-ghcmod flycheck-clojure fill-column-indicator ess elm-yasnippets elm-mode editorconfig-domain-specific editorconfig-custom-majormode color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode clj-refactor cider-tracing cider-spy cider-profile cider-eval-sexp-fu cider-decompile cider-browse-ns bbcode-mode autotetris-mode ascii anything ansible-doc ansible aggressive-indent aggressive-fill-paragraph ag afternoon-theme adoc-mode achievements ac-octave)))
- '(sort-fold-case t)
+ '(sort-fold-case t t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
