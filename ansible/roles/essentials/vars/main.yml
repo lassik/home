@@ -50,7 +50,7 @@ packages:
   ruby: [apt, brew, freebsd]
   sqlite: [brew, freebsd]
 
-  curl: [freebsd]
+  curl: [apt, freebsd]
   firefox: [brew_cask]
   google-chrome: [brew_cask]
   httpie: [apt, brew, freebsd]
