@@ -9,7 +9,7 @@ packages:
   libreoffice-language-pack: [brew_cask]
   libreoffice: [brew_cask]
   mg3a: [brew]
-  mg: [apt]
+  mg: [apt, freebsd]
   nano: [freebsd]
   paintbrush: [brew_cask]
   poppler: [brew]
