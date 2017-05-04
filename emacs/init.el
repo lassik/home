@@ -11,6 +11,15 @@
 ;; private/src/emacs/  -- non-standard elisp files I'm editing
 ;; private/conf/emacs/ -- personal configuration files for emacs including this file
 
+;;; Find out who we are
+
+(defconst my-mac-p (equal 'darwin system-type))
+(defconst my-windows-p (equal 'windows-nt system-type))
+(defconst my-unix-p (not my-windows-p))
+(defconst my-xemacs-p (featurep 'xemacs))
+(defconst my-aquamacs-p (featurep 'aquamacs))
+(defconst my-gnuemacs-p (not my-xemacs-p))
+
 ;;; Find out where our stuff is
 
 (defconst my-emacs-conf-dir
@@ -76,7 +85,7 @@
 
 ;;; Ensuer /usr/local is in PATH
 
-(whenhost unix
+(when my-unix-p
   (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))  ; FFFUUU
   (setq exec-path (split-string (getenv "PATH") ":" t)))
 
@@ -107,12 +116,12 @@
 
 ;; Make Emacs startup with a blank scratch buffer instead of a splash
 ;; screen.
-(whenhost gnuemacs
+(when my-gnuemacs-p
   (set-variable 'inhibit-splash-screen t)
   (set-variable 'inhibit-startup-echo-area-message (user-login-name)))
 
 ;; Prevent the computer from beeping and flashing at me.
-(whenhost gnuemacs
+(when my-gnuemacs-p
   (defun my-dummy-ring-bell-function () (interactive))
   (set-variable 'ring-bell-function 'my-dummy-ring-bell-function))
 
@@ -133,7 +142,7 @@
 ;; commands such as M-x and M-w, which puts much less strain on my
 ;; fingers; and 2) new frames, called windows in standard GUI lingo,
 ;; are never auto-created.  This code was copied over from Emacswiki.
-(whenhost aquamacs
+(when my-aquamacs-p
   (osx-key-mode -1)
   (setq ns-command-modifier 'meta)
   (setq ns-alternate-modifier nil)
@@ -234,7 +243,7 @@
 (when (featurep 'magit)
   (global-set-key (kbd "C-x g") 'magit-status))
 
-(whenhost aquamacs
+(when my-aquamacs-p
   (define-key osx-key-mode-map "\C-z" 'suspend-emacs))
 
 ;;; Custom Lisp indentation
@@ -269,7 +278,6 @@
 (set-lisp-indent 'prog1 0)
 (set-lisp-indent 'until 1)
 (set-lisp-indent 'when-output 1)
-(set-lisp-indent 'whenhost 1)
 (set-lisp-indent 'whilet 2)
 (set-lisp-indent 'with-output-to-string 0)
 (set-lisp-indent :section 1)
@@ -297,17 +305,18 @@
 (setq custom-file
       (concat my-emacs-conf-dir
               "custom-"
-              (ehostcase
-               (aquamacs "aquamacs")
-               (gnuemacs "gnuemacs")
-               (xemacs   "xemacs"))
+              (cond
+               (my-aquamacs-p "aquamacs")
+               (my-gnuemacs-p "gnuemacs")
+               (my-xemacs-p   "xemacs")
+               (t             "unknown"))
               "-"
               (format "%d" emacs-major-version)
               "-"
-              (case system-type
-                (windows-nt "win")
-                (darwin     "mac")
-                (t          "unix"))
+              (cond
+               (my-mac-p     "mac")
+               (my-windows-p "win")
+               (t            "unix"))
               ".el"))
 
 (defun maximize-emacs ()
@@ -340,7 +349,7 @@
 
 ;; Make C-x k run `server-edit' instead of the usual `kill-buffer' for
 ;; emacsclient buffers. From EmacsWiki EmacsClient page.
-(whenhost gnuemacs
+(when my-gnuemacs-p
   (add-hook 'server-switch-hook
             (lambda ()
               (when (current-local-map)
