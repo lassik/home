@@ -1,6 +1,6 @@
 ;; Personal Emacs subroutines
 
-;; Lassi Kortela <lassi@lassikortela.net>
+;; Lassi Kortela <lassi@lassi.io>
 
 ;; TODO: delete all blank lines (in region)
 ;; TODO: compact all blank lines so there are never two or more consecutive blank lines (in region)
@@ -104,7 +104,7 @@
 ;;;; Commands to manipulate region lines
 
 (defun prefix-region (prefix start end)
-  (interactive 
+  (interactive
    (destructuring-bind (start end) (region-bounds t nil)
      (list (read-string "Prefix: ") start end)))
   (when (and start end)
@@ -116,7 +116,7 @@
         (goto-char (min (point-max) (1+ (point-at-eol))))))))
 
 (defun suffix-region (suffix start end)
-  (interactive 
+  (interactive
    (destructuring-bind (start end) (region-bounds nil t)
      (list (read-string "Suffix: ") start end)))
   (when (and start end)
@@ -131,7 +131,7 @@
           (setq done (= (point) (point-max))))))))
 
 (defun unprefix-region (prefix start end)
-  (interactive 
+  (interactive
    (destructuring-bind (start end) (region-bounds t nil)
      (list (read-string "Prefix: ") start end)))
   (when (and start end (not (equal "" prefix)))
@@ -145,7 +145,7 @@
           (setq done (= (point) (point-max))))))))
 
 (defun unsuffix-region (suffix start end)
-  (interactive 
+  (interactive
    (destructuring-bind (start end) (region-bounds nil t)
      (list (read-string "Suffix: ") start end)))
   (when (and start end (not (equal "" suffix)))
