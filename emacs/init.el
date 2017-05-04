@@ -90,20 +90,9 @@
 ;; hopefully at some point down the line it will become easier as
 ;; defaults begin to reflect the brave new world of Unicode.
 
-(whenhost (unix xemacs)
-  (require 'un-define)
-  (set-coding-priority-list '(utf-8))
-  (set-coding-category-system 'utf-8 'utf-8))
-
 (prefer-coding-system 'utf-8-unix)
 (set-keyboard-coding-system 'utf-8-unix)
 (set-terminal-coding-system 'utf-8-unix)
-
-(whenhost xemacs
-  (set-default-buffer-file-coding-system 'utf-8-unix)
-  (set-coding-category-system 'utf-8 'utf-8-unix)
-  (set-coding-priority-list '(utf-8))
-  (set-language-environment "Latin-1"))
 
 ;;; Unfasten some seatbelts
 
@@ -136,16 +125,7 @@
               " " (downcase (substring (system-name) 0 (position ?. (system-name))))
               " " (downcase (replace-regexp-in-string "[^A-Za-z0-9_-].*$" "" invocation-name))))
 
-(whenhost xemacs
-  (set-variable 'menubar-visible-p nil))
-
 ;;; Operating system specific fixes
-
-;; This is appended by default to grep command lines and seems plain
-;; and simply set wrong in the default configuration: it points to the
-;; file "/dev/null" that exists only under Unix and Cygwin.
-(whenhost (xemacs windows)
-  (set-variable 'grep-null-device ""))
 
 ;; Make Aquamacs have classic Emacs behavior instead of Mac OS X style
 ;; behavior in many respects.  The most important changes are that 1)
@@ -179,9 +159,6 @@
 (defun my-case-fold-hook ()
   (setq case-fold-search t)
   (setq sort-fold-case t))
-
-(whenhost xemacs
-  (add-hook 'dired-mode-hook 'my-case-fold-hook))
 
 ;;; Custom key bindings
 
@@ -259,9 +236,6 @@
 
 (whenhost aquamacs
   (define-key osx-key-mode-map "\C-z" 'suspend-emacs))
-
-(whenhost xemacs
-  (define-key cssm-mode-map [?{] 'self-insert-command))
 
 ;;; Custom Lisp indentation
 
