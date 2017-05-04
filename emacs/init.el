@@ -83,6 +83,8 @@
     ;; At last, load the extensions.
     (mapc #'load-file (directory-files code-dir t "\\.el$"))))
 
+(load-file (concat my-emacs-conf-dir "subr-lassi.el"))
+
 ;;; Ensuer /usr/local is in PATH
 
 (when my-unix-p
