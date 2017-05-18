@@ -1,7 +1,6 @@
 ---
 packages:
   boot-clj: [brew]
-  clojure: [apt]
   leiningen: [brew, freebsd]
   lumo: [brew]
   planck: [brew]
