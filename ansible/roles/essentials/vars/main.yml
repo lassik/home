@@ -4,6 +4,7 @@ packages:
   aspell: [freebsd]
   emacs-devel: [freebsd]
   emacs: [apt, brew_cask]
+  exiftool: [brew]
   imagemagick: [apt, brew]
   ispell: [apt, brew]
   libreoffice-language-pack: [brew_cask]
