@@ -21,6 +21,7 @@
  '(editorconfig-custom-hooks (quote (editorconfig-domain-specific)))
  '(editorconfig-mode t)
  '(ido-mode (quote both) nil (ido))
+ '(indent-tabs-mode nil)
  '(iswitchb-mode t)
  '(make-backup-files nil)
  '(ns-alternate-modifier (quote none))
@@ -31,8 +32,8 @@
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (haskell-mode markdown-mode editorconfig cider magit ess-R-data-view ess-R-object-popup yaml-mode vkill shm rainbow-delimiters purescript-mode nrepl-sync nrepl-eval-sexp-fu moonscript matlab-mode markdown-toc markdown-mode+ magit-rockstar magit-push-remote magit-gitflow magit-gh-pulls magit-find-file lice htmlize hindent haml-mode go-mode flycheck-package flycheck-hdevtools flycheck-haskell flycheck-ghcmod flycheck-clojure fill-column-indicator ess elm-yasnippets elm-mode editorconfig-domain-specific editorconfig-custom-majormode color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode clj-refactor cider-tracing cider-spy cider-profile cider-eval-sexp-fu cider-decompile cider-browse-ns bbcode-mode autotetris-mode ascii anything ansible-doc ansible aggressive-indent aggressive-fill-paragraph ag afternoon-theme adoc-mode achievements ac-octave)))
- '(sort-fold-case t t)
+    (itail rust-mode swift-mode exotica-theme exec-path-from-shell pyimport slime prettier-js dad-joke d-mode format-all xah-reformat-code web-beautify suomalainen-kalenteri sicp rufo elisp-format rubocop bbcode-mode package-lint lsp-mode lsp-ocaml lsp-python lush-theme lusty-explorer caml flycheck-ocaml merlin tuareg utop js-format web-mode-edit-element web-narrow-mode clang-format py-autopep8 midi-kbd browse-kill-ring csv csv-mode sokoban flycheck flycheck-elm flycheck-gometalinter coffee-mode lua-mode pcre2el php-mode nasm-mode web-mode undo-tree docker dockerfile-mode haskell-mode markdown-mode editorconfig cider magit ess-R-data-view ess-R-object-popup yaml-mode vkill shm rainbow-delimiters purescript-mode nrepl-sync nrepl-eval-sexp-fu moonscript matlab-mode markdown-toc markdown-mode+ magit-rockstar magit-push-remote magit-gitflow magit-gh-pulls magit-find-file lice htmlize hindent haml-mode go-mode flycheck-package flycheck-hdevtools flycheck-haskell flycheck-ghcmod flycheck-clojure fill-column-indicator ess elm-yasnippets elm-mode editorconfig-domain-specific editorconfig-custom-majormode color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clj-refactor cider-tracing cider-spy cider-profile cider-eval-sexp-fu cider-decompile cider-browse-ns autotetris-mode ascii anything ansible-doc ansible aggressive-indent aggressive-fill-paragraph ag afternoon-theme adoc-mode achievements ac-octave)))
+ '(sort-fold-case t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
