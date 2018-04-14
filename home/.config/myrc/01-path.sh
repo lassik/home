@@ -1,5 +1,6 @@
 for d in ~/".local/$(uname | tr A-Z a-z)-$(uname -m | tr A-Z a-z)/bin" \
            ~/.local/bin/ \
+           /usr/local/bin \
            /usr/local/sbin \
            /bin \
            /sbin \
