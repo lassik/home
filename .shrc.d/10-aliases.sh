@@ -3,17 +3,17 @@
 
 unalias l c >/dev/null 2>&1
 
-if which dircolors >/dev/null 2>&1 ; then
-    l() {
-        ls --color -halF "$@"
-    }
+if which dircolors >/dev/null 2>&1; then
+	l() {
+		ls --color -halF "$@"
+	}
 else
-    export CLICOLOR=y
-    l() {
-        ls -halF "$@"
-    }
+	export CLICOLOR=y
+	l() {
+		ls -halF "$@"
+	}
 fi
 
 c() {
-    cd "${1-..}"
+	cd "${1-..}"
 }

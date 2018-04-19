@@ -1,17 +1,17 @@
 for x in ~/".local/$(uname | tr A-Z a-z)-$(uname -m | tr A-Z a-z)/bin" \
-           ~/.local/bin/ \
-           /bin \
-           /sbin \
-           /usr/local/bin \
-           /usr/local/sbin \
-           /usr/pkg/bin \
-           /usr/pkg/sbin \
-           /usr/bin \
-           /usr/sbin \
-           /usr/X11R6/bin \
-           /usr/X11/bin \
-           /usr/games ; do
-    if [ -d "$x" ]; then
-        export PATH="$PATH":"$x"
-    fi
+	~/.local/bin/ \
+	/bin \
+	/sbin \
+	/usr/local/bin \
+	/usr/local/sbin \
+	/usr/pkg/bin \
+	/usr/pkg/sbin \
+	/usr/bin \
+	/usr/sbin \
+	/usr/X11R6/bin \
+	/usr/X11/bin \
+	/usr/games; do
+	if [ -d "$x" ]; then
+		export PATH="$PATH":"$x"
+	fi
 done
