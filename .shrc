@@ -9,10 +9,12 @@ cd "$(pwd -P)"
 
 export ENV=~/.shrc
 
-for x in ~/.shrc.d/*.sh; do
-	#echo
-	#echo "$x"
-	#time . "$x"
-	. "$x"
-done
-unset x
+if [ "${x:-}" != done ]; then
+	for x in ~/.shrc.d/*.sh; do
+		#echo
+		#echo "$x"
+		#time . "$x"
+		. "$x"
+	done
+	x=done
+fi
