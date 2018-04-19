@@ -1,3 +1,8 @@
 case "$-" in
-*i*) ! which pathy >/dev/null 2>&1 || eval "$(pathy activate)" ;;
+*i*)
+	# This is an interactive shell.
+	if which pathy >/dev/null 2>&1; then
+		eval "$(pathy activate)"
+	fi
+	;;
 esac
