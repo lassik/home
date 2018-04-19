@@ -1,1 +1,1 @@
-. ~/.shrc
+export ENV=~/.shrc
