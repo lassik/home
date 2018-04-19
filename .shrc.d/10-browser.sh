@@ -1,7 +1,7 @@
 if [ -n "$DISPLAY" ]; then
-    for b in chromium-browser ; do
-        if which "$b" >/dev/null 2>&1 ; then
-            export BROWSER="$b"
+    for x in chromium-browser ; do
+        if which "$x" >/dev/null 2>&1 ; then
+            export BROWSER="$x"
             break
         fi
     done

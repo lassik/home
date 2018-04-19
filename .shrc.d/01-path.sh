@@ -1,4 +1,4 @@
-for d in ~/".local/$(uname | tr A-Z a-z)-$(uname -m | tr A-Z a-z)/bin" \
+for x in ~/".local/$(uname | tr A-Z a-z)-$(uname -m | tr A-Z a-z)/bin" \
            ~/.local/bin/ \
            /bin \
            /sbin \
@@ -11,7 +11,7 @@ for d in ~/".local/$(uname | tr A-Z a-z)-$(uname -m | tr A-Z a-z)/bin" \
            /usr/X11R6/bin \
            /usr/X11/bin \
            /usr/games ; do
-    if [ -d "$d" ]; then
-        export PATH="$PATH":"$d"
+    if [ -d "$x" ]; then
+        export PATH="$PATH":"$x"
     fi
 done
