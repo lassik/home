@@ -32,10 +32,10 @@
   (expand-file-name (file-name-directory load-file-name)))
 
 (defconst my-emacs-public-code-dir
-  (expand-file-name (concat my-emacs-conf-dir "../../../public/src/emacs/")))
+  (expand-file-name "~/persist/public/src/emacs/"))
 
 (defconst my-emacs-private-code-dir
-  (expand-file-name (concat my-emacs-conf-dir "../../../private/src/emacs/")))
+  (expand-file-name "~/persist/private/src/emacs/"))
 
 ;;; Load extensions bundled with Emacs
 
