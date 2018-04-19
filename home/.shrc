@@ -9,7 +9,7 @@ cd "$(pwd -P)"
 
 export ENV=~/.shrc
 
-for _myrc in ~/.config/myrc/*.sh; do
+for _myrc in ~/.shrc.d/*.sh; do
     . "$_myrc"
 done
 unset _myrc
