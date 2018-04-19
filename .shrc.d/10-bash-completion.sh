@@ -4,7 +4,7 @@ if [ -n "$BASH_VERSION" ]; then
 		complete -F _cd -o nospace c
 	fi
 
-	if which brew >/dev/null 2>&1 && [ -f $(brew --prefix)/etc/bash_completion ]; then
-		. $(brew --prefix)/etc/bash_completion
+	if which brew >/dev/null 2>&1 && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+		. "$(brew --prefix)/etc/bash_completion"
 	fi
 fi
