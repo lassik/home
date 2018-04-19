@@ -16,5 +16,6 @@ case "$-" in
 		#time . "$x"
 		. "$x"
 	done
+	unset x
 	;;
 esac
