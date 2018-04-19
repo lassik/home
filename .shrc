@@ -7,15 +7,14 @@ export HOME="$(cd && pwd -P)"
 # Likewise, resolve symlinks in the current directory.
 cd "$(pwd -P)"
 
-export BASH_ENV=~/.shrc
-export ENV=~/.shrc
-
-if [ "${x:-}" != done ]; then
+case "$-" in
+*i*)
+	# This is an interactive shell.
 	for x in ~/.shrc.d/*.sh; do
 		#echo
 		#echo "$x"
 		#time . "$x"
 		. "$x"
 	done
-	x=done
-fi
+	;;
+esac
