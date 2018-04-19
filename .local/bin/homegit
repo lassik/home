@@ -1,0 +1,3 @@
+#!/bin/sh
+set -eux
+git --work-tree="$HOME" --git-dir="$HOME/.config/home.git" "$@"
