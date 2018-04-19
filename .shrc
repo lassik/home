@@ -10,6 +10,6 @@ cd "$(pwd -P)"
 export ENV=~/.shrc
 
 for x in ~/.shrc.d/*.sh; do
-    . "$x"
+	. "$x"
 done
 unset x
