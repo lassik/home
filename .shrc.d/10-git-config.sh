@@ -1,9 +1,5 @@
 if which git >/dev/null 2>&1; then
 
-	# Change to push.default to 'simple' once I no longer use git <1.7.11
-	# anywhere. Sigh.
-	git config --global push.default current
-
 	git config --global log.decorate true
 	git config --global color.ui true
 
