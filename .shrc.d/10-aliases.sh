@@ -1,7 +1,11 @@
 # I don't like having my own shell aliases and functions but these are
 # almost mandatory.
 
-unalias l c >/dev/null 2>&1
+unalias c l >/dev/null 2>&1
+
+c() {
+	cd "${1-..}"
+}
 
 if which dircolors >/dev/null 2>&1; then
 	l() {
@@ -13,7 +17,3 @@ else
 		ls -halF "$@"
 	}
 fi
-
-c() {
-	cd "${1-..}"
-}
