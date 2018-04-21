@@ -45,13 +45,7 @@
 ;; the first use of a load-on-demand extension.
 
 (require 'cl)                           ; For great justice.
-
-(require 'cc-mode)
-(require 'css-mode)
 (require 'dired)
-(require 'picture)
-(require 'ruby-mode)
-(require 'tex-mode)
 
 ;;; Load extensions not bundled with Emacs
 
@@ -210,12 +204,19 @@
 (define-key minibuffer-local-map [(control n)] 'next-history-element)
 (define-key minibuffer-local-map [(control p)] 'previous-history-element)
 (define-key minibuffer-local-map [(space)] 'self-insert-command)
-(define-key picture-mode-map [(control c) down]  'picture-movement-down)
-(define-key picture-mode-map [(control c) left]  'picture-movement-left)
-(define-key picture-mode-map [(control c) right] 'picture-movement-right)
-(define-key picture-mode-map [(control c) up]    'picture-movement-up)
-(define-key ruby-mode-map [(meta backspace)] 'backward-kill-word)
-(define-key tex-mode-map [?\"] 'self-insert-command)
+
+(eval-after-load "picture"
+  '(progn
+     (define-key picture-mode-map [(control c) down]  'picture-movement-down)
+     (define-key picture-mode-map [(control c) left]  'picture-movement-left)
+     (define-key picture-mode-map [(control c) right] 'picture-movement-right)
+     (define-key picture-mode-map [(control c) up]    'picture-movement-up)))
+
+(eval-after-load "ruby-mode"
+  '(define-key ruby-mode-map [(meta backspace)] 'backward-kill-word))
+
+(eval-after-load "tex-mode"
+  '(define-key tex-mode-map [?\"] 'self-insert-command))
 
 (when (featurep 'magit)
   (global-set-key (kbd "C-x g") 'magit-status))
