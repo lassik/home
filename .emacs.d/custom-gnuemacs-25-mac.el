@@ -22,7 +22,6 @@
  '(editorconfig-mode t)
  '(ido-mode (quote both) nil (ido))
  '(indent-tabs-mode nil)
- '(iswitchb-mode t)
  '(make-backup-files nil)
  '(ns-alternate-modifier (quote none))
  '(ns-command-modifier (quote meta))

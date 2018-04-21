@@ -21,8 +21,6 @@
  '(indent-tabs-mode nil)
  '(inferior-lisp-program "cl-script-clisp")
  '(initial-major-mode (quote lisp-interaction-mode))
- '(iswitchb-mode t)
- '(iswitchb-prompt-newbuffer nil)
  '(lua-indent-level 2)
  '(make-backup-files nil)
  '(menu-bar-mode nil)

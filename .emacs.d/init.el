@@ -180,7 +180,6 @@
 (define-key (current-global-map) [(control h) (return)] 'manual-entry)
 (define-key (current-global-map) [(control t)] nil) ; ratpoison prefix key
 (define-key (current-global-map) [(control x) (control d)] 'dired)
-(define-key (current-global-map) [(control x) b] 'iswitchb-buffer)
 (define-key (current-global-map) [(meta c)] 'capitalize-region-or-word)
 (define-key (current-global-map) [(meta l)] 'downcase-region-or-word)
 (define-key (current-global-map) [(meta u)] 'upcase-region-or-word)
