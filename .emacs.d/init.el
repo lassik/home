@@ -22,8 +22,6 @@
 (defconst my-mac-p (equal 'darwin system-type))
 (defconst my-windows-p (equal 'windows-nt system-type))
 (defconst my-unix-p (not my-windows-p))
-(defconst my-xemacs-p (featurep 'xemacs))
-(defconst my-gnuemacs-p (not my-xemacs-p))
 
 ;;; Find out where our stuff is
 
@@ -122,14 +120,12 @@
 
 ;; Make Emacs startup with a blank scratch buffer instead of a splash
 ;; screen.
-(when my-gnuemacs-p
-  (set-variable 'inhibit-splash-screen t)
-  (set-variable 'inhibit-startup-echo-area-message (user-login-name)))
+(set-variable 'inhibit-splash-screen t)
+(set-variable 'inhibit-startup-echo-area-message (user-login-name))
 
 ;; Prevent the computer from beeping and flashing at me.
-(when my-gnuemacs-p
-  (defun my-dummy-ring-bell-function () (interactive))
-  (set-variable 'ring-bell-function 'my-dummy-ring-bell-function))
+(defun my-dummy-ring-bell-function () (interactive))
+(set-variable 'ring-bell-function 'my-dummy-ring-bell-function)
 
 ;; Set a frame title that I can use to distinguish one Emacs from
 ;; another. Having the name of the computer in the frame title is
@@ -283,12 +279,7 @@
 
 (setq custom-file
       (concat my-emacs-conf-dir
-              "custom-"
-              (cond
-               (my-gnuemacs-p "gnuemacs")
-               (my-xemacs-p   "xemacs")
-               (t             "unknown"))
-              "-"
+              "custom-gnuemacs-"
               (format "%d" emacs-major-version)
               "-"
               (cond

@@ -5,12 +5,6 @@
 ;; TODO: delete all blank lines (in region)
 ;; TODO: compact all blank lines so there are never two or more consecutive blank lines (in region)
 
-;;;; Portability fixes
-
-;; XEmacs fix
-(unless (fboundp 'use-region-p)
-  (defalias 'use-region-p 'region-active-p))
-
 ;;;; Utility functions
 
 (defun region-bounds (&optional need-bol-p need-eol-p)
@@ -36,8 +30,7 @@
 (defun scratch ()
   (interactive)
   (switch-to-buffer (get-buffer-create "*scratch*"))
-  (funcall (or initial-major-mode 'lisp-interaction-mode))
-  (font-lock-mode 1))                   ; XEmacs fix
+  (funcall (or initial-major-mode 'lisp-interaction-mode)))
 
 (defun foo ()
   (interactive)
@@ -56,20 +49,14 @@
             (or (get-char-property (point) 'face) '(default))))
    "*Customize Faces*"))
 
-;; For Windows GNU Emacs.
+;; For Windows GNU Emacs. This is complicated but I finally got it to work.
 (when (fboundp 'w32-shell-execute)
-  (defun terminal-window-here ()
-    (interactive)
-    (w32-shell-execute nil "cmd.exe")))
-
-;; For Windows XEmacs. This is complicated but I finally got it to work.
-(when (fboundp 'mswindows-shell-execute)
   (defun terminal-window-here ()
     (interactive)
     ;; NOTE: In the code below, default-directory doesn't need to be
     ;; shell-quoted because the Windows shell's cd command parses it
     ;; as a single argument.
-    (mswindows-shell-execute
+    (w32-shell-execute
      nil
      (concat (getenv "SystemRoot") "\\system32\\cmd.exe")
      (concat "/k cd /d " default-directory))))
