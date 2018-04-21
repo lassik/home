@@ -18,6 +18,7 @@
  '(dired-use-ls-dired (quote unspecified))
  '(enable-recursive-minibuffers t)
  '(grep-command "grep -niR ")
+ '(ido-mode (quote both) nil (ido))
  '(indent-tabs-mode nil)
  '(inferior-lisp-program "cl-script-clisp")
  '(initial-major-mode (quote lisp-interaction-mode))
