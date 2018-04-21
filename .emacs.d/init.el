@@ -317,13 +317,3 @@
               (require 'ess)
               (require 'ess-site)
               nil)))
-
-;; Make C-x k run `server-edit' instead of the usual `kill-buffer' for
-;; emacsclient buffers. From EmacsWiki EmacsClient page.
-(when my-gnuemacs-p
-  (add-hook 'server-switch-hook
-            (lambda ()
-              (when (current-local-map)
-                (use-local-map (copy-keymap (current-local-map))))
-              (when server-buffer-clients
-                (local-set-key (kbd "C-x k") 'server-edit)))))
