@@ -141,31 +141,6 @@
               " " (downcase (substring (system-name) 0 (position ?. (system-name))))
               " " (downcase (replace-regexp-in-string "[^A-Za-z0-9_-].*$" "" invocation-name))))
 
-;;; Operating system specific fixes
-
-;; Make Aquamacs have classic Emacs behavior instead of Mac OS X style
-;; behavior in many respects.  The most important changes are that 1)
-;; the Mac keyboard's Command key works as the Emacs Meta key in
-;; commands such as M-x and M-w, which puts much less strain on my
-;; fingers; and 2) new frames, called windows in standard GUI lingo,
-;; are never auto-created.  This code was copied over from Emacswiki.
-(when my-aquamacs-p
-  (osx-key-mode -1)
-  (setq ns-command-modifier 'meta)
-  (setq ns-alternate-modifier nil)
-  (setq ns-use-mac-modifier-symbols nil)
-  (setq aquamacs-scratch-file nil)
-  (setq initial-major-mode 'emacs-lisp-mode)
-  (setq mac-command-modifier 'meta)
-  (setq x-select-enable-clipboard t)
-  (tabbar-mode -1)
-  (one-buffer-one-frame-mode -1)
-  (setq special-display-regexps nil)
-  (aquamacs-autoface-mode -1)
-  (unless window-system
-    (normal-erase-is-backspace-mode nil)
-    (set-face-inverse-video-p 'mode-line-inactive t)))
-
 ;; The remainder of this file consists entirely of custamizations that
 ;; the Emacs `customize' facility can't yet handle. `customize' is
 ;; awesome.
