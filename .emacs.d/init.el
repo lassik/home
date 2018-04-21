@@ -301,15 +301,6 @@
                (t            "unix"))
               ".el"))
 
-(defun maximize-emacs ()
-  (interactive)
-  (case window-system
-    (x
-     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                            '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                            '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))))
-
 ;; If you try to load your customizations by simply feeding your
 ;; newly-set `custom-file' to `load-file' in this initialization file,
 ;; some of the customizations won't have any effect because
@@ -320,8 +311,6 @@
 ;; seems to work for me.
 (add-hook 'window-setup-hook
           (lambda ()
-            (when (fboundp 'maximize-emacs)
-              (maximize-emacs))
             (when (file-exists-p custom-file)
               (load-file custom-file)
               (set-variable 'dired-use-ls-dired nil)
