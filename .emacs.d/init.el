@@ -23,7 +23,6 @@
 (defconst my-windows-p (equal 'windows-nt system-type))
 (defconst my-unix-p (not my-windows-p))
 (defconst my-xemacs-p (featurep 'xemacs))
-(defconst my-aquamacs-p (featurep 'aquamacs))
 (defconst my-gnuemacs-p (not my-xemacs-p))
 
 ;;; Find out where our stuff is
@@ -225,9 +224,6 @@
 (when (featurep 'magit)
   (global-set-key (kbd "C-x g") 'magit-status))
 
-(when my-aquamacs-p
-  (define-key osx-key-mode-map "\C-z" 'suspend-emacs))
-
 ;;; Custom Lisp indentation
 
 ;; I'm not sure this is the right way to do it, but it seems to work.
@@ -289,7 +285,6 @@
       (concat my-emacs-conf-dir
               "custom-"
               (cond
-               (my-aquamacs-p "aquamacs")
                (my-gnuemacs-p "gnuemacs")
                (my-xemacs-p   "xemacs")
                (t             "unknown"))
@@ -308,8 +303,8 @@
 ;; who-knows-what will override them.  EmacsWiki folk wisdom says
 ;; `window-setup-hook' and `term-setup-hook' are the right places to
 ;; load them.  I don't understand the bizarre complications of the
-;; Emacs/Aquamacs startup process so I'm going with folk wisdom.  It
-;; seems to work for me.
+;; Emacs startup process so I'm going with folk wisdom.  It seems to
+;; work for me.
 (add-hook 'window-setup-hook
           (lambda ()
             (when (file-exists-p custom-file)
