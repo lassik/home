@@ -72,21 +72,21 @@
   (interactive "p")
   (if (region-active-p)
       (capitalize-region (region-beginning) (region-end))
-      (capitalize-word arg)))
+    (capitalize-word arg)))
 
 (defun upcase-region-or-word (arg)
   "Upcase the selected region or the following word (or ARG words)."
   (interactive "p")
   (if (region-active-p)
       (upcase-region (region-beginning) (region-end))
-      (upcase-word arg)))
+    (upcase-word arg)))
 
 (defun downcase-region-or-word (arg)
   "Downcase the selected region or the following word (or ARG words)."
   (interactive "p")
   (if (region-active-p)
       (downcase-region (region-beginning) (region-end))
-      (downcase-word arg)))
+    (downcase-word arg)))
 
 ;;;; Commands to manipulate region lines
 
@@ -170,7 +170,7 @@
         (when (interactive-p)
           (if (= count 0)
               (message "No superfluous lines found")
-              (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
+            (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
         count))))
 
 ;;;; Miscellaneous text editing commands
@@ -188,21 +188,21 @@
   (let (titles)
     (let ((start (point-at-bol)))
       (while (re-search-forward "[ \t]+" (point-at-eol) t)
-	(unless (equal " " (match-string 0))
-	  (when (< (point-at-bol) (match-beginning 0))
-	    (setq titles (nconc titles (list (cons (- start (point-at-bol)) (- (match-beginning 0) (point-at-bol)))))))
-	  (setq start (match-end 0))))
+        (unless (equal " " (match-string 0))
+          (when (< (point-at-bol) (match-beginning 0))
+            (setq titles (nconc titles (list (cons (- start (point-at-bol)) (- (match-beginning 0) (point-at-bol)))))))
+          (setq start (match-end 0))))
       (when (< start (point-at-eol))
-	(setq titles (nconc titles (list (cons (- start (point-at-bol)) (- (point-at-eol) (point-at-bol))))))))
+        (setq titles (nconc titles (list (cons (- start (point-at-bol)) (- (point-at-eol) (point-at-bol))))))))
     (goto-char (point-at-eol))
     (insert (with-temp-buffer
-	      (insert "\n")
-	      (let ((last 0))
-		(dolist (title titles (buffer-substring (point-min) (point-max)))
-		  (destructuring-bind (start . end) title
-		    (insert (make-string (- start last) ? ))
-		    (insert (make-string (- end start) dash-char))
-		    (setq last end))))))))
+              (insert "\n")
+              (let ((last 0))
+                (dolist (title titles (buffer-substring (point-min) (point-max)))
+                  (destructuring-bind (start . end) title
+                    (insert (make-string (- start last) ? ))
+                    (insert (make-string (- end start) dash-char))
+                    (setq last end))))))))
 
 (defun count-hours-region (start end)
   (interactive "r")
@@ -225,12 +225,12 @@
   (interactive "*")
   (if (not (use-region-p))
       (delete-blank-lines-std)
-      (save-excursion
-        (save-restriction
-          (goto-char (region-beginning))
-          (narrow-to-region (region-beginning) (region-end))
-          (while (re-search-forward "\\(^[ \t]*\n\\)+" nil t)
-            (replace-match ""))))))
+    (save-excursion
+      (save-restriction
+        (goto-char (region-beginning))
+        (narrow-to-region (region-beginning) (region-end))
+        (while (re-search-forward "\\(^[ \t]*\n\\)+" nil t)
+          (replace-match ""))))))
 
 (defun append-yanked-lines-to-those-starting-at-point ()
   (interactive)
