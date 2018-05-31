@@ -39,6 +39,7 @@
 ;; the first use of a load-on-demand extension.
 
 (require 'cl)                           ; For great justice.
+(require 'comint)
 (require 'dired)
 
 ;;; Load extensions not bundled with Emacs
