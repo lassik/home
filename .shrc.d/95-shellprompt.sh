@@ -5,8 +5,11 @@ DragonFly | FreeBSD)
 NetBSD)
 	PS1='$PWD\$ '
 	;;
-OpenBSD)
+OpenBSD | Linux)
 	PS1='\n\w\n\u@\h\$ '
+	;;
+*)
+	PS1='\$ '
 	;;
 esac
 if which shellprompt >/dev/null 2>&1; then
