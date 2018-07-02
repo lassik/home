@@ -1,6 +1,13 @@
-PS1='\n\w\n\u@\h\$ '
 case "$(uname)" in
-DragonFly | FreeBSD | NetBSD) PS1='\w$ ' ;;
+DragonFly | FreeBSD)
+	PS1='\w\$ '
+	;;
+NetBSD)
+	PS1='$PWD\$ '
+	;;
+OpenBSD)
+	PS1='\n\w\n\u@\h\$ '
+	;;
 esac
 if which shellprompt >/dev/null 2>&1; then
 	if [ -n "$ZSH_VERSION" ]; then
