@@ -7,15 +7,19 @@ export HOME="$(cd && pwd -P)"
 # Likewise, resolve symlinks in the current directory.
 cd "$(pwd -P)"
 
-case "$-" in
-*i*)
-	# This is an interactive shell.
-	for x in ~/.shrc.d/*.sh; do
-		#echo
-		#echo "$x"
-		#time . "$x"
-		. "$x"
-	done
-	unset x
-	;;
-esac
+for x in ~/.shrc.d/*.sh; do
+	case "$x" in
+	*.i.sh)
+		# Only use these files in an interactive shell.
+		case "$-" in
+		*i*) ;;
+		*) continue ;;
+		esac
+		;;
+	esac
+	#echo
+	#echo "$x"
+	#time . "$x"
+	. "$x"
+done
+unset x
