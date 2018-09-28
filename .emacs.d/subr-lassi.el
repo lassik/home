@@ -331,3 +331,12 @@ comes with Emacs in the source file whitespace.el."
     (re-search-backward "\n+")
     (delete-region (1- (point)) (point-max))
     (push-mark (point-min) t t)))
+
+(defun sum-numbers-in-region (beg end)
+  (interactive "r")
+  (let ((nums (mapcar (lambda (num) (car (read-from-string num)))
+                      (split-string
+                       (replace-regexp-in-string
+                        "[^0-9.]" " " (buffer-substring beg end))
+                       " +" t))))
+    (message "%S = %S" (cons '+ nums) (apply '+ nums))))
