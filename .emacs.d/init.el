@@ -257,7 +257,6 @@
 
 (setq ecumenist-db (concat my-emacs-conf-dir "ecumenist"))
 
-(add-to-list 'auto-mode-alist '("\\.json\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.nasm\\'" . nasm-mode))
 
