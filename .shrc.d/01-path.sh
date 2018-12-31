@@ -1,5 +1,5 @@
 for x in ~/".local/$(uname | tr A-Z a-z)-$(uname -m | tr A-Z a-z)/bin" \
-	~/.local/bin/ \
+	~/.local/bin \
 	/bin \
 	/sbin \
 	/usr/local/bin \
