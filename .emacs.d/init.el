@@ -178,7 +178,12 @@
   ;; TODO: (dired-get-filename)
   (call-interactively 'dired-advertised-find-file))
 
+(defun my-insert-lambda ()
+  (interactive)
+  (insert "\u03BB"))
+
 (define-key (current-global-map) [(control h) (return)] 'manual-entry)
+(define-key (current-global-map) [(control meta y)] 'my-insert-lambda)
 (define-key (current-global-map) [(control t)] nil) ; ratpoison prefix key
 (define-key (current-global-map) [(control x) (control d)] 'dired)
 (define-key (current-global-map) [(meta c)] 'capitalize-region-or-word)
