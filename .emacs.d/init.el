@@ -240,6 +240,9 @@
 
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.nasm\\'" . nasm-mode))
+(add-to-list 'auto-mode-alist '("\\.sld\\'" . scheme-mode))
+(add-to-list 'auto-mode-alist '("\\.sls\\'" . scheme-mode))
+(add-to-list 'auto-mode-alist '("\\.sps\\'" . scheme-mode))
 
 (dolist (alist '(auto-mode-alist magic-mode-alist))
   (when (boundp alist)
