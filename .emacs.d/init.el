@@ -103,6 +103,7 @@
 (put 'dired-find-alternate-file 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(put 'set-goal-column 'disabled nil)
 (set-variable 'initial-scratch-message "")
 
 ;; Make Emacs startup with a blank scratch buffer instead of a splash
@@ -304,4 +305,3 @@
 ;; Need the `t' for this to work.
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 
-(put 'set-goal-column 'disabled nil)
