@@ -227,33 +227,6 @@
             (set (make-local-variable 'lisp-indent-function)
                  'common-lisp-indent-function)))
 
-(defun set-lisp-indent (symbol value)
-  (dolist (prop '(lisp-indent-function common-lisp-indent-function) value)
-    (if (equal 0 value) (remprop symbol prop) (put symbol prop value))))
-
-(set-lisp-indent 'asm 1)
-(set-lisp-indent 'casequal 1)
-(set-lisp-indent 'dcase 1)
-(set-lisp-indent 'defconst 1)           ; Emacs Lisp
-(set-lisp-indent 'defface 1)            ; Emacs Lisp
-(set-lisp-indent 'define 1)             ; Scheme
-(set-lisp-indent 'define-derived-mode 3) ; Emacs Lisp
-(set-lisp-indent 'define-modify-macro 0)
-(set-lisp-indent 'define-symbol-macro 1)
-(set-lisp-indent 'defpackage 1)         ; Common Lisp
-(set-lisp-indent 'defsubstrate 1)
-(set-lisp-indent 'ecasequal 1)
-(set-lisp-indent 'edcase 1)
-(set-lisp-indent 'event-case 1)
-(set-lisp-indent 'letrec 2)
-(set-lisp-indent 'loop 0)
-(set-lisp-indent 'prog1 0)
-(set-lisp-indent 'until 1)
-(set-lisp-indent 'when-output 1)
-(set-lisp-indent 'whilet 2)
-(set-lisp-indent 'with-output-to-string 0)
-(set-lisp-indent :section 1)
-
 (add-hook 'clojure-mode-hook
           (lambda ()
             (define-clojure-indent
