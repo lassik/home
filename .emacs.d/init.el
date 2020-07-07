@@ -76,11 +76,9 @@
 
 (load-file (concat my-emacs-conf-dir "subr-lassi.el"))
 
-;;; Ensuer /usr/local is in PATH
-
-(when my-unix-p
-  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))  ; FFFUUU
-  (setq exec-path (split-string (getenv "PATH") ":" t)))
+(when (require 'exec-path-from-shell nil t)
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "LC_ALL"))
 
 ;; Magit needs git fron PATH, so postpone it until here.
 (require 'magit nil t)
