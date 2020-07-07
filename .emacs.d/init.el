@@ -119,9 +119,11 @@
 ;; useful because I might operate a remote GUI emacs using SSH X
 ;; forwarding.
 (setq frame-title-format
-      (concat "%b"
-              " " (downcase (substring (system-name) 0 (position ?. (system-name))))
-              " " (downcase (replace-regexp-in-string "[^A-Za-z0-9_-].*$" "" invocation-name))))
+      (concat
+       "%b"
+       " " (downcase (substring (system-name) 0 (position ?. (system-name))))
+       " " (downcase (replace-regexp-in-string
+                      "[^A-Za-z0-9_-].*$" "" invocation-name))))
 
 ;; The remainder of this file consists entirely of custamizations that
 ;; the Emacs `customize' facility can't yet handle. `customize' is
