@@ -201,17 +201,17 @@
 (define-key minibuffer-local-map [(control p)] 'previous-history-element)
 (define-key minibuffer-local-map [(space)] 'self-insert-command)
 
-(eval-after-load "picture"
+(eval-after-load 'picture
   '(progn
      (define-key picture-mode-map [(control c) down]  'picture-movement-down)
      (define-key picture-mode-map [(control c) left]  'picture-movement-left)
      (define-key picture-mode-map [(control c) right] 'picture-movement-right)
      (define-key picture-mode-map [(control c) up]    'picture-movement-up)))
 
-(eval-after-load "ruby-mode"
+(eval-after-load 'ruby-mode
   '(define-key ruby-mode-map [(meta backspace)] 'backward-kill-word))
 
-(eval-after-load "tex-mode"
+(eval-after-load 'tex-mode
   '(define-key tex-mode-map [?\"] 'self-insert-command))
 
 (when (featurep 'magit)
