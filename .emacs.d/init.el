@@ -300,3 +300,8 @@
               (require 'ess)
               (require 'ess-site)
               nil)))
+
+;; Need the `t' for this to work.
+(add-hook 'window-setup-hook 'toggle-frame-maximized t)
+
+(put 'set-goal-column 'disabled nil)
