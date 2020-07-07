@@ -83,6 +83,8 @@
 ;; Magit needs git fron PATH, so postpone it until here.
 (require 'magit nil t)
 
+(require 'lisp-local nil t)
+
 ;;; Internationalization and localization
 
 ;; Default to UTF-8 with Unix newlines everywhere. The present setup
