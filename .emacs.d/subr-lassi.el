@@ -340,3 +340,21 @@ comes with Emacs in the source file whitespace.el."
                         "[^0-9.]" " " (buffer-substring beg end))
                        " +" t))))
     (message "%S = %S" (cons '+ nums) (apply '+ nums))))
+
+(defun nroff-update-date ()
+  (interactive)
+  (save-match-data
+    (goto-char (point-min))
+    (let* ((case-fold-search nil)
+           (parts (decode-time (current-time)))
+           (d (nth 3 parts))
+           (m (nth 4 parts))
+           (y (nth 5 parts))
+           (month-names
+            '("January" "February" "March" "April" "May" "June"
+              "July" "August" "September" "October" "November" "December"))
+           (month-name (nth (1- m) month-names))
+           (new-timestamp (format ".Dd %s %d, %d" month-name d y)))
+      (if (re-search-forward "^\\.Dd [A-Za-z0-9, ]*$" nil t)
+          (replace-match new-timestamp t)
+          (error ".Dd line not found")))))
