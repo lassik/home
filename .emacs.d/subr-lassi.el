@@ -198,7 +198,7 @@
         (when (called-interactively-p 'any)
           (if (= count 0)
               (message "No superfluous lines found")
-              (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
+            (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
         count))))
 
 ;;;; Miscellaneous text editing commands
@@ -408,7 +408,7 @@ comes with Emacs in the source file whitespace.el."
            (new-timestamp (format ".Dd %s %d, %d" month-name d y)))
       (if (re-search-forward "^\\.Dd [A-Za-z0-9, ]*$" nil t)
           (replace-match new-timestamp t)
-          (error ".Dd line not found")))))
+        (error ".Dd line not found")))))
 
 (defun delete-non-ascii-characters (start end)
   (interactive "r")
@@ -423,14 +423,14 @@ comes with Emacs in the source file whitespace.el."
                   (= #x09 char)
                   (= #x0a char)))
             (forward-char 1)
-            (delete-char 1))))))
+          (delete-char 1))))))
 
 (defun dupes (list)
   (let ((counter (make-hash-table :test #'equal)))
     (dolist (item list)
       (setf (gethash item counter) (1+ (gethash item counter 0))))
     (cl-remove-if (lambda (item) (< (gethash item counter) 2))
-                        (hash-table-keys counter))))
+                  (hash-table-keys counter))))
 
 (defun region-lines (start end)
   (save-excursion
@@ -451,7 +451,7 @@ comes with Emacs in the source file whitespace.el."
       (dolist (buffer (buffer-list))
         (when (if (buffer-file-name buffer)
                   (buffer-modified-p buffer)
-                  (not (string-match "^[ *]" (buffer-name buffer))))
+                (not (string-match "^[ *]" (buffer-name buffer))))
           (insert (format "%s\n" (buffer-name buffer))))))
     (display-buffer (current-buffer))))
 
