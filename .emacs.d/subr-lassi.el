@@ -51,8 +51,9 @@
 
 (defun scratch ()
   (interactive)
-  (switch-to-buffer (get-buffer-create "*scratch*"))
-  (funcall (or initial-major-mode 'lisp-interaction-mode)))
+  (let ((default-directory (expand-file-name "~")))
+    (switch-to-buffer (get-buffer-create "*scratch*"))
+    (funcall (or initial-major-mode 'lisp-interaction-mode))))
 
 (defun foo ()
   (interactive)
