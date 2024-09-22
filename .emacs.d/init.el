@@ -112,10 +112,9 @@
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
-(set-variable 'initial-scratch-message "")
 
-;; Make Emacs startup with a blank scratch buffer instead of a splash
-;; screen.
+;; Start up with a blank scratch buffer instead of a splash screen.
+(set-variable 'initial-scratch-message "")
 (set-variable 'inhibit-splash-screen t)
 (set-variable 'inhibit-startup-echo-area-message (user-login-name))
 
