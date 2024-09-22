@@ -83,7 +83,11 @@
 ;; Magit needs git fron PATH, so postpone it until here.
 (require 'magit nil t)
 
-(require 'lisp-local nil t)
+(when (require 'lisp-local nil t)
+  (add-hook 'emacs-lisp-mode-hook 'lisp-local 1)
+  (add-hook 'lisp-mode-hook       'lisp-local 1)
+  (add-hook 'scheme-mode-hook     'lisp-local 1)
+  (add-hook 'clojure-mode-hook    'lisp-local 1))
 
 ;;; Internationalization and localization
 
