@@ -6,6 +6,7 @@
 ;; TODO: compact all blank lines so there are never two or more consecutive blank lines (in region)
 
 (require 'cl-lib)
+(require 'man)
 
 (defun sort-words (reverse beg end)
   "Sort words in region alphabetically, in REVERSE if negative.
@@ -367,6 +368,19 @@ comes with Emacs in the source file whitespace.el."
                         "[^0-9.]" " " (buffer-substring beg end))
                        " +" t))))
     (message "%S = %S" (cons '+ nums) (apply '+ nums))))
+
+(defun my-live-preview-manpage (src-buf)
+  (insert (with-current-buffer src-buf (buffer-string)))
+  (shell-command-on-region (point-min) (point-max) "mandoc" (current-buffer))
+  (Man-fontify-manpage))
+
+(defun my-live-preview-asciidoc-manpage (src-buf)
+  (insert (with-current-buffer src-buf (buffer-string)))
+  (shell-command-on-region
+   (point-min) (point-max)
+   "asciidoctor -b manpage -o - - | mandoc"
+   (current-buffer))
+  (Man-fontify-manpage))
 
 (defun nroff-update-date ()
   (interactive)
