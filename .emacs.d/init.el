@@ -307,6 +307,9 @@
 (with-current-buffer (get-buffer "*scratch*")
   (setq default-directory (expand-file-name "~")))
 
+(when (require 'desktop-mail-user-agent nil t)
+  (desktop-mail-user-agent))
+
 (when (require 'define-scratch nil t)
   (define-scratch c-scratch c-mode)
   (define-scratch clojure-scratch clojure-mode)
