@@ -5,6 +5,8 @@
 ;; TODO: delete all blank lines (in region)
 ;; TODO: compact all blank lines so there are never two or more consecutive blank lines (in region)
 
+(require 'cl-lib)
+
 (defun sort-words (reverse beg end)
   "Sort words in region alphabetically, in REVERSE if negative.
     Prefixed with negative \\[universal-argument], sorts in reverse.
@@ -58,10 +60,10 @@
 (defun foo ()
   (interactive)
   (let ((names '("foo" "bar" "baz" "qux" "quux" "quuux" "quuuux")))
-    (let ((name (dolist (name names (car (last names)))
+    (let ((name (cl-dolist (name names (car (last names)))
                   (let ((buf (get-buffer name)))
                     (when (or (null buf) (= 0 (buffer-size buf)))
-                      (return name))))))
+                      (cl-return name))))))
       (switch-to-buffer (get-buffer-create name)))))
 
 (defun customize-face-at-point ()
@@ -115,7 +117,7 @@
 
 (defun prefix-region (prefix start end)
   (interactive
-   (destructuring-bind (start end) (region-bounds t nil)
+   (cl-destructuring-bind (start end) (region-bounds t nil)
      (list (read-string "Prefix: ") start end)))
   (when (and start end)
     (save-restriction
@@ -127,7 +129,7 @@
 
 (defun suffix-region (suffix start end)
   (interactive
-   (destructuring-bind (start end) (region-bounds nil t)
+   (cl-destructuring-bind (start end) (region-bounds nil t)
      (list (read-string "Suffix: ") start end)))
   (when (and start end)
     (save-restriction
@@ -142,7 +144,7 @@
 
 (defun unprefix-region (prefix start end)
   (interactive
-   (destructuring-bind (start end) (region-bounds t nil)
+   (cl-destructuring-bind (start end) (region-bounds t nil)
      (list (read-string "Prefix: ") start end)))
   (when (and start end (not (equal "" prefix)))
     (save-restriction
@@ -156,7 +158,7 @@
 
 (defun unsuffix-region (suffix start end)
   (interactive
-   (destructuring-bind (start end) (region-bounds nil t)
+   (cl-destructuring-bind (start end) (region-bounds nil t)
      (list (read-string "Suffix: ") start end)))
   (when (and start end (not (equal "" suffix)))
     (save-restriction
@@ -222,7 +224,7 @@
               (insert "\n")
               (let ((last 0))
                 (dolist (title titles (buffer-substring (point-min) (point-max)))
-                  (destructuring-bind (start . end) title
+                  (cl-destructuring-bind (start . end) title
                     (insert (make-string (- start last) ? ))
                     (insert (make-string (- end start) dash-char))
                     (setq last end))))))))
