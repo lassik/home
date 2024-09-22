@@ -38,7 +38,7 @@
 ;; 2) To eliminate the load time that would otherwise be incurred upon
 ;; the first use of a load-on-demand extension.
 
-(require 'cl)                           ; For great justice.
+(require 'cl-lib)  ; For great justice.
 (require 'comint)
 (require 'dired)
 
@@ -69,7 +69,7 @@
     ;; prevent multiple `load-path' entries for the extension
     ;; directory in case this init file is loaded multiple times in
     ;; one Emacs session.
-    (pushnew code-dir load-path :test #'equal)
+    (cl-pushnew code-dir load-path :test #'equal)
 
     ;; At last, load the extensions.
     (mapc #'load-file (directory-files code-dir t "\\.el$"))))
@@ -128,7 +128,7 @@
 (setq frame-title-format
       (concat
        "%b"
-       " " (downcase (substring (system-name) 0 (position ?. (system-name))))
+       " " (downcase (substring (system-name) 0 (cl-position ?. (system-name))))
        " " (downcase (replace-regexp-in-string
                       "[^A-Za-z0-9_-].*$" "" invocation-name))))
 
@@ -163,7 +163,7 @@
   (interactive)
   (let ((min (minibuffer-input-start)))
     (let ((end (point)))
-      (symbol-macrolet ((delim (case (char-before) ((?/ ?\\) t))))
+      (cl-symbol-macrolet ((delim (cl-case (char-before) ((?/ ?\\) t))))
         (while (and (< min (point)) delim) (backward-char))
         (while (and (< min (point)) (not delim)) (backward-char))
         (when (< (point) end) (delete-region (point) end))))))
