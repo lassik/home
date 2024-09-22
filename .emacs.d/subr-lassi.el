@@ -187,15 +187,17 @@
     (save-restriction
       (goto-char start)
       (narrow-to-region start end)
-      (let ((count 0))
+      (let ((count 0) (case-fold-search nil))
         (while (re-search-forward "^\\(.*\n\\)\\1+" nil t)
-          (incf count (1- (truncate (- (match-end 0) (match-beginning 0))
-                                    (- (match-end 1) (match-beginning 1)))))
+          (setq count
+                (+ count
+                   (1- (truncate (- (match-end 0) (match-beginning 0))
+                                 (- (match-end 1) (match-beginning 1))))))
           (replace-match "\\1"))
-        (when (interactive-p)
+        (when (called-interactively-p 'any)
           (if (= count 0)
               (message "No superfluous lines found")
-            (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
+              (message "Deleted %d superfluous %s" count (if (= count 1) "line" "lines"))))
         count))))
 
 ;;;; Miscellaneous text editing commands
