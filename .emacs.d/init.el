@@ -105,6 +105,8 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'qr 'query-replace)
 (defalias 'qrr 'query-replace-regexp)
+(defalias 'ire 'indent-region)
+(defalias 'jos 'just-one-space)
 
 (put 'dired-find-alternate-file 'disabled nil)
 (put 'downcase-region 'disabled nil)
