@@ -208,6 +208,11 @@
 (define-key minibuffer-local-map [(control p)] 'previous-history-element)
 (define-key minibuffer-local-map [(space)] 'self-insert-command)
 
+;; Stop trigger-happy text-scale.
+(global-set-key (kbd "<pinch>") 'ignore)
+(global-set-key (kbd "<C-wheel-up>") 'ignore)
+(global-set-key (kbd "<C-wheel-down>") 'ignore)
+
 (eval-after-load 'picture
   '(progn
      (define-key picture-mode-map [(control c) down]  'picture-movement-down)
