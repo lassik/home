@@ -183,8 +183,7 @@
 
 (defun my-dired-run ()
   (interactive)
-  ;; TODO: (dired-get-filename)
-  (call-interactively 'dired-advertised-find-file))
+  (call-interactively 'dired-find-file))
 
 (defun my-insert-lambda ()
   (interactive)
