@@ -382,6 +382,16 @@ comes with Emacs in the source file whitespace.el."
    (current-buffer))
   (Man-fontify-manpage))
 
+(defun my-hex-to-text ()
+  (interactive)
+  (let ((hexes (split-string (buffer-substring (region-beginning) (region-end)))))
+    (delete-region (region-beginning) (region-end))
+    (dolist (hex hexes (buffer-string))
+      (let ((char-code (cl-parse-integer hex :radix 16)))
+        (cl-assert (or (<= #x09 char-code #x0d)
+                       (<= #x20 char-code #x7e)))
+        (insert char-code)))))
+
 (defun nroff-update-date ()
   (interactive)
   (save-match-data
@@ -399,3 +409,96 @@ comes with Emacs in the source file whitespace.el."
       (if (re-search-forward "^\\.Dd [A-Za-z0-9, ]*$" nil t)
           (replace-match new-timestamp t)
           (error ".Dd line not found")))))
+
+(defun delete-non-ascii-characters (start end)
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (widen)
+      (narrow-to-region start end)
+      (goto-char (point-min))
+      (while (< (point) (point-max))
+        (if (let ((char (char-after (point))))
+              (or (<= #x20 char #x7e)
+                  (= #x09 char)
+                  (= #x0a char)))
+            (forward-char 1)
+            (delete-char 1))))))
+
+(defun dupes (list)
+  (let ((counter (make-hash-table :test #'equal)))
+    (dolist (item list)
+      (setf (gethash item counter) (1+ (gethash item counter 0))))
+    (cl-remove-if (lambda (item) (< (gethash item counter) 2))
+                        (hash-table-keys counter))))
+
+(defun region-lines (start end)
+  (save-excursion
+    (let (lines)
+      (goto-char start)
+      (goto-char (point-at-bol))
+      (while (< (point-at-bol) end)
+        (let ((line (buffer-substring (point-at-bol) (point-at-eol))))
+          (push line lines)
+          (forward-line 1)))
+      (reverse lines))))
+
+(defun unsaved-buffer-list ()
+  (interactive)
+  (with-current-buffer (get-buffer-create "*Unsaved Buffer List*")
+    (erase-buffer)
+    (save-match-data
+      (dolist (buffer (buffer-list))
+        (when (if (buffer-file-name buffer)
+                  (buffer-modified-p buffer)
+                  (not (string-match "^[ *]" (buffer-name buffer))))
+          (insert (format "%s\n" (buffer-name buffer))))))
+    (display-buffer (current-buffer))))
+
+(defun unfontify-region (start end)
+  (interactive "r")
+  (remove-text-properties start end '(face nil)))
+
+(defun alt-capitalize-region (start end)
+  (interactive "r")
+  (let ((a start))
+    (while (< a end)
+      (let ((b (1+ a)))
+        (if (zerop (random 2))
+            (upcase-region a b)
+          (downcase-region a b))
+        (setq a b)))))
+
+(defun ascify-whitespace (start end)
+  (interactive "r")
+  (save-match-data
+    (save-excursion
+      (save-restriction
+        (widen)
+        (goto-char start)
+        (narrow-to-region start end)
+        (let* ((ws-chars (concat " \t\n\r" (string #x2029)))
+               (re-white (concat "[" ws-chars "]+"))
+               (re-other (concat "[^" ws-chars "]+")))
+          (while (not (eobp))
+            (when (looking-at re-white)
+              (replace-match " "))
+            (goto-char (match-end 0))
+            (looking-at re-other)
+            (goto-char (match-end 0))))))))
+
+(defun crayon (color start end)
+  (interactive
+   (list (completing-read
+          "Color: "
+          '("blue" "cyan" "gray" "green" "orange" "magenta" "red" "yellow"))
+         (region-beginning)
+         (region-end)))
+  (let ((face (intern (concat "crayon-face-" color))))
+    (unless (facep face)
+      (make-face face)
+      (set-face-foreground face color)
+      (set-face-documentation face (format "Crayon %s face." color)))
+    (let ((overlay (make-overlay start end)))
+      (overlay-put overlay 'face face)
+      overlay)))
