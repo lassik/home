@@ -302,3 +302,18 @@
 
 (when (require 'whois nil t)
   (defalias 'whois 'whois-shell))
+
+;; Go to home directory.
+(with-current-buffer (get-buffer "*scratch*")
+  (setq default-directory (expand-file-name "~")))
+
+(when (require 'define-scratch nil t)
+  (define-scratch c-scratch c-mode)
+  (define-scratch clojure-scratch clojure-mode)
+  (define-scratch lisp-data-scratch lisp-data-mode)
+  (define-scratch lisp-scratch lisp-mode)
+  (define-scratch pose-scratch lisp-data-mode)
+  (define-scratch scheme-scratch scheme-mode)
+  (define-scratch sh-scratch sh-mode)
+  (define-scratch sml-scratch sml-mode)
+  (define-scratch text-scratch text-mode auto-fill-mode))
