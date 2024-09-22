@@ -293,8 +293,8 @@
             (when (file-exists-p custom-file)
               (load-file custom-file)
               (set-variable 'dired-use-ls-dired nil)
-              (require 'ess)
-              (require 'ess-site)
+              (require 'ess nil t)
+              (require 'ess-site nil t)
               nil)))
 
 ;; Need the `t' for this to work.
