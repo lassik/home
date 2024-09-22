@@ -5,6 +5,28 @@
 ;; TODO: delete all blank lines (in region)
 ;; TODO: compact all blank lines so there are never two or more consecutive blank lines (in region)
 
+(defun sort-words (reverse beg end)
+  "Sort words in region alphabetically, in REVERSE if negative.
+    Prefixed with negative \\[universal-argument], sorts in reverse.
+
+    The variable `sort-fold-case' determines whether alphabetic case
+    affects the sort order.
+
+    See `sort-regexp-fields'."
+  (interactive "*P\nr")
+  (sort-regexp-fields reverse "\\w+" "\\&" beg end))
+
+(defun sort-space-words (reverse beg end)
+  "Sort words in region alphabetically, in REVERSE if negative.
+    Prefixed with negative \\[universal-argument], sorts in reverse.
+
+    The variable `sort-fold-case' determines whether alphabetic case
+    affects the sort order.
+
+    See `sort-regexp-fields'."
+  (interactive "*P\nr")
+  (sort-regexp-fields reverse "[^ \t]+" "\\&" beg end))
+
 ;;;; Utility functions
 
 (defun region-bounds (&optional need-bol-p need-eol-p)
