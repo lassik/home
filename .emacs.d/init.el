@@ -300,4 +300,5 @@
 ;; Need the `t' for this to work.
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 
-(when (require 'whois nil t) (defalias 'whois 'whois-shell))
+(when (require 'whois nil t)
+  (defalias 'whois 'whois-shell))
