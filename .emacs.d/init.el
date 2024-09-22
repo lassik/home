@@ -233,25 +233,33 @@
 
 ;; I'm not sure this is the right way to do it, but it seems to work.
 
-(add-hook 'lisp-mode-hook
-          (lambda ()
-            (set (make-local-variable 'lisp-indent-function)
-                 'common-lisp-indent-function)))
+;; (add-hook 'lisp-mode-hook
+;;           (lambda ()
+;;             (set (make-local-variable 'lisp-indent-function)
+;;                  'common-lisp-indent-function)))
 
-(add-hook 'clojure-mode-hook
-          (lambda ()
-            (define-clojure-indent
-              (match 1))))
+;; (add-hook 'clojure-mode-hook
+;;           (lambda ()
+;;             (define-clojure-indent
+;;               (match 1))))
 
 ;;; Pathnames
 
 (setq ecumenist-db (concat my-emacs-conf-dir "ecumenist"))
 
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.nasm\\'" . nasm-mode))
-(add-to-list 'auto-mode-alist '("\\.sld\\'" . scheme-mode))
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . scheme-mode))
-(add-to-list 'auto-mode-alist '("\\.sps\\'" . scheme-mode))
+(cl-pushnew (cons "upscheme" 'scheme-mode) interpreter-mode-alist :test #'equal)
+
+(cl-mapc (lambda (x)
+           (add-to-list 'auto-mode-alist
+                        (cons (concat (regexp-quote (cl-first x)) "\\'")
+                              (cl-second x))))
+         '((".md"      gfm-mode)
+           (".nasm"    nasm-mode)
+           (".pose"    lisp-data-mode)
+           (".scheme"  scheme-mode)
+           (".sld"     scheme-mode)
+           (".sls"     scheme-mode)
+           (".sps"     scheme-mode)))
 
 (dolist (alist '(auto-mode-alist magic-mode-alist))
   (when (boundp alist)
