@@ -307,6 +307,11 @@
 (with-current-buffer (get-buffer "*scratch*")
   (setq default-directory (expand-file-name "~")))
 
+;; Workaround for the bug
+;; <https://www.reddit.com/r/emacs/comments/flb0vc/wrongtypeargument_stringp_require_info_with_emacs/>
+;; which seems to appear when running an undumped Emacs.
+(setq load-history (cl-remove-if-not #'stringp load-history :key #'car))
+
 (when (require 'desktop-mail-user-agent nil t)
   (desktop-mail-user-agent))
 
