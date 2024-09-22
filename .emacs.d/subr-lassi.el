@@ -238,8 +238,8 @@
       (goto-char start)
       (let ((hours 0))
         (while (re-search-forward "^[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \\([0-9]+\\)h" end t)
-          (incf hours (car (read-from-string (match-string 1)))))
-        (when (interactive-p)
+          (setq hours (+ hours (car (read-from-string (match-string 1))))))
+        (when (called-interactively-p 'any)
           (message "%d hours in region" hours))
         hours))))
 
